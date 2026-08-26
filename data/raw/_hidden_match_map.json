@@ -1,0 +1,5577 @@
+[
+  {
+    "gt_txn_id": "GT-000000",
+    "ledger_ids": [
+      "LED-000000"
+    ],
+    "settlement_ids": [
+      "STL-000000-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000001",
+    "ledger_ids": [
+      "LED-000001"
+    ],
+    "settlement_ids": [
+      "STL-000001-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000002",
+    "ledger_ids": [
+      "LED-000002"
+    ],
+    "settlement_ids": [
+      "STL-000002-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000003",
+    "ledger_ids": [
+      "LED-000003"
+    ],
+    "settlement_ids": [
+      "STL-000003-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000004",
+    "ledger_ids": [
+      "LED-000004"
+    ],
+    "settlement_ids": [
+      "STL-000004-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000005",
+    "ledger_ids": [
+      "LED-000005"
+    ],
+    "settlement_ids": [
+      "STL-000005-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000006",
+    "ledger_ids": [
+      "LED-000006"
+    ],
+    "settlement_ids": [
+      "STL-000006-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000007",
+    "ledger_ids": [
+      "LED-000007"
+    ],
+    "settlement_ids": [
+      "STL-000007-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000008",
+    "ledger_ids": [
+      "LED-000008"
+    ],
+    "settlement_ids": [
+      "STL-000008-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000009",
+    "ledger_ids": [
+      "LED-000009"
+    ],
+    "settlement_ids": [
+      "STL-000009-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000011",
+    "ledger_ids": [
+      "LED-000011"
+    ],
+    "settlement_ids": [
+      "STL-000011-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000012",
+    "ledger_ids": [
+      "LED-000012"
+    ],
+    "settlement_ids": [
+      "STL-000012-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000013",
+    "ledger_ids": [
+      "LED-000013"
+    ],
+    "settlement_ids": [
+      "STL-000013-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000014",
+    "ledger_ids": [
+      "LED-000014"
+    ],
+    "settlement_ids": [
+      "STL-000014-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000015",
+    "ledger_ids": [
+      "LED-000015"
+    ],
+    "settlement_ids": [
+      "STL-000015-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000016",
+    "ledger_ids": [
+      "LED-000016"
+    ],
+    "settlement_ids": [
+      "STL-000016-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000017",
+    "ledger_ids": [
+      "LED-000017"
+    ],
+    "settlement_ids": [
+      "STL-000017-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000018",
+    "ledger_ids": [
+      "LED-000018"
+    ],
+    "settlement_ids": [
+      "STL-000018-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000021",
+    "ledger_ids": [
+      "LED-000021"
+    ],
+    "settlement_ids": [
+      "STL-000021-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000022",
+    "ledger_ids": [
+      "LED-000022"
+    ],
+    "settlement_ids": [
+      "STL-000022-0",
+      "STL-000022-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000023",
+    "ledger_ids": [
+      "LED-000023"
+    ],
+    "settlement_ids": [
+      "STL-000023-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000024",
+    "ledger_ids": [
+      "LED-000024"
+    ],
+    "settlement_ids": [
+      "STL-000024-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000025",
+    "ledger_ids": [
+      "LED-000025"
+    ],
+    "settlement_ids": [
+      "STL-000025-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000026",
+    "ledger_ids": [
+      "LED-000026"
+    ],
+    "settlement_ids": [
+      "STL-000026-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000027",
+    "ledger_ids": [
+      "LED-000027"
+    ],
+    "settlement_ids": [
+      "STL-000027-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000028",
+    "ledger_ids": [
+      "LED-000028"
+    ],
+    "settlement_ids": [
+      "STL-000028-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000029",
+    "ledger_ids": [
+      "LED-000029"
+    ],
+    "settlement_ids": [
+      "STL-000029-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000030",
+    "ledger_ids": [
+      "LED-000030"
+    ],
+    "settlement_ids": [
+      "STL-000030-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000031",
+    "ledger_ids": [
+      "LED-000031"
+    ],
+    "settlement_ids": [
+      "STL-000031-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000032",
+    "ledger_ids": [
+      "LED-000032"
+    ],
+    "settlement_ids": [
+      "STL-000032-0",
+      "STL-000032-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000033",
+    "ledger_ids": [
+      "LED-000033"
+    ],
+    "settlement_ids": [
+      "STL-000033-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000034",
+    "ledger_ids": [
+      "LED-000034"
+    ],
+    "settlement_ids": [
+      "STL-000034-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000036",
+    "ledger_ids": [
+      "LED-000036"
+    ],
+    "settlement_ids": [
+      "STL-000036-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000037",
+    "ledger_ids": [
+      "LED-000037"
+    ],
+    "settlement_ids": [
+      "STL-000037-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000038",
+    "ledger_ids": [
+      "LED-000038"
+    ],
+    "settlement_ids": [
+      "STL-000038-0",
+      "STL-000038-1",
+      "STL-000038-2"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000039",
+    "ledger_ids": [
+      "LED-000039"
+    ],
+    "settlement_ids": [
+      "STL-000039-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000040",
+    "ledger_ids": [
+      "LED-000040"
+    ],
+    "settlement_ids": [
+      "STL-000040-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000041",
+    "ledger_ids": [
+      "LED-000041"
+    ],
+    "settlement_ids": [
+      "STL-000041-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000042",
+    "ledger_ids": [
+      "LED-000042"
+    ],
+    "settlement_ids": [
+      "STL-000042-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000044",
+    "ledger_ids": [
+      "LED-000044"
+    ],
+    "settlement_ids": [
+      "STL-000044-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000045",
+    "ledger_ids": [
+      "LED-000045"
+    ],
+    "settlement_ids": [
+      "STL-000045-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000046",
+    "ledger_ids": [
+      "LED-000046"
+    ],
+    "settlement_ids": [
+      "STL-000046-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000047",
+    "ledger_ids": [
+      "LED-000047"
+    ],
+    "settlement_ids": [
+      "STL-000047-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000048",
+    "ledger_ids": [
+      "LED-000048"
+    ],
+    "settlement_ids": [
+      "STL-000048-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000049",
+    "ledger_ids": [
+      "LED-000049"
+    ],
+    "settlement_ids": [
+      "STL-000049-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000051",
+    "ledger_ids": [
+      "LED-000051"
+    ],
+    "settlement_ids": [
+      "STL-000051-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000052",
+    "ledger_ids": [
+      "LED-000052"
+    ],
+    "settlement_ids": [
+      "STL-000052-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000053",
+    "ledger_ids": [
+      "LED-000053"
+    ],
+    "settlement_ids": [
+      "STL-000053-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000054",
+    "ledger_ids": [
+      "LED-000054"
+    ],
+    "settlement_ids": [
+      "STL-000054-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000055",
+    "ledger_ids": [
+      "LED-000055"
+    ],
+    "settlement_ids": [
+      "STL-000055-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000057",
+    "ledger_ids": [
+      "LED-000057"
+    ],
+    "settlement_ids": [
+      "STL-000057-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000058",
+    "ledger_ids": [
+      "LED-000058"
+    ],
+    "settlement_ids": [
+      "STL-000058-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000060",
+    "ledger_ids": [
+      "LED-000060"
+    ],
+    "settlement_ids": [
+      "STL-000060-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000062",
+    "ledger_ids": [
+      "LED-000062"
+    ],
+    "settlement_ids": [
+      "STL-000062-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000063",
+    "ledger_ids": [
+      "LED-000063"
+    ],
+    "settlement_ids": [
+      "STL-000063-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000064",
+    "ledger_ids": [
+      "LED-000064"
+    ],
+    "settlement_ids": [
+      "STL-000064-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000065",
+    "ledger_ids": [
+      "LED-000065"
+    ],
+    "settlement_ids": [
+      "STL-000065-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000066",
+    "ledger_ids": [
+      "LED-000066"
+    ],
+    "settlement_ids": [
+      "STL-000066-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000067",
+    "ledger_ids": [
+      "LED-000067"
+    ],
+    "settlement_ids": [
+      "STL-000067-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000068",
+    "ledger_ids": [
+      "LED-000068"
+    ],
+    "settlement_ids": [
+      "STL-000068-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000069",
+    "ledger_ids": [
+      "LED-000069"
+    ],
+    "settlement_ids": [
+      "STL-000069-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000070",
+    "ledger_ids": [
+      "LED-000070"
+    ],
+    "settlement_ids": [
+      "STL-000070-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000071",
+    "ledger_ids": [
+      "LED-000071"
+    ],
+    "settlement_ids": [
+      "STL-000071-0",
+      "STL-000071-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000072",
+    "ledger_ids": [
+      "LED-000072"
+    ],
+    "settlement_ids": [
+      "STL-000072-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000073",
+    "ledger_ids": [
+      "LED-000073"
+    ],
+    "settlement_ids": [
+      "STL-000073-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000074",
+    "ledger_ids": [
+      "LED-000074"
+    ],
+    "settlement_ids": [
+      "STL-000074-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000076",
+    "ledger_ids": [
+      "LED-000076"
+    ],
+    "settlement_ids": [
+      "STL-000076-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000077",
+    "ledger_ids": [
+      "LED-000077"
+    ],
+    "settlement_ids": [
+      "STL-000077-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000078",
+    "ledger_ids": [
+      "LED-000078"
+    ],
+    "settlement_ids": [
+      "STL-000078-0",
+      "STL-000078-1",
+      "STL-000078-2"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000079",
+    "ledger_ids": [
+      "LED-000079"
+    ],
+    "settlement_ids": [
+      "STL-000079-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000080",
+    "ledger_ids": [
+      "LED-000080"
+    ],
+    "settlement_ids": [
+      "STL-000080-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000081",
+    "ledger_ids": [
+      "LED-000081"
+    ],
+    "settlement_ids": [
+      "STL-000081-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000082",
+    "ledger_ids": [
+      "LED-000082"
+    ],
+    "settlement_ids": [
+      "STL-000082-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000083",
+    "ledger_ids": [
+      "LED-000083"
+    ],
+    "settlement_ids": [
+      "STL-000083-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000084",
+    "ledger_ids": [
+      "LED-000084"
+    ],
+    "settlement_ids": [
+      "STL-000084-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000085",
+    "ledger_ids": [
+      "LED-000085"
+    ],
+    "settlement_ids": [
+      "STL-000085-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000088",
+    "ledger_ids": [
+      "LED-000088"
+    ],
+    "settlement_ids": [
+      "STL-000088-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000089",
+    "ledger_ids": [
+      "LED-000089"
+    ],
+    "settlement_ids": [
+      "STL-000089-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000090",
+    "ledger_ids": [
+      "LED-000090"
+    ],
+    "settlement_ids": [
+      "STL-000090-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000092",
+    "ledger_ids": [
+      "LED-000092"
+    ],
+    "settlement_ids": [
+      "STL-000092-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000093",
+    "ledger_ids": [
+      "LED-000093"
+    ],
+    "settlement_ids": [
+      "STL-000093-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000095",
+    "ledger_ids": [
+      "LED-000095"
+    ],
+    "settlement_ids": [
+      "STL-000095-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000096",
+    "ledger_ids": [
+      "LED-000096"
+    ],
+    "settlement_ids": [
+      "STL-000096-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000097",
+    "ledger_ids": [
+      "LED-000097"
+    ],
+    "settlement_ids": [
+      "STL-000097-0",
+      "STL-000097-1",
+      "STL-000097-2"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000098",
+    "ledger_ids": [
+      "LED-000098"
+    ],
+    "settlement_ids": [
+      "STL-000098-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000099",
+    "ledger_ids": [
+      "LED-000099"
+    ],
+    "settlement_ids": [
+      "STL-000099-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000100",
+    "ledger_ids": [
+      "LED-000100"
+    ],
+    "settlement_ids": [
+      "STL-000100-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000101",
+    "ledger_ids": [
+      "LED-000101"
+    ],
+    "settlement_ids": [
+      "STL-000101-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000102",
+    "ledger_ids": [
+      "LED-000102"
+    ],
+    "settlement_ids": [
+      "STL-000102-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000103",
+    "ledger_ids": [
+      "LED-000103"
+    ],
+    "settlement_ids": [
+      "STL-000103-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000104",
+    "ledger_ids": [
+      "LED-000104"
+    ],
+    "settlement_ids": [
+      "STL-000104-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000105",
+    "ledger_ids": [
+      "LED-000105"
+    ],
+    "settlement_ids": [
+      "STL-000105-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000106",
+    "ledger_ids": [
+      "LED-000106"
+    ],
+    "settlement_ids": [
+      "STL-000106-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000107",
+    "ledger_ids": [
+      "LED-000107"
+    ],
+    "settlement_ids": [
+      "STL-000107-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000108",
+    "ledger_ids": [
+      "LED-000108"
+    ],
+    "settlement_ids": [
+      "STL-000108-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000109",
+    "ledger_ids": [
+      "LED-000109"
+    ],
+    "settlement_ids": [
+      "STL-000109-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000110",
+    "ledger_ids": [
+      "LED-000110"
+    ],
+    "settlement_ids": [
+      "STL-000110-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000111",
+    "ledger_ids": [
+      "LED-000111"
+    ],
+    "settlement_ids": [
+      "STL-000111-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000112",
+    "ledger_ids": [
+      "LED-000112"
+    ],
+    "settlement_ids": [
+      "STL-000112-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000113",
+    "ledger_ids": [
+      "LED-000113"
+    ],
+    "settlement_ids": [
+      "STL-000113-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000114",
+    "ledger_ids": [
+      "LED-000114"
+    ],
+    "settlement_ids": [
+      "STL-000114-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000115",
+    "ledger_ids": [
+      "LED-000115"
+    ],
+    "settlement_ids": [
+      "STL-000115-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000116",
+    "ledger_ids": [
+      "LED-000116"
+    ],
+    "settlement_ids": [
+      "STL-000116-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000117",
+    "ledger_ids": [
+      "LED-000117"
+    ],
+    "settlement_ids": [
+      "STL-000117-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000118",
+    "ledger_ids": [
+      "LED-000118"
+    ],
+    "settlement_ids": [
+      "STL-000118-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000119",
+    "ledger_ids": [
+      "LED-000119"
+    ],
+    "settlement_ids": [
+      "STL-000119-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000120",
+    "ledger_ids": [
+      "LED-000120"
+    ],
+    "settlement_ids": [
+      "STL-000120-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000121",
+    "ledger_ids": [
+      "LED-000121"
+    ],
+    "settlement_ids": [
+      "STL-000121-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000122",
+    "ledger_ids": [
+      "LED-000122"
+    ],
+    "settlement_ids": [
+      "STL-000122-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000123",
+    "ledger_ids": [
+      "LED-000123"
+    ],
+    "settlement_ids": [
+      "STL-000123-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000124",
+    "ledger_ids": [
+      "LED-000124"
+    ],
+    "settlement_ids": [
+      "STL-000124-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000125",
+    "ledger_ids": [
+      "LED-000125"
+    ],
+    "settlement_ids": [
+      "STL-000125-0",
+      "STL-000125-1",
+      "STL-000125-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000126",
+    "ledger_ids": [
+      "LED-000126"
+    ],
+    "settlement_ids": [
+      "STL-000126-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000127",
+    "ledger_ids": [
+      "LED-000127"
+    ],
+    "settlement_ids": [
+      "STL-000127-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000128",
+    "ledger_ids": [
+      "LED-000128"
+    ],
+    "settlement_ids": [
+      "STL-000128-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000129",
+    "ledger_ids": [
+      "LED-000129"
+    ],
+    "settlement_ids": [
+      "STL-000129-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000130",
+    "ledger_ids": [
+      "LED-000130"
+    ],
+    "settlement_ids": [
+      "STL-000130-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000131",
+    "ledger_ids": [
+      "LED-000131"
+    ],
+    "settlement_ids": [
+      "STL-000131-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000132",
+    "ledger_ids": [
+      "LED-000132"
+    ],
+    "settlement_ids": [
+      "STL-000132-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000133",
+    "ledger_ids": [
+      "LED-000133"
+    ],
+    "settlement_ids": [
+      "STL-000133-0",
+      "STL-000133-1"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000134",
+    "ledger_ids": [
+      "LED-000134"
+    ],
+    "settlement_ids": [
+      "STL-000134-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000135",
+    "ledger_ids": [
+      "LED-000135"
+    ],
+    "settlement_ids": [
+      "STL-000135-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000136",
+    "ledger_ids": [
+      "LED-000136"
+    ],
+    "settlement_ids": [
+      "STL-000136-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000137",
+    "ledger_ids": [
+      "LED-000137"
+    ],
+    "settlement_ids": [
+      "STL-000137-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000138",
+    "ledger_ids": [
+      "LED-000138"
+    ],
+    "settlement_ids": [
+      "STL-000138-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000139",
+    "ledger_ids": [
+      "LED-000139"
+    ],
+    "settlement_ids": [
+      "STL-000139-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000140",
+    "ledger_ids": [
+      "LED-000140"
+    ],
+    "settlement_ids": [
+      "STL-000140-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000141",
+    "ledger_ids": [
+      "LED-000141"
+    ],
+    "settlement_ids": [
+      "STL-000141-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000143",
+    "ledger_ids": [
+      "LED-000143"
+    ],
+    "settlement_ids": [
+      "STL-000143-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000144",
+    "ledger_ids": [
+      "LED-000144"
+    ],
+    "settlement_ids": [
+      "STL-000144-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000145",
+    "ledger_ids": [
+      "LED-000145"
+    ],
+    "settlement_ids": [
+      "STL-000145-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000146",
+    "ledger_ids": [
+      "LED-000146"
+    ],
+    "settlement_ids": [
+      "STL-000146-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000147",
+    "ledger_ids": [
+      "LED-000147"
+    ],
+    "settlement_ids": [
+      "STL-000147-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000148",
+    "ledger_ids": [
+      "LED-000148"
+    ],
+    "settlement_ids": [
+      "STL-000148-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000149",
+    "ledger_ids": [
+      "LED-000149"
+    ],
+    "settlement_ids": [
+      "STL-000149-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000150",
+    "ledger_ids": [
+      "LED-000150"
+    ],
+    "settlement_ids": [
+      "STL-000150-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000151",
+    "ledger_ids": [
+      "LED-000151"
+    ],
+    "settlement_ids": [
+      "STL-000151-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000152",
+    "ledger_ids": [
+      "LED-000152"
+    ],
+    "settlement_ids": [
+      "STL-000152-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000154",
+    "ledger_ids": [
+      "LED-000154"
+    ],
+    "settlement_ids": [
+      "STL-000154-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000155",
+    "ledger_ids": [
+      "LED-000155"
+    ],
+    "settlement_ids": [
+      "STL-000155-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000156",
+    "ledger_ids": [
+      "LED-000156"
+    ],
+    "settlement_ids": [
+      "STL-000156-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000158",
+    "ledger_ids": [
+      "LED-000158"
+    ],
+    "settlement_ids": [
+      "STL-000158-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000160",
+    "ledger_ids": [
+      "LED-000160"
+    ],
+    "settlement_ids": [
+      "STL-000160-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000161",
+    "ledger_ids": [
+      "LED-000161"
+    ],
+    "settlement_ids": [
+      "STL-000161-0",
+      "STL-000161-1",
+      "STL-000161-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000162",
+    "ledger_ids": [
+      "LED-000162"
+    ],
+    "settlement_ids": [
+      "STL-000162-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000163",
+    "ledger_ids": [
+      "LED-000163"
+    ],
+    "settlement_ids": [
+      "STL-000163-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000164",
+    "ledger_ids": [
+      "LED-000164"
+    ],
+    "settlement_ids": [
+      "STL-000164-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000165",
+    "ledger_ids": [
+      "LED-000165"
+    ],
+    "settlement_ids": [
+      "STL-000165-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000166",
+    "ledger_ids": [
+      "LED-000166"
+    ],
+    "settlement_ids": [
+      "STL-000166-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000167",
+    "ledger_ids": [
+      "LED-000167"
+    ],
+    "settlement_ids": [
+      "STL-000167-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000168",
+    "ledger_ids": [
+      "LED-000168"
+    ],
+    "settlement_ids": [
+      "STL-000168-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000169",
+    "ledger_ids": [
+      "LED-000169"
+    ],
+    "settlement_ids": [
+      "STL-000169-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000170",
+    "ledger_ids": [
+      "LED-000170"
+    ],
+    "settlement_ids": [
+      "STL-000170-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000171",
+    "ledger_ids": [
+      "LED-000171"
+    ],
+    "settlement_ids": [
+      "STL-000171-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000172",
+    "ledger_ids": [
+      "LED-000172"
+    ],
+    "settlement_ids": [
+      "STL-000172-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000173",
+    "ledger_ids": [
+      "LED-000173"
+    ],
+    "settlement_ids": [
+      "STL-000173-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000174",
+    "ledger_ids": [
+      "LED-000174"
+    ],
+    "settlement_ids": [
+      "STL-000174-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000176",
+    "ledger_ids": [
+      "LED-000176"
+    ],
+    "settlement_ids": [
+      "STL-000176-0",
+      "STL-000176-1",
+      "STL-000176-2"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000177",
+    "ledger_ids": [
+      "LED-000177"
+    ],
+    "settlement_ids": [
+      "STL-000177-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000178",
+    "ledger_ids": [
+      "LED-000178"
+    ],
+    "settlement_ids": [
+      "STL-000178-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000179",
+    "ledger_ids": [
+      "LED-000179"
+    ],
+    "settlement_ids": [
+      "STL-000179-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000180",
+    "ledger_ids": [
+      "LED-000180"
+    ],
+    "settlement_ids": [
+      "STL-000180-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000181",
+    "ledger_ids": [
+      "LED-000181"
+    ],
+    "settlement_ids": [
+      "STL-000181-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000182",
+    "ledger_ids": [
+      "LED-000182"
+    ],
+    "settlement_ids": [
+      "STL-000182-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000183",
+    "ledger_ids": [
+      "LED-000183"
+    ],
+    "settlement_ids": [
+      "STL-000183-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000184",
+    "ledger_ids": [
+      "LED-000184"
+    ],
+    "settlement_ids": [
+      "STL-000184-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000185",
+    "ledger_ids": [
+      "LED-000185"
+    ],
+    "settlement_ids": [
+      "STL-000185-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000186",
+    "ledger_ids": [
+      "LED-000186"
+    ],
+    "settlement_ids": [
+      "STL-000186-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000187",
+    "ledger_ids": [
+      "LED-000187"
+    ],
+    "settlement_ids": [
+      "STL-000187-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000188",
+    "ledger_ids": [
+      "LED-000188"
+    ],
+    "settlement_ids": [
+      "STL-000188-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000189",
+    "ledger_ids": [
+      "LED-000189"
+    ],
+    "settlement_ids": [
+      "STL-000189-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000190",
+    "ledger_ids": [
+      "LED-000190"
+    ],
+    "settlement_ids": [
+      "STL-000190-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000191",
+    "ledger_ids": [
+      "LED-000191"
+    ],
+    "settlement_ids": [
+      "STL-000191-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000192",
+    "ledger_ids": [
+      "LED-000192"
+    ],
+    "settlement_ids": [
+      "STL-000192-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000193",
+    "ledger_ids": [
+      "LED-000193"
+    ],
+    "settlement_ids": [
+      "STL-000193-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000195",
+    "ledger_ids": [
+      "LED-000195"
+    ],
+    "settlement_ids": [
+      "STL-000195-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000196",
+    "ledger_ids": [
+      "LED-000196"
+    ],
+    "settlement_ids": [
+      "STL-000196-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000197",
+    "ledger_ids": [
+      "LED-000197"
+    ],
+    "settlement_ids": [
+      "STL-000197-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000198",
+    "ledger_ids": [
+      "LED-000198"
+    ],
+    "settlement_ids": [
+      "STL-000198-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000199",
+    "ledger_ids": [
+      "LED-000199"
+    ],
+    "settlement_ids": [
+      "STL-000199-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000200",
+    "ledger_ids": [
+      "LED-000200"
+    ],
+    "settlement_ids": [
+      "STL-000200-0",
+      "STL-000200-1",
+      "STL-000200-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000202",
+    "ledger_ids": [
+      "LED-000202"
+    ],
+    "settlement_ids": [
+      "STL-000202-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000203",
+    "ledger_ids": [
+      "LED-000203"
+    ],
+    "settlement_ids": [
+      "STL-000203-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000204",
+    "ledger_ids": [
+      "LED-000204"
+    ],
+    "settlement_ids": [
+      "STL-000204-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000205",
+    "ledger_ids": [
+      "LED-000205"
+    ],
+    "settlement_ids": [
+      "STL-000205-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000206",
+    "ledger_ids": [
+      "LED-000206"
+    ],
+    "settlement_ids": [
+      "STL-000206-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000207",
+    "ledger_ids": [
+      "LED-000207"
+    ],
+    "settlement_ids": [
+      "STL-000207-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000208",
+    "ledger_ids": [
+      "LED-000208"
+    ],
+    "settlement_ids": [
+      "STL-000208-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000209",
+    "ledger_ids": [
+      "LED-000209"
+    ],
+    "settlement_ids": [
+      "STL-000209-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000210",
+    "ledger_ids": [
+      "LED-000210"
+    ],
+    "settlement_ids": [
+      "STL-000210-0",
+      "STL-000210-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000211",
+    "ledger_ids": [
+      "LED-000211"
+    ],
+    "settlement_ids": [
+      "STL-000211-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000213",
+    "ledger_ids": [
+      "LED-000213"
+    ],
+    "settlement_ids": [
+      "STL-000213-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000214",
+    "ledger_ids": [
+      "LED-000214"
+    ],
+    "settlement_ids": [
+      "STL-000214-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000215",
+    "ledger_ids": [
+      "LED-000215"
+    ],
+    "settlement_ids": [
+      "STL-000215-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000216",
+    "ledger_ids": [
+      "LED-000216"
+    ],
+    "settlement_ids": [
+      "STL-000216-0",
+      "STL-000216-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000217",
+    "ledger_ids": [
+      "LED-000217"
+    ],
+    "settlement_ids": [
+      "STL-000217-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000218",
+    "ledger_ids": [
+      "LED-000218"
+    ],
+    "settlement_ids": [
+      "STL-000218-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000219",
+    "ledger_ids": [
+      "LED-000219"
+    ],
+    "settlement_ids": [
+      "STL-000219-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000220",
+    "ledger_ids": [
+      "LED-000220"
+    ],
+    "settlement_ids": [
+      "STL-000220-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000221",
+    "ledger_ids": [
+      "LED-000221"
+    ],
+    "settlement_ids": [
+      "STL-000221-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000224",
+    "ledger_ids": [
+      "LED-000224"
+    ],
+    "settlement_ids": [
+      "STL-000224-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000225",
+    "ledger_ids": [
+      "LED-000225"
+    ],
+    "settlement_ids": [
+      "STL-000225-0",
+      "STL-000225-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000226",
+    "ledger_ids": [
+      "LED-000226"
+    ],
+    "settlement_ids": [
+      "STL-000226-0",
+      "STL-000226-1",
+      "STL-000226-2"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000228",
+    "ledger_ids": [
+      "LED-000228"
+    ],
+    "settlement_ids": [
+      "STL-000228-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000229",
+    "ledger_ids": [
+      "LED-000229"
+    ],
+    "settlement_ids": [
+      "STL-000229-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000231",
+    "ledger_ids": [
+      "LED-000231"
+    ],
+    "settlement_ids": [
+      "STL-000231-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000232",
+    "ledger_ids": [
+      "LED-000232"
+    ],
+    "settlement_ids": [
+      "STL-000232-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000235",
+    "ledger_ids": [
+      "LED-000235"
+    ],
+    "settlement_ids": [
+      "STL-000235-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000236",
+    "ledger_ids": [
+      "LED-000236"
+    ],
+    "settlement_ids": [
+      "STL-000236-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000237",
+    "ledger_ids": [
+      "LED-000237"
+    ],
+    "settlement_ids": [
+      "STL-000237-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000238",
+    "ledger_ids": [
+      "LED-000238"
+    ],
+    "settlement_ids": [
+      "STL-000238-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000239",
+    "ledger_ids": [
+      "LED-000239"
+    ],
+    "settlement_ids": [
+      "STL-000239-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000242",
+    "ledger_ids": [
+      "LED-000242"
+    ],
+    "settlement_ids": [
+      "STL-000242-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000243",
+    "ledger_ids": [
+      "LED-000243"
+    ],
+    "settlement_ids": [
+      "STL-000243-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000245",
+    "ledger_ids": [
+      "LED-000245"
+    ],
+    "settlement_ids": [
+      "STL-000245-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000246",
+    "ledger_ids": [
+      "LED-000246"
+    ],
+    "settlement_ids": [
+      "STL-000246-0",
+      "STL-000246-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000247",
+    "ledger_ids": [
+      "LED-000247"
+    ],
+    "settlement_ids": [
+      "STL-000247-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000248",
+    "ledger_ids": [
+      "LED-000248"
+    ],
+    "settlement_ids": [
+      "STL-000248-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000249",
+    "ledger_ids": [
+      "LED-000249"
+    ],
+    "settlement_ids": [
+      "STL-000249-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000250",
+    "ledger_ids": [
+      "LED-000250"
+    ],
+    "settlement_ids": [
+      "STL-000250-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000251",
+    "ledger_ids": [
+      "LED-000251"
+    ],
+    "settlement_ids": [
+      "STL-000251-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000252",
+    "ledger_ids": [
+      "LED-000252"
+    ],
+    "settlement_ids": [
+      "STL-000252-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000253",
+    "ledger_ids": [
+      "LED-000253"
+    ],
+    "settlement_ids": [
+      "STL-000253-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000254",
+    "ledger_ids": [
+      "LED-000254"
+    ],
+    "settlement_ids": [
+      "STL-000254-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000255",
+    "ledger_ids": [
+      "LED-000255"
+    ],
+    "settlement_ids": [
+      "STL-000255-0",
+      "STL-000255-1",
+      "STL-000255-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000256",
+    "ledger_ids": [
+      "LED-000256"
+    ],
+    "settlement_ids": [
+      "STL-000256-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000258",
+    "ledger_ids": [
+      "LED-000258"
+    ],
+    "settlement_ids": [
+      "STL-000258-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000259",
+    "ledger_ids": [
+      "LED-000259"
+    ],
+    "settlement_ids": [
+      "STL-000259-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000260",
+    "ledger_ids": [
+      "LED-000260"
+    ],
+    "settlement_ids": [
+      "STL-000260-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000261",
+    "ledger_ids": [
+      "LED-000261"
+    ],
+    "settlement_ids": [
+      "STL-000261-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000262",
+    "ledger_ids": [
+      "LED-000262"
+    ],
+    "settlement_ids": [
+      "STL-000262-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000263",
+    "ledger_ids": [
+      "LED-000263"
+    ],
+    "settlement_ids": [
+      "STL-000263-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000265",
+    "ledger_ids": [
+      "LED-000265"
+    ],
+    "settlement_ids": [
+      "STL-000265-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000266",
+    "ledger_ids": [
+      "LED-000266"
+    ],
+    "settlement_ids": [
+      "STL-000266-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000267",
+    "ledger_ids": [
+      "LED-000267"
+    ],
+    "settlement_ids": [
+      "STL-000267-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000268",
+    "ledger_ids": [
+      "LED-000268"
+    ],
+    "settlement_ids": [
+      "STL-000268-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000269",
+    "ledger_ids": [
+      "LED-000269"
+    ],
+    "settlement_ids": [
+      "STL-000269-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000270",
+    "ledger_ids": [
+      "LED-000270"
+    ],
+    "settlement_ids": [
+      "STL-000270-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000271",
+    "ledger_ids": [
+      "LED-000271"
+    ],
+    "settlement_ids": [
+      "STL-000271-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000272",
+    "ledger_ids": [
+      "LED-000272"
+    ],
+    "settlement_ids": [
+      "STL-000272-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000273",
+    "ledger_ids": [
+      "LED-000273"
+    ],
+    "settlement_ids": [
+      "STL-000273-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000274",
+    "ledger_ids": [
+      "LED-000274"
+    ],
+    "settlement_ids": [
+      "STL-000274-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000275",
+    "ledger_ids": [
+      "LED-000275"
+    ],
+    "settlement_ids": [
+      "STL-000275-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000276",
+    "ledger_ids": [
+      "LED-000276"
+    ],
+    "settlement_ids": [
+      "STL-000276-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000278",
+    "ledger_ids": [
+      "LED-000278"
+    ],
+    "settlement_ids": [
+      "STL-000278-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000279",
+    "ledger_ids": [
+      "LED-000279"
+    ],
+    "settlement_ids": [
+      "STL-000279-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000280",
+    "ledger_ids": [
+      "LED-000280"
+    ],
+    "settlement_ids": [
+      "STL-000280-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000281",
+    "ledger_ids": [
+      "LED-000281"
+    ],
+    "settlement_ids": [
+      "STL-000281-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000282",
+    "ledger_ids": [
+      "LED-000282"
+    ],
+    "settlement_ids": [
+      "STL-000282-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000283",
+    "ledger_ids": [
+      "LED-000283"
+    ],
+    "settlement_ids": [
+      "STL-000283-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000284",
+    "ledger_ids": [
+      "LED-000284"
+    ],
+    "settlement_ids": [
+      "STL-000284-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000285",
+    "ledger_ids": [
+      "LED-000285"
+    ],
+    "settlement_ids": [
+      "STL-000285-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000286",
+    "ledger_ids": [
+      "LED-000286"
+    ],
+    "settlement_ids": [
+      "STL-000286-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000287",
+    "ledger_ids": [
+      "LED-000287"
+    ],
+    "settlement_ids": [
+      "STL-000287-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000288",
+    "ledger_ids": [
+      "LED-000288"
+    ],
+    "settlement_ids": [
+      "STL-000288-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000289",
+    "ledger_ids": [
+      "LED-000289"
+    ],
+    "settlement_ids": [
+      "STL-000289-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000292",
+    "ledger_ids": [
+      "LED-000292"
+    ],
+    "settlement_ids": [
+      "STL-000292-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000294",
+    "ledger_ids": [
+      "LED-000294"
+    ],
+    "settlement_ids": [
+      "STL-000294-0",
+      "STL-000294-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000296",
+    "ledger_ids": [
+      "LED-000296"
+    ],
+    "settlement_ids": [
+      "STL-000296-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000297",
+    "ledger_ids": [
+      "LED-000297"
+    ],
+    "settlement_ids": [
+      "STL-000297-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000298",
+    "ledger_ids": [
+      "LED-000298"
+    ],
+    "settlement_ids": [
+      "STL-000298-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000299",
+    "ledger_ids": [
+      "LED-000299"
+    ],
+    "settlement_ids": [
+      "STL-000299-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000300",
+    "ledger_ids": [
+      "LED-000300"
+    ],
+    "settlement_ids": [
+      "STL-000300-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000301",
+    "ledger_ids": [
+      "LED-000301"
+    ],
+    "settlement_ids": [
+      "STL-000301-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000302",
+    "ledger_ids": [
+      "LED-000302"
+    ],
+    "settlement_ids": [
+      "STL-000302-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000303",
+    "ledger_ids": [
+      "LED-000303"
+    ],
+    "settlement_ids": [
+      "STL-000303-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000306",
+    "ledger_ids": [
+      "LED-000306"
+    ],
+    "settlement_ids": [
+      "STL-000306-0",
+      "STL-000306-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000307",
+    "ledger_ids": [
+      "LED-000307"
+    ],
+    "settlement_ids": [
+      "STL-000307-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000308",
+    "ledger_ids": [
+      "LED-000308"
+    ],
+    "settlement_ids": [
+      "STL-000308-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000309",
+    "ledger_ids": [
+      "LED-000309"
+    ],
+    "settlement_ids": [
+      "STL-000309-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000310",
+    "ledger_ids": [
+      "LED-000310"
+    ],
+    "settlement_ids": [
+      "STL-000310-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000312",
+    "ledger_ids": [
+      "LED-000312"
+    ],
+    "settlement_ids": [
+      "STL-000312-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000313",
+    "ledger_ids": [
+      "LED-000313"
+    ],
+    "settlement_ids": [
+      "STL-000313-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000314",
+    "ledger_ids": [
+      "LED-000314"
+    ],
+    "settlement_ids": [
+      "STL-000314-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000315",
+    "ledger_ids": [
+      "LED-000315"
+    ],
+    "settlement_ids": [
+      "STL-000315-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000316",
+    "ledger_ids": [
+      "LED-000316"
+    ],
+    "settlement_ids": [
+      "STL-000316-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000318",
+    "ledger_ids": [
+      "LED-000318"
+    ],
+    "settlement_ids": [
+      "STL-000318-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000319",
+    "ledger_ids": [
+      "LED-000319"
+    ],
+    "settlement_ids": [
+      "STL-000319-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000320",
+    "ledger_ids": [
+      "LED-000320"
+    ],
+    "settlement_ids": [
+      "STL-000320-0",
+      "STL-000320-1",
+      "STL-000320-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000321",
+    "ledger_ids": [
+      "LED-000321"
+    ],
+    "settlement_ids": [
+      "STL-000321-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000322",
+    "ledger_ids": [
+      "LED-000322"
+    ],
+    "settlement_ids": [
+      "STL-000322-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000323",
+    "ledger_ids": [
+      "LED-000323"
+    ],
+    "settlement_ids": [
+      "STL-000323-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000324",
+    "ledger_ids": [
+      "LED-000324"
+    ],
+    "settlement_ids": [
+      "STL-000324-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000325",
+    "ledger_ids": [
+      "LED-000325"
+    ],
+    "settlement_ids": [
+      "STL-000325-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000326",
+    "ledger_ids": [
+      "LED-000326"
+    ],
+    "settlement_ids": [
+      "STL-000326-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000327",
+    "ledger_ids": [
+      "LED-000327"
+    ],
+    "settlement_ids": [
+      "STL-000327-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000328",
+    "ledger_ids": [
+      "LED-000328"
+    ],
+    "settlement_ids": [
+      "STL-000328-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000329",
+    "ledger_ids": [
+      "LED-000329"
+    ],
+    "settlement_ids": [
+      "STL-000329-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000330",
+    "ledger_ids": [
+      "LED-000330"
+    ],
+    "settlement_ids": [
+      "STL-000330-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000331",
+    "ledger_ids": [
+      "LED-000331"
+    ],
+    "settlement_ids": [
+      "STL-000331-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000332",
+    "ledger_ids": [
+      "LED-000332"
+    ],
+    "settlement_ids": [
+      "STL-000332-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000333",
+    "ledger_ids": [
+      "LED-000333"
+    ],
+    "settlement_ids": [
+      "STL-000333-0",
+      "STL-000333-1",
+      "STL-000333-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000335",
+    "ledger_ids": [
+      "LED-000335"
+    ],
+    "settlement_ids": [
+      "STL-000335-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000338",
+    "ledger_ids": [
+      "LED-000338"
+    ],
+    "settlement_ids": [
+      "STL-000338-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000339",
+    "ledger_ids": [
+      "LED-000339"
+    ],
+    "settlement_ids": [
+      "STL-000339-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000340",
+    "ledger_ids": [
+      "LED-000340"
+    ],
+    "settlement_ids": [
+      "STL-000340-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000341",
+    "ledger_ids": [
+      "LED-000341"
+    ],
+    "settlement_ids": [
+      "STL-000341-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000342",
+    "ledger_ids": [
+      "LED-000342"
+    ],
+    "settlement_ids": [
+      "STL-000342-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000344",
+    "ledger_ids": [
+      "LED-000344"
+    ],
+    "settlement_ids": [
+      "STL-000344-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000346",
+    "ledger_ids": [
+      "LED-000346"
+    ],
+    "settlement_ids": [
+      "STL-000346-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000347",
+    "ledger_ids": [
+      "LED-000347"
+    ],
+    "settlement_ids": [
+      "STL-000347-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000348",
+    "ledger_ids": [
+      "LED-000348"
+    ],
+    "settlement_ids": [
+      "STL-000348-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000349",
+    "ledger_ids": [
+      "LED-000349"
+    ],
+    "settlement_ids": [
+      "STL-000349-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000351",
+    "ledger_ids": [
+      "LED-000351"
+    ],
+    "settlement_ids": [
+      "STL-000351-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000352",
+    "ledger_ids": [
+      "LED-000352"
+    ],
+    "settlement_ids": [
+      "STL-000352-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000353",
+    "ledger_ids": [
+      "LED-000353"
+    ],
+    "settlement_ids": [
+      "STL-000353-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000354",
+    "ledger_ids": [
+      "LED-000354"
+    ],
+    "settlement_ids": [
+      "STL-000354-0",
+      "STL-000354-1",
+      "STL-000354-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000355",
+    "ledger_ids": [
+      "LED-000355"
+    ],
+    "settlement_ids": [
+      "STL-000355-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000356",
+    "ledger_ids": [
+      "LED-000356"
+    ],
+    "settlement_ids": [
+      "STL-000356-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000357",
+    "ledger_ids": [
+      "LED-000357"
+    ],
+    "settlement_ids": [
+      "STL-000357-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000358",
+    "ledger_ids": [
+      "LED-000358"
+    ],
+    "settlement_ids": [
+      "STL-000358-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000359",
+    "ledger_ids": [
+      "LED-000359"
+    ],
+    "settlement_ids": [
+      "STL-000359-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000360",
+    "ledger_ids": [
+      "LED-000360"
+    ],
+    "settlement_ids": [
+      "STL-000360-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000361",
+    "ledger_ids": [
+      "LED-000361"
+    ],
+    "settlement_ids": [
+      "STL-000361-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000362",
+    "ledger_ids": [
+      "LED-000362"
+    ],
+    "settlement_ids": [
+      "STL-000362-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000363",
+    "ledger_ids": [
+      "LED-000363"
+    ],
+    "settlement_ids": [
+      "STL-000363-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000364",
+    "ledger_ids": [
+      "LED-000364"
+    ],
+    "settlement_ids": [
+      "STL-000364-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000365",
+    "ledger_ids": [
+      "LED-000365"
+    ],
+    "settlement_ids": [
+      "STL-000365-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000366",
+    "ledger_ids": [
+      "LED-000366"
+    ],
+    "settlement_ids": [
+      "STL-000366-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000367",
+    "ledger_ids": [
+      "LED-000367"
+    ],
+    "settlement_ids": [
+      "STL-000367-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000368",
+    "ledger_ids": [
+      "LED-000368"
+    ],
+    "settlement_ids": [
+      "STL-000368-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000369",
+    "ledger_ids": [
+      "LED-000369"
+    ],
+    "settlement_ids": [
+      "STL-000369-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000371",
+    "ledger_ids": [
+      "LED-000371"
+    ],
+    "settlement_ids": [
+      "STL-000371-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000372",
+    "ledger_ids": [
+      "LED-000372"
+    ],
+    "settlement_ids": [
+      "STL-000372-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000373",
+    "ledger_ids": [
+      "LED-000373"
+    ],
+    "settlement_ids": [
+      "STL-000373-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000374",
+    "ledger_ids": [
+      "LED-000374"
+    ],
+    "settlement_ids": [
+      "STL-000374-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000375",
+    "ledger_ids": [
+      "LED-000375"
+    ],
+    "settlement_ids": [
+      "STL-000375-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000376",
+    "ledger_ids": [
+      "LED-000376"
+    ],
+    "settlement_ids": [
+      "STL-000376-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000377",
+    "ledger_ids": [
+      "LED-000377"
+    ],
+    "settlement_ids": [
+      "STL-000377-0",
+      "STL-000377-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000378",
+    "ledger_ids": [
+      "LED-000378"
+    ],
+    "settlement_ids": [
+      "STL-000378-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000379",
+    "ledger_ids": [
+      "LED-000379"
+    ],
+    "settlement_ids": [
+      "STL-000379-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000380",
+    "ledger_ids": [
+      "LED-000380"
+    ],
+    "settlement_ids": [
+      "STL-000380-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000381",
+    "ledger_ids": [
+      "LED-000381"
+    ],
+    "settlement_ids": [
+      "STL-000381-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000382",
+    "ledger_ids": [
+      "LED-000382"
+    ],
+    "settlement_ids": [
+      "STL-000382-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000383",
+    "ledger_ids": [
+      "LED-000383"
+    ],
+    "settlement_ids": [
+      "STL-000383-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000385",
+    "ledger_ids": [
+      "LED-000385"
+    ],
+    "settlement_ids": [
+      "STL-000385-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000386",
+    "ledger_ids": [
+      "LED-000386"
+    ],
+    "settlement_ids": [
+      "STL-000386-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000387",
+    "ledger_ids": [
+      "LED-000387"
+    ],
+    "settlement_ids": [
+      "STL-000387-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000388",
+    "ledger_ids": [
+      "LED-000388"
+    ],
+    "settlement_ids": [
+      "STL-000388-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000389",
+    "ledger_ids": [
+      "LED-000389"
+    ],
+    "settlement_ids": [
+      "STL-000389-0",
+      "STL-000389-1",
+      "STL-000389-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000390",
+    "ledger_ids": [
+      "LED-000390"
+    ],
+    "settlement_ids": [
+      "STL-000390-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000391",
+    "ledger_ids": [
+      "LED-000391"
+    ],
+    "settlement_ids": [
+      "STL-000391-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000392",
+    "ledger_ids": [
+      "LED-000392"
+    ],
+    "settlement_ids": [
+      "STL-000392-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000393",
+    "ledger_ids": [
+      "LED-000393"
+    ],
+    "settlement_ids": [
+      "STL-000393-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000394",
+    "ledger_ids": [
+      "LED-000394"
+    ],
+    "settlement_ids": [
+      "STL-000394-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000395",
+    "ledger_ids": [
+      "LED-000395"
+    ],
+    "settlement_ids": [
+      "STL-000395-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000396",
+    "ledger_ids": [
+      "LED-000396"
+    ],
+    "settlement_ids": [
+      "STL-000396-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000397",
+    "ledger_ids": [
+      "LED-000397"
+    ],
+    "settlement_ids": [
+      "STL-000397-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000398",
+    "ledger_ids": [
+      "LED-000398"
+    ],
+    "settlement_ids": [
+      "STL-000398-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000399",
+    "ledger_ids": [
+      "LED-000399"
+    ],
+    "settlement_ids": [
+      "STL-000399-0",
+      "STL-000399-1",
+      "STL-000399-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000400",
+    "ledger_ids": [
+      "LED-000400"
+    ],
+    "settlement_ids": [
+      "STL-000400-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000403",
+    "ledger_ids": [
+      "LED-000403"
+    ],
+    "settlement_ids": [
+      "STL-000403-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000404",
+    "ledger_ids": [
+      "LED-000404"
+    ],
+    "settlement_ids": [
+      "STL-000404-0",
+      "STL-000404-1",
+      "STL-000404-2"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000405",
+    "ledger_ids": [
+      "LED-000405"
+    ],
+    "settlement_ids": [
+      "STL-000405-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000407",
+    "ledger_ids": [
+      "LED-000407"
+    ],
+    "settlement_ids": [
+      "STL-000407-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000408",
+    "ledger_ids": [
+      "LED-000408"
+    ],
+    "settlement_ids": [
+      "STL-000408-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000409",
+    "ledger_ids": [
+      "LED-000409"
+    ],
+    "settlement_ids": [
+      "STL-000409-0",
+      "STL-000409-1",
+      "STL-000409-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000410",
+    "ledger_ids": [
+      "LED-000410"
+    ],
+    "settlement_ids": [
+      "STL-000410-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000411",
+    "ledger_ids": [
+      "LED-000411"
+    ],
+    "settlement_ids": [
+      "STL-000411-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000412",
+    "ledger_ids": [
+      "LED-000412"
+    ],
+    "settlement_ids": [
+      "STL-000412-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000413",
+    "ledger_ids": [
+      "LED-000413"
+    ],
+    "settlement_ids": [
+      "STL-000413-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000414",
+    "ledger_ids": [
+      "LED-000414"
+    ],
+    "settlement_ids": [
+      "STL-000414-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000415",
+    "ledger_ids": [
+      "LED-000415"
+    ],
+    "settlement_ids": [
+      "STL-000415-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000416",
+    "ledger_ids": [
+      "LED-000416"
+    ],
+    "settlement_ids": [
+      "STL-000416-0",
+      "STL-000416-1",
+      "STL-000416-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000417",
+    "ledger_ids": [
+      "LED-000417"
+    ],
+    "settlement_ids": [
+      "STL-000417-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000419",
+    "ledger_ids": [
+      "LED-000419"
+    ],
+    "settlement_ids": [
+      "STL-000419-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000420",
+    "ledger_ids": [
+      "LED-000420"
+    ],
+    "settlement_ids": [
+      "STL-000420-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000421",
+    "ledger_ids": [
+      "LED-000421"
+    ],
+    "settlement_ids": [
+      "STL-000421-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000422",
+    "ledger_ids": [
+      "LED-000422"
+    ],
+    "settlement_ids": [
+      "STL-000422-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000423",
+    "ledger_ids": [
+      "LED-000423"
+    ],
+    "settlement_ids": [
+      "STL-000423-0",
+      "STL-000423-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000424",
+    "ledger_ids": [
+      "LED-000424"
+    ],
+    "settlement_ids": [
+      "STL-000424-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000425",
+    "ledger_ids": [
+      "LED-000425"
+    ],
+    "settlement_ids": [
+      "STL-000425-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000426",
+    "ledger_ids": [
+      "LED-000426"
+    ],
+    "settlement_ids": [
+      "STL-000426-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000427",
+    "ledger_ids": [
+      "LED-000427"
+    ],
+    "settlement_ids": [
+      "STL-000427-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000428",
+    "ledger_ids": [
+      "LED-000428"
+    ],
+    "settlement_ids": [
+      "STL-000428-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000429",
+    "ledger_ids": [
+      "LED-000429"
+    ],
+    "settlement_ids": [
+      "STL-000429-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000430",
+    "ledger_ids": [
+      "LED-000430"
+    ],
+    "settlement_ids": [
+      "STL-000430-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000431",
+    "ledger_ids": [
+      "LED-000431"
+    ],
+    "settlement_ids": [
+      "STL-000431-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000432",
+    "ledger_ids": [
+      "LED-000432"
+    ],
+    "settlement_ids": [
+      "STL-000432-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000433",
+    "ledger_ids": [
+      "LED-000433"
+    ],
+    "settlement_ids": [
+      "STL-000433-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000434",
+    "ledger_ids": [
+      "LED-000434"
+    ],
+    "settlement_ids": [
+      "STL-000434-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000435",
+    "ledger_ids": [
+      "LED-000435"
+    ],
+    "settlement_ids": [
+      "STL-000435-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000436",
+    "ledger_ids": [
+      "LED-000436"
+    ],
+    "settlement_ids": [
+      "STL-000436-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000437",
+    "ledger_ids": [
+      "LED-000437"
+    ],
+    "settlement_ids": [
+      "STL-000437-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000438",
+    "ledger_ids": [
+      "LED-000438"
+    ],
+    "settlement_ids": [
+      "STL-000438-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000439",
+    "ledger_ids": [
+      "LED-000439"
+    ],
+    "settlement_ids": [
+      "STL-000439-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000440",
+    "ledger_ids": [
+      "LED-000440"
+    ],
+    "settlement_ids": [
+      "STL-000440-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000442",
+    "ledger_ids": [
+      "LED-000442"
+    ],
+    "settlement_ids": [
+      "STL-000442-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000443",
+    "ledger_ids": [
+      "LED-000443"
+    ],
+    "settlement_ids": [
+      "STL-000443-0",
+      "STL-000443-1",
+      "STL-000443-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000444",
+    "ledger_ids": [
+      "LED-000444"
+    ],
+    "settlement_ids": [
+      "STL-000444-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000446",
+    "ledger_ids": [
+      "LED-000446"
+    ],
+    "settlement_ids": [
+      "STL-000446-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000447",
+    "ledger_ids": [
+      "LED-000447"
+    ],
+    "settlement_ids": [
+      "STL-000447-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000448",
+    "ledger_ids": [
+      "LED-000448"
+    ],
+    "settlement_ids": [
+      "STL-000448-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000450",
+    "ledger_ids": [
+      "LED-000450"
+    ],
+    "settlement_ids": [
+      "STL-000450-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000451",
+    "ledger_ids": [
+      "LED-000451"
+    ],
+    "settlement_ids": [
+      "STL-000451-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000452",
+    "ledger_ids": [
+      "LED-000452"
+    ],
+    "settlement_ids": [
+      "STL-000452-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000455",
+    "ledger_ids": [
+      "LED-000455"
+    ],
+    "settlement_ids": [
+      "STL-000455-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000456",
+    "ledger_ids": [
+      "LED-000456"
+    ],
+    "settlement_ids": [
+      "STL-000456-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000458",
+    "ledger_ids": [
+      "LED-000458"
+    ],
+    "settlement_ids": [
+      "STL-000458-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000459",
+    "ledger_ids": [
+      "LED-000459"
+    ],
+    "settlement_ids": [
+      "STL-000459-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000460",
+    "ledger_ids": [
+      "LED-000460"
+    ],
+    "settlement_ids": [
+      "STL-000460-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000461",
+    "ledger_ids": [
+      "LED-000461"
+    ],
+    "settlement_ids": [
+      "STL-000461-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000462",
+    "ledger_ids": [
+      "LED-000462"
+    ],
+    "settlement_ids": [
+      "STL-000462-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000463",
+    "ledger_ids": [
+      "LED-000463"
+    ],
+    "settlement_ids": [
+      "STL-000463-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000464",
+    "ledger_ids": [
+      "LED-000464"
+    ],
+    "settlement_ids": [
+      "STL-000464-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000465",
+    "ledger_ids": [
+      "LED-000465"
+    ],
+    "settlement_ids": [
+      "STL-000465-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000466",
+    "ledger_ids": [
+      "LED-000466"
+    ],
+    "settlement_ids": [
+      "STL-000466-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000467",
+    "ledger_ids": [
+      "LED-000467"
+    ],
+    "settlement_ids": [
+      "STL-000467-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000468",
+    "ledger_ids": [
+      "LED-000468"
+    ],
+    "settlement_ids": [
+      "STL-000468-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000469",
+    "ledger_ids": [
+      "LED-000469"
+    ],
+    "settlement_ids": [
+      "STL-000469-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000470",
+    "ledger_ids": [
+      "LED-000470"
+    ],
+    "settlement_ids": [
+      "STL-000470-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000471",
+    "ledger_ids": [
+      "LED-000471"
+    ],
+    "settlement_ids": [
+      "STL-000471-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000472",
+    "ledger_ids": [
+      "LED-000472"
+    ],
+    "settlement_ids": [
+      "STL-000472-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000473",
+    "ledger_ids": [
+      "LED-000473"
+    ],
+    "settlement_ids": [
+      "STL-000473-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000474",
+    "ledger_ids": [
+      "LED-000474"
+    ],
+    "settlement_ids": [
+      "STL-000474-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000475",
+    "ledger_ids": [
+      "LED-000475"
+    ],
+    "settlement_ids": [
+      "STL-000475-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000476",
+    "ledger_ids": [
+      "LED-000476"
+    ],
+    "settlement_ids": [
+      "STL-000476-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000477",
+    "ledger_ids": [
+      "LED-000477"
+    ],
+    "settlement_ids": [
+      "STL-000477-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000478",
+    "ledger_ids": [
+      "LED-000478"
+    ],
+    "settlement_ids": [
+      "STL-000478-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000479",
+    "ledger_ids": [
+      "LED-000479"
+    ],
+    "settlement_ids": [
+      "STL-000479-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000480",
+    "ledger_ids": [
+      "LED-000480"
+    ],
+    "settlement_ids": [
+      "STL-000480-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000481",
+    "ledger_ids": [
+      "LED-000481"
+    ],
+    "settlement_ids": [
+      "STL-000481-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000482",
+    "ledger_ids": [
+      "LED-000482"
+    ],
+    "settlement_ids": [
+      "STL-000482-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000483",
+    "ledger_ids": [
+      "LED-000483"
+    ],
+    "settlement_ids": [
+      "STL-000483-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000485",
+    "ledger_ids": [
+      "LED-000485"
+    ],
+    "settlement_ids": [
+      "STL-000485-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000486",
+    "ledger_ids": [
+      "LED-000486"
+    ],
+    "settlement_ids": [
+      "STL-000486-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000487",
+    "ledger_ids": [
+      "LED-000487"
+    ],
+    "settlement_ids": [
+      "STL-000487-0",
+      "STL-000487-1",
+      "STL-000487-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000490",
+    "ledger_ids": [
+      "LED-000490"
+    ],
+    "settlement_ids": [
+      "STL-000490-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000491",
+    "ledger_ids": [
+      "LED-000491"
+    ],
+    "settlement_ids": [
+      "STL-000491-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000492",
+    "ledger_ids": [
+      "LED-000492"
+    ],
+    "settlement_ids": [
+      "STL-000492-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000493",
+    "ledger_ids": [
+      "LED-000493"
+    ],
+    "settlement_ids": [
+      "STL-000493-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000494",
+    "ledger_ids": [
+      "LED-000494"
+    ],
+    "settlement_ids": [
+      "STL-000494-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000495",
+    "ledger_ids": [
+      "LED-000495"
+    ],
+    "settlement_ids": [
+      "STL-000495-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000496",
+    "ledger_ids": [
+      "LED-000496"
+    ],
+    "settlement_ids": [
+      "STL-000496-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000497",
+    "ledger_ids": [
+      "LED-000497"
+    ],
+    "settlement_ids": [
+      "STL-000497-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000498",
+    "ledger_ids": [
+      "LED-000498"
+    ],
+    "settlement_ids": [
+      "STL-000498-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000499",
+    "ledger_ids": [
+      "LED-000499"
+    ],
+    "settlement_ids": [
+      "STL-000499-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000501",
+    "ledger_ids": [
+      "LED-000501"
+    ],
+    "settlement_ids": [
+      "STL-000501-0",
+      "STL-000501-1",
+      "STL-000501-2"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000503",
+    "ledger_ids": [
+      "LED-000503"
+    ],
+    "settlement_ids": [
+      "STL-000503-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000504",
+    "ledger_ids": [
+      "LED-000504"
+    ],
+    "settlement_ids": [
+      "STL-000504-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000505",
+    "ledger_ids": [
+      "LED-000505"
+    ],
+    "settlement_ids": [
+      "STL-000505-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000507",
+    "ledger_ids": [
+      "LED-000507"
+    ],
+    "settlement_ids": [
+      "STL-000507-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000508",
+    "ledger_ids": [
+      "LED-000508"
+    ],
+    "settlement_ids": [
+      "STL-000508-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000509",
+    "ledger_ids": [
+      "LED-000509"
+    ],
+    "settlement_ids": [
+      "STL-000509-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000510",
+    "ledger_ids": [
+      "LED-000510"
+    ],
+    "settlement_ids": [
+      "STL-000510-0",
+      "STL-000510-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000511",
+    "ledger_ids": [
+      "LED-000511"
+    ],
+    "settlement_ids": [
+      "STL-000511-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000512",
+    "ledger_ids": [
+      "LED-000512"
+    ],
+    "settlement_ids": [
+      "STL-000512-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000513",
+    "ledger_ids": [
+      "LED-000513"
+    ],
+    "settlement_ids": [
+      "STL-000513-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000514",
+    "ledger_ids": [
+      "LED-000514"
+    ],
+    "settlement_ids": [
+      "STL-000514-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000516",
+    "ledger_ids": [
+      "LED-000516"
+    ],
+    "settlement_ids": [
+      "STL-000516-0",
+      "STL-000516-1",
+      "STL-000516-2"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000517",
+    "ledger_ids": [
+      "LED-000517"
+    ],
+    "settlement_ids": [
+      "STL-000517-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000518",
+    "ledger_ids": [
+      "LED-000518"
+    ],
+    "settlement_ids": [
+      "STL-000518-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000519",
+    "ledger_ids": [
+      "LED-000519"
+    ],
+    "settlement_ids": [
+      "STL-000519-0",
+      "STL-000519-1",
+      "STL-000519-2"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000520",
+    "ledger_ids": [
+      "LED-000520"
+    ],
+    "settlement_ids": [
+      "STL-000520-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000521",
+    "ledger_ids": [
+      "LED-000521"
+    ],
+    "settlement_ids": [
+      "STL-000521-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000522",
+    "ledger_ids": [
+      "LED-000522"
+    ],
+    "settlement_ids": [
+      "STL-000522-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000524",
+    "ledger_ids": [
+      "LED-000524"
+    ],
+    "settlement_ids": [
+      "STL-000524-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000525",
+    "ledger_ids": [
+      "LED-000525"
+    ],
+    "settlement_ids": [
+      "STL-000525-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000526",
+    "ledger_ids": [
+      "LED-000526"
+    ],
+    "settlement_ids": [
+      "STL-000526-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000527",
+    "ledger_ids": [
+      "LED-000527"
+    ],
+    "settlement_ids": [
+      "STL-000527-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000528",
+    "ledger_ids": [
+      "LED-000528"
+    ],
+    "settlement_ids": [
+      "STL-000528-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000531",
+    "ledger_ids": [
+      "LED-000531"
+    ],
+    "settlement_ids": [
+      "STL-000531-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000532",
+    "ledger_ids": [
+      "LED-000532"
+    ],
+    "settlement_ids": [
+      "STL-000532-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000534",
+    "ledger_ids": [
+      "LED-000534"
+    ],
+    "settlement_ids": [
+      "STL-000534-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000535",
+    "ledger_ids": [
+      "LED-000535"
+    ],
+    "settlement_ids": [
+      "STL-000535-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000536",
+    "ledger_ids": [
+      "LED-000536"
+    ],
+    "settlement_ids": [
+      "STL-000536-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000537",
+    "ledger_ids": [
+      "LED-000537"
+    ],
+    "settlement_ids": [
+      "STL-000537-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000538",
+    "ledger_ids": [
+      "LED-000538"
+    ],
+    "settlement_ids": [
+      "STL-000538-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000539",
+    "ledger_ids": [
+      "LED-000539"
+    ],
+    "settlement_ids": [
+      "STL-000539-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000540",
+    "ledger_ids": [
+      "LED-000540"
+    ],
+    "settlement_ids": [
+      "STL-000540-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000541",
+    "ledger_ids": [
+      "LED-000541"
+    ],
+    "settlement_ids": [
+      "STL-000541-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000542",
+    "ledger_ids": [
+      "LED-000542"
+    ],
+    "settlement_ids": [
+      "STL-000542-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000543",
+    "ledger_ids": [
+      "LED-000543"
+    ],
+    "settlement_ids": [
+      "STL-000543-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000544",
+    "ledger_ids": [
+      "LED-000544"
+    ],
+    "settlement_ids": [
+      "STL-000544-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000545",
+    "ledger_ids": [
+      "LED-000545"
+    ],
+    "settlement_ids": [
+      "STL-000545-0",
+      "STL-000545-1"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000546",
+    "ledger_ids": [
+      "LED-000546"
+    ],
+    "settlement_ids": [
+      "STL-000546-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000548",
+    "ledger_ids": [
+      "LED-000548"
+    ],
+    "settlement_ids": [
+      "STL-000548-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000549",
+    "ledger_ids": [
+      "LED-000549"
+    ],
+    "settlement_ids": [
+      "STL-000549-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000550",
+    "ledger_ids": [
+      "LED-000550"
+    ],
+    "settlement_ids": [
+      "STL-000550-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000551",
+    "ledger_ids": [
+      "LED-000551"
+    ],
+    "settlement_ids": [
+      "STL-000551-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000552",
+    "ledger_ids": [
+      "LED-000552"
+    ],
+    "settlement_ids": [
+      "STL-000552-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000553",
+    "ledger_ids": [
+      "LED-000553"
+    ],
+    "settlement_ids": [
+      "STL-000553-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000554",
+    "ledger_ids": [
+      "LED-000554"
+    ],
+    "settlement_ids": [
+      "STL-000554-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000555",
+    "ledger_ids": [
+      "LED-000555"
+    ],
+    "settlement_ids": [
+      "STL-000555-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000557",
+    "ledger_ids": [
+      "LED-000557"
+    ],
+    "settlement_ids": [
+      "STL-000557-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000559",
+    "ledger_ids": [
+      "LED-000559"
+    ],
+    "settlement_ids": [
+      "STL-000559-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000560",
+    "ledger_ids": [
+      "LED-000560"
+    ],
+    "settlement_ids": [
+      "STL-000560-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000562",
+    "ledger_ids": [
+      "LED-000562"
+    ],
+    "settlement_ids": [
+      "STL-000562-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000563",
+    "ledger_ids": [
+      "LED-000563"
+    ],
+    "settlement_ids": [
+      "STL-000563-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000564",
+    "ledger_ids": [
+      "LED-000564"
+    ],
+    "settlement_ids": [
+      "STL-000564-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000565",
+    "ledger_ids": [
+      "LED-000565"
+    ],
+    "settlement_ids": [
+      "STL-000565-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000568",
+    "ledger_ids": [
+      "LED-000568"
+    ],
+    "settlement_ids": [
+      "STL-000568-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000569",
+    "ledger_ids": [
+      "LED-000569"
+    ],
+    "settlement_ids": [
+      "STL-000569-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000571",
+    "ledger_ids": [
+      "LED-000571"
+    ],
+    "settlement_ids": [
+      "STL-000571-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000572",
+    "ledger_ids": [
+      "LED-000572"
+    ],
+    "settlement_ids": [
+      "STL-000572-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000574",
+    "ledger_ids": [
+      "LED-000574"
+    ],
+    "settlement_ids": [
+      "STL-000574-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000575",
+    "ledger_ids": [
+      "LED-000575"
+    ],
+    "settlement_ids": [
+      "STL-000575-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000576",
+    "ledger_ids": [
+      "LED-000576"
+    ],
+    "settlement_ids": [
+      "STL-000576-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000578",
+    "ledger_ids": [
+      "LED-000578"
+    ],
+    "settlement_ids": [
+      "STL-000578-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000579",
+    "ledger_ids": [
+      "LED-000579"
+    ],
+    "settlement_ids": [
+      "STL-000579-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000580",
+    "ledger_ids": [
+      "LED-000580"
+    ],
+    "settlement_ids": [
+      "STL-000580-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000581",
+    "ledger_ids": [
+      "LED-000581"
+    ],
+    "settlement_ids": [
+      "STL-000581-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000582",
+    "ledger_ids": [
+      "LED-000582"
+    ],
+    "settlement_ids": [
+      "STL-000582-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000583",
+    "ledger_ids": [
+      "LED-000583"
+    ],
+    "settlement_ids": [
+      "STL-000583-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000584",
+    "ledger_ids": [
+      "LED-000584"
+    ],
+    "settlement_ids": [
+      "STL-000584-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000585",
+    "ledger_ids": [
+      "LED-000585"
+    ],
+    "settlement_ids": [
+      "STL-000585-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000587",
+    "ledger_ids": [
+      "LED-000587"
+    ],
+    "settlement_ids": [
+      "STL-000587-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000588",
+    "ledger_ids": [
+      "LED-000588"
+    ],
+    "settlement_ids": [
+      "STL-000588-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000589",
+    "ledger_ids": [
+      "LED-000589"
+    ],
+    "settlement_ids": [
+      "STL-000589-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000590",
+    "ledger_ids": [
+      "LED-000590"
+    ],
+    "settlement_ids": [
+      "STL-000590-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000591",
+    "ledger_ids": [
+      "LED-000591"
+    ],
+    "settlement_ids": [
+      "STL-000591-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000592",
+    "ledger_ids": [
+      "LED-000592"
+    ],
+    "settlement_ids": [
+      "STL-000592-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000593",
+    "ledger_ids": [
+      "LED-000593"
+    ],
+    "settlement_ids": [
+      "STL-000593-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000594",
+    "ledger_ids": [
+      "LED-000594"
+    ],
+    "settlement_ids": [
+      "STL-000594-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000596",
+    "ledger_ids": [
+      "LED-000596"
+    ],
+    "settlement_ids": [
+      "STL-000596-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000597",
+    "ledger_ids": [
+      "LED-000597"
+    ],
+    "settlement_ids": [
+      "STL-000597-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000598",
+    "ledger_ids": [
+      "LED-000598"
+    ],
+    "settlement_ids": [
+      "STL-000598-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000264",
+    "ledger_ids": [
+      "LED-000264"
+    ],
+    "settlement_ids": [
+      "STL-000264-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000561",
+    "ledger_ids": [
+      "LED-000561"
+    ],
+    "settlement_ids": [
+      "STL-000561-0"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000020|GT-000153|GT-000384",
+    "ledger_ids": [
+      "LED-000020",
+      "LED-000153",
+      "LED-000384"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000020-000153-000384"
+    ],
+    "split": "test"
+  },
+  {
+    "gt_txn_id": "GT-000291|GT-000337|GT-000567",
+    "ledger_ids": [
+      "LED-000291",
+      "LED-000337",
+      "LED-000567"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000291-000337-000567"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000244|GT-000277|GT-000586",
+    "ledger_ids": [
+      "LED-000244",
+      "LED-000277",
+      "LED-000586"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000244-000277-000586"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000010|GT-000222|GT-000523",
+    "ledger_ids": [
+      "LED-000010",
+      "LED-000222",
+      "LED-000523"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000010-000222-000523"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000530",
+    "ledger_ids": [
+      "LED-000530"
+    ],
+    "settlement_ids": [
+      "STL-000530-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000061|GT-000241",
+    "ledger_ids": [
+      "LED-000061",
+      "LED-000241"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000061-000241"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000406|GT-000441",
+    "ledger_ids": [
+      "LED-000406",
+      "LED-000441"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000406-000441"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000577",
+    "ledger_ids": [
+      "LED-000577"
+    ],
+    "settlement_ids": [
+      "STL-000577-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000317",
+    "ledger_ids": [
+      "LED-000317"
+    ],
+    "settlement_ids": [
+      "STL-000317-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000019",
+    "ledger_ids": [
+      "LED-000019"
+    ],
+    "settlement_ids": [
+      "STL-000019-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000489|GT-000558",
+    "ledger_ids": [
+      "LED-000489",
+      "LED-000558"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000489-000558"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000595",
+    "ledger_ids": [
+      "LED-000595"
+    ],
+    "settlement_ids": [
+      "STL-000595-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000240|GT-000445",
+    "ledger_ids": [
+      "LED-000240",
+      "LED-000445"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000240-000445"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000599",
+    "ledger_ids": [
+      "LED-000599"
+    ],
+    "settlement_ids": [
+      "STL-000599-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000086|GT-000570",
+    "ledger_ids": [
+      "LED-000086",
+      "LED-000570"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000086-000570"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000257",
+    "ledger_ids": [
+      "LED-000257"
+    ],
+    "settlement_ids": [
+      "STL-000257-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000056|GT-000418",
+    "ledger_ids": [
+      "LED-000056",
+      "LED-000418"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000056-000418"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000223|GT-000311",
+    "ledger_ids": [
+      "LED-000223",
+      "LED-000311"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000223-000311"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000449",
+    "ledger_ids": [
+      "LED-000449"
+    ],
+    "settlement_ids": [
+      "STL-000449-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000201|GT-000305",
+    "ledger_ids": [
+      "LED-000201",
+      "LED-000305"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000201-000305"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000453|GT-000547",
+    "ledger_ids": [
+      "LED-000453",
+      "LED-000547"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000453-000547"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000533",
+    "ledger_ids": [
+      "LED-000533"
+    ],
+    "settlement_ids": [
+      "STL-000533-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000075",
+    "ledger_ids": [
+      "LED-000075"
+    ],
+    "settlement_ids": [
+      "STL-000075-0"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000230",
+    "ledger_ids": [
+      "LED-000230"
+    ],
+    "settlement_ids": [
+      "STL-000230-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000345",
+    "ledger_ids": [
+      "LED-000345"
+    ],
+    "settlement_ids": [
+      "STL-000345-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000304",
+    "ledger_ids": [
+      "LED-000304"
+    ],
+    "settlement_ids": [
+      "STL-000304-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000295",
+    "ledger_ids": [
+      "LED-000295"
+    ],
+    "settlement_ids": [
+      "STL-000295-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000488",
+    "ledger_ids": [
+      "LED-000488"
+    ],
+    "settlement_ids": [
+      "STL-000488-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000157",
+    "ledger_ids": [
+      "LED-000157"
+    ],
+    "settlement_ids": [
+      "STL-000157-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000293",
+    "ledger_ids": [
+      "LED-000293"
+    ],
+    "settlement_ids": [
+      "STL-000293-0"
+    ],
+    "split": "val"
+  },
+  {
+    "gt_txn_id": "GT-000087",
+    "ledger_ids": [
+      "LED-000087"
+    ],
+    "settlement_ids": [
+      "STL-000087-0"
+    ],
+    "split": "val"
+  }
+]

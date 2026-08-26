@@ -1,0 +1,17 @@
+{
+  "n_ground_truth_txns": 600,
+  "n_ledger_records": 586,
+  "n_settlement_records": 608,
+  "structural_type_counts": {
+    "one_to_one": 481,
+    "batched_settlement": 50,
+    "split_settlement": 36,
+    "ledger_only": 19,
+    "settlement_only": 14
+  },
+  "split_counts": {
+    "train": 407,
+    "val": 109,
+    "test": 84
+  }
+}
