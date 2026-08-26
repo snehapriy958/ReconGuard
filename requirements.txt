@@ -1,0 +1,6 @@
+pandas
+numpy
+pyarrow
+rapidfuzz
+sentence-transformers
+pytest

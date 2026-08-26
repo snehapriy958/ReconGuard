@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "embedding_backend": "fallback_ngram_hash",
+    "embedding_dim": 256,
+    "n_ledger_records": 586,
+    "n_settlement_records": 608,
+    "n_candidate_pairs": 1136,
+    "avg_candidates_per_ledger_record": 1.939,
+    "has_description_feature": true
+  },
+  "n_rows": 1136,
+  "features": {
+    "abs_amount_diff": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 802,
+      "min": 0.0,
+      "max": 11991.01,
+      "mean": 2201.085255,
+      "median": 992.33,
+      "std": 2725.563994
+    },
+    "relative_amount_diff": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 799,
+      "min": 0.0,
+      "max": 0.049555,
+      "mean": 0.015134,
+      "median": 0.00972,
+      "std": 0.01605
+    },
+    "amount_ratio": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 809,
+      "min": 0.950734,
+      "max": 1.049555,
+      "mean": 0.997426,
+      "median": 1.0,
+      "std": 0.021913
+    },
+    "date_diff_days": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 8,
+      "min": 0.0,
+      "max": 7.0,
+      "mean": 2.071303,
+      "median": 1.0,
+      "std": 2.295989
+    },
+    "vendor_levenshtein_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 152,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.559684,
+      "median": 0.388889,
+      "std": 0.349083
+    },
+    "vendor_jaro_winkler_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 323,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.707047,
+      "median": 0.610998,
+      "std": 0.259116
+    },
+    "vendor_token_sort_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 161,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.550309,
+      "median": 0.381966,
+      "std": 0.346633
+    },
+    "vendor_token_set_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 132,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.583877,
+      "median": 0.394444,
+      "std": 0.362951
+    },
+    "vendor_exact_normalized_match": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.31338,
+      "median": 0.0,
+      "std": 0.464072
+    },
+    "vendor_embedding_cosine_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 181,
+      "min": -0.333333,
+      "max": 1.0,
+      "mean": 0.408613,
+      "median": 0.129099,
+      "std": 0.454547
+    },
+    "reference_exact_match": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.298415,
+      "median": 0.0,
+      "std": 0.457764
+    },
+    "reference_substring_overlap": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.369718,
+      "median": 0.0,
+      "std": 0.482941
+    },
+    "reference_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 6,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.445829,
+      "median": 0.230769,
+      "std": 0.378464
+    },
+    "reference_missing_ledger": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0
+    },
+    "reference_missing_settlement": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.15757,
+      "median": 0.0,
+      "std": 0.364498
+    },
+    "reference_both_missing": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0
+    },
+    "candidate_count_for_ledger": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 7,
+      "min": 1.0,
+      "max": 7.0,
+      "mean": 2.647887,
+      "median": 2.0,
+      "std": 1.340378
+    },
+    "candidate_count_for_settlement": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 8,
+      "min": 1.0,
+      "max": 8.0,
+      "mean": 2.852113,
+      "median": 3.0,
+      "std": 1.506273
+    },
+    "competing_candidate_count": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 14,
+      "min": 0.0,
+      "max": 13.0,
+      "mean": 3.5,
+      "median": 3.0,
+      "std": 2.502158
+    },
+    "is_potential_one_to_many": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.81162,
+      "median": 1.0,
+      "std": 0.391188
+    },
+    "is_potential_many_to_one": {
+      "dtype": "int64",
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.794014,
+      "median": 1.0,
+      "std": 0.404598
+    },
+    "description_embedding_cosine_similarity": {
+      "dtype": "float64",
+      "missing_pct": 0.0,
+      "unique_count": 491,
+      "min": -0.091499,
+      "max": 0.922835,
+      "mean": 0.306439,
+      "median": 0.214573,
+      "std": 0.261755
+    }
+  }
+}
