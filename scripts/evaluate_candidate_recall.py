@@ -14,7 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from ml.features.candidate_generation import generate_candidates
+from ml.candidate_generation.blocking_v1 import generate_candidates
 
 ROOT = Path(__file__).parent.parent
 ledger_df = pd.read_csv(ROOT / "data/raw/ledger.csv")

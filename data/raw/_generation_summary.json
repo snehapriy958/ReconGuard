@@ -1,7 +1,7 @@
 {
   "n_ground_truth_txns": 600,
   "n_ledger_records": 586,
-  "n_settlement_records": 608,
+  "n_settlement_records": 607,
   "structural_type_counts": {
     "one_to_one": 481,
     "batched_settlement": 50,

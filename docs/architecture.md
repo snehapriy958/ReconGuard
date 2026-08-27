@@ -88,3 +88,41 @@ names sharing common words like "company"). Documented in the feature
 catalog rather than patched — it's a real property of the metric, which is
 exactly why the classifier gets four independent string-similarity features
 instead of relying on one.
+
+## Phase 3 — Candidate-recall remediation + Logistic Regression baseline (done)
+
+**Candidate generation:** V1 baseline independently re-verified (100% one-to-one,
+0% structural recall — confirmed, not assumed). Root cause of the 0% structural
+recall traced to a genuine **Phase 1 data-generation bug**, not a blocking
+weakness: batch members had no date-proximity constraint and could be
+generated months apart. Fixed at the source (synchronized batch-member dates
+at generation time), regenerated the dataset, and re-verified Phase 1/2 tests
+still pass on the corrected data. Built Blocking V2 (bounded structural
+search, tuned via a real tolerance sweep to 0.025/₹7) achieving **100% recall
+on all three relationship types** with a measured, deliberate candidate-volume
+tradeoff (9,838 structural candidates against 50 true structural groups).
+Full write-up: `docs/candidate_generation.md`.
+
+**Label assembly:** evaluation-only (`scripts/assemble_labels.py`), scoped
+to the V1 pairwise candidate set (structural-group classification deferred,
+stated explicitly — see `docs/model_baseline.md`). Leakage rule is stricter
+than transaction-group splitting: both records in a candidate pair must
+agree on ground-truth split, or the pair is excluded entirely. This excluded
+323 of 1,142 candidates (28%) — a real, substantial fraction.
+
+**Logistic Regression baseline:** trained on 22 Phase 2 features, StandardScaler
+preprocessing, `class_weight='balanced'` selected (tied with unweighted on
+validation). Held-out test: precision 1.0, recall 0.9857, F1 0.9928. This
+result was scrutinized, not just reported — probability distribution is
+sharply bimodal (genuinely well-separated problem, not a leakage artifact,
+confirmed via the existing leakage tests), zero false positives observed
+(stated as "unverified" rather than "confirmed good" — no FP data to
+characterize failure modes from), one false negative traced to vendor
+corruption compounding with structural ambiguity (10 competing candidates on
+a true one-to-one pair). Full write-up: `docs/model_baseline.md`.
+
+**Tests:** 13 new Phase 3 tests, 42/42 total passing (Phase 2 + Phase 3).
+
+**Explicit scope boundary carried to Phase 4:** structural (split/batch)
+candidates are not yet classified by any model — this baseline covers
+one-to-one reconciliation only.

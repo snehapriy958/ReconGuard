@@ -1,5 +1,9 @@
 """
-ReconLens — candidate generation (blocking).
+FROZEN AS BASELINE (Phase 3, section 7): this is Blocking V1. Do not modify —
+it is the baseline that V2 (ml/candidate_generation/blocking_v2.py) is
+measured against. Any improvement work happens in blocking_v2.py, not here.
+
+ReconLens — candidate generation (blocking), V1.
 
 Never compares every ledger record against every settlement record. Blocks
 on amount proximity + date window, which are the two dimensions Phase 1's

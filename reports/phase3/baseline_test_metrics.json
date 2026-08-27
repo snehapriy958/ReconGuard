@@ -1,0 +1,19 @@
+{
+  "chosen_variant": "balanced",
+  "test_metrics": {
+    "n": 83,
+    "n_positive": 70,
+    "n_negative": 13,
+    "precision": 1.0,
+    "recall": 0.9857,
+    "f1": 0.9928,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": {
+      "tn": 13,
+      "fp": 0,
+      "fn": 1,
+      "tp": 69
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "total_v1_candidates": 1142,
+  "excluded_ambiguous_structural_pairs": 1,
+  "excluded_cross_split_pairs": 323,
+  "labeled_rows": 818,
+  "leakage_checks": {
+    "cross_split_ground_truth_transactions": 0,
+    "duplicate_candidate_rows": 0,
+    "hidden_columns_present": 0
+  },
+  "class_distribution": {
+    "train": {
+      "total": 612,
+      "positive": 334,
+      "negative": 278,
+      "positive_pct": 54.58
+    },
+    "val": {
+      "total": 123,
+      "positive": 98,
+      "negative": 25,
+      "positive_pct": 79.67
+    },
+    "test": {
+      "total": 83,
+      "positive": 70,
+      "negative": 13,
+      "positive_pct": 84.34
+    }
+  }
+}

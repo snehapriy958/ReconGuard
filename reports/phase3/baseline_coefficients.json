@@ -1,0 +1,112 @@
+[
+  {
+    "feature": "reference_substring_overlap",
+    "coefficient": 2.2563,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "reference_missing_settlement",
+    "coefficient": 1.6311,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "relative_amount_diff",
+    "coefficient": -1.2225,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "reference_exact_match",
+    "coefficient": 0.9679,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "date_diff_days",
+    "coefficient": -0.9243,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "abs_amount_diff",
+    "coefficient": -0.895,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "vendor_jaro_winkler_similarity",
+    "coefficient": 0.7671,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "amount_ratio",
+    "coefficient": -0.7543,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "reference_similarity",
+    "coefficient": 0.7167,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "vendor_token_set_similarity",
+    "coefficient": 0.5936,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "vendor_embedding_cosine_similarity",
+    "coefficient": 0.5098,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "description_embedding_cosine_similarity",
+    "coefficient": 0.5061,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "candidate_count_for_ledger",
+    "coefficient": -0.4094,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "is_potential_one_to_many",
+    "coefficient": -0.3774,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "is_potential_many_to_one",
+    "coefficient": -0.3351,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "vendor_levenshtein_similarity",
+    "coefficient": 0.1645,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "candidate_count_for_settlement",
+    "coefficient": 0.1578,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "competing_candidate_count",
+    "coefficient": -0.151,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "vendor_token_sort_similarity",
+    "coefficient": 0.1108,
+    "direction": "increases match likelihood"
+  },
+  {
+    "feature": "vendor_exact_normalized_match",
+    "coefficient": -0.0636,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "reference_missing_ledger",
+    "coefficient": 0.0,
+    "direction": "decreases match likelihood"
+  },
+  {
+    "feature": "reference_both_missing",
+    "coefficient": 0.0,
+    "direction": "decreases match likelihood"
+  }
+]

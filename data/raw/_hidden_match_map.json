@@ -196,7 +196,8 @@
     ],
     "settlement_ids": [
       "STL-000022-0",
-      "STL-000022-1"
+      "STL-000022-1",
+      "STL-000022-2"
     ],
     "split": "train"
   },
@@ -297,7 +298,8 @@
     ],
     "settlement_ids": [
       "STL-000032-0",
-      "STL-000032-1"
+      "STL-000032-1",
+      "STL-000032-2"
     ],
     "split": "train"
   },
@@ -1914,7 +1916,8 @@
     ],
     "settlement_ids": [
       "STL-000210-0",
-      "STL-000210-1"
+      "STL-000210-1",
+      "STL-000210-2"
     ],
     "split": "train"
   },
@@ -1965,7 +1968,8 @@
     ],
     "settlement_ids": [
       "STL-000216-0",
-      "STL-000216-1"
+      "STL-000216-1",
+      "STL-000216-2"
     ],
     "split": "train"
   },
@@ -2047,8 +2051,7 @@
     ],
     "settlement_ids": [
       "STL-000226-0",
-      "STL-000226-1",
-      "STL-000226-2"
+      "STL-000226-1"
     ],
     "split": "val"
   },
@@ -2270,8 +2273,7 @@
     ],
     "settlement_ids": [
       "STL-000255-0",
-      "STL-000255-1",
-      "STL-000255-2"
+      "STL-000255-1"
     ],
     "split": "train"
   },
@@ -2814,8 +2816,7 @@
     ],
     "settlement_ids": [
       "STL-000320-0",
-      "STL-000320-1",
-      "STL-000320-2"
+      "STL-000320-1"
     ],
     "split": "train"
   },
@@ -2946,8 +2947,7 @@
     ],
     "settlement_ids": [
       "STL-000333-0",
-      "STL-000333-1",
-      "STL-000333-2"
+      "STL-000333-1"
     ],
     "split": "train"
   },
@@ -3320,7 +3320,8 @@
     ],
     "settlement_ids": [
       "STL-000377-0",
-      "STL-000377-1"
+      "STL-000377-1",
+      "STL-000377-2"
     ],
     "split": "train"
   },
@@ -3533,8 +3534,7 @@
     ],
     "settlement_ids": [
       "STL-000399-0",
-      "STL-000399-1",
-      "STL-000399-2"
+      "STL-000399-1"
     ],
     "split": "train"
   },
@@ -3565,8 +3565,7 @@
     ],
     "settlement_ids": [
       "STL-000404-0",
-      "STL-000404-1",
-      "STL-000404-2"
+      "STL-000404-1"
     ],
     "split": "test"
   },
@@ -3607,8 +3606,7 @@
     ],
     "settlement_ids": [
       "STL-000409-0",
-      "STL-000409-1",
-      "STL-000409-2"
+      "STL-000409-1"
     ],
     "split": "train"
   },
@@ -3679,8 +3677,7 @@
     ],
     "settlement_ids": [
       "STL-000416-0",
-      "STL-000416-1",
-      "STL-000416-2"
+      "STL-000416-1"
     ],
     "split": "train"
   },
@@ -3932,8 +3929,7 @@
     ],
     "settlement_ids": [
       "STL-000443-0",
-      "STL-000443-1",
-      "STL-000443-2"
+      "STL-000443-1"
     ],
     "split": "train"
   },
@@ -4803,7 +4799,8 @@
     ],
     "settlement_ids": [
       "STL-000545-0",
-      "STL-000545-1"
+      "STL-000545-1",
+      "STL-000545-2"
     ],
     "split": "train"
   },
@@ -5260,48 +5257,66 @@
     "split": "test"
   },
   {
-    "gt_txn_id": "GT-000291|GT-000337|GT-000567",
+    "gt_txn_id": "GT-000291|GT-000337",
     "ledger_ids": [
       "LED-000291",
-      "LED-000337",
+      "LED-000337"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000291-000337"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000567",
+    "ledger_ids": [
       "LED-000567"
     ],
     "settlement_ids": [
-      "STL-BATCH-000291-000337-000567"
+      "STL-000567-0"
     ],
     "split": "train"
   },
   {
-    "gt_txn_id": "GT-000244|GT-000277|GT-000586",
+    "gt_txn_id": "GT-000244|GT-000277",
     "ledger_ids": [
       "LED-000244",
-      "LED-000277",
+      "LED-000277"
+    ],
+    "settlement_ids": [
+      "STL-BATCH-000244-000277"
+    ],
+    "split": "train"
+  },
+  {
+    "gt_txn_id": "GT-000586",
+    "ledger_ids": [
       "LED-000586"
     ],
     "settlement_ids": [
-      "STL-BATCH-000244-000277-000586"
+      "STL-000586-0"
     ],
     "split": "train"
   },
   {
-    "gt_txn_id": "GT-000010|GT-000222|GT-000523",
+    "gt_txn_id": "GT-000010|GT-000222",
     "ledger_ids": [
       "LED-000010",
-      "LED-000222",
-      "LED-000523"
+      "LED-000222"
     ],
     "settlement_ids": [
-      "STL-BATCH-000010-000222-000523"
+      "STL-BATCH-000010-000222"
     ],
     "split": "train"
   },
   {
-    "gt_txn_id": "GT-000530",
+    "gt_txn_id": "GT-000523|GT-000530",
     "ledger_ids": [
+      "LED-000523",
       "LED-000530"
     ],
     "settlement_ids": [
-      "STL-000530-0"
+      "STL-BATCH-000523-000530"
     ],
     "split": "train"
   },

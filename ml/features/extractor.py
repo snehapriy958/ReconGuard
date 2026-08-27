@@ -28,7 +28,7 @@ from ml.features.reference import (
 )
 from ml.features.embeddings import EmbeddingBackend, EmbeddingCache, cosine_similarity
 from ml.features.structural import compute_structural_features
-from ml.features.candidate_generation import generate_candidates
+from ml.candidate_generation.blocking_v1 import generate_candidates
 
 ROOT = Path(__file__).parent.parent.parent
 RAW_DIR = ROOT / "data" / "raw"

@@ -1,0 +1,34 @@
+{
+  "unweighted": {
+    "n": 123,
+    "n_positive": 98,
+    "n_negative": 25,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": {
+      "tn": 25,
+      "fp": 0,
+      "fn": 0,
+      "tp": 98
+    }
+  },
+  "balanced": {
+    "n": 123,
+    "n_positive": 98,
+    "n_negative": 25,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": {
+      "tn": 25,
+      "fp": 0,
+      "fn": 0,
+      "tp": 98
+    }
+  }
+}

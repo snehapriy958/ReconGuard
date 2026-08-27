@@ -23,6 +23,7 @@ Design rules this file exists to enforce (see docs/architecture.md §6):
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import random
 import string
@@ -201,6 +202,12 @@ def generate(n_transactions: int, seed: int, out_dir: Path) -> None:
         if gt.structural_type == "settlement_only":
             # no ledger record at all for this ground-truth txn
             pass
+        elif gt.structural_type == "batched_settlement":
+            # Ledger row deferred to step 2b: batch members need a jointly
+            # reassigned, temporally-clustered date (see the fix note there),
+            # so creating the ledger row here with the txn's independently
+            # -drawn original date would just reintroduce the same bug.
+            pass
         else:
             ledger_id = f"LED-{gt.txn_id[3:]}"
             ledger_rows.append({
@@ -269,11 +276,55 @@ def generate(n_transactions: int, seed: int, out_dir: Path) -> None:
     #          by (split, vendor), into a single settlement row covering their
     #          summed amount. Grouping within the same split is required —
     #          a batch line spanning train and test would leak split membership
-    #          across the boundary we're trying to keep clean (see module docstring §3). ---
-    # Chunk within each (split, vendor) bucket only — a real settlement batch
-    # is same vendor, same split; grouping across vendors would be a generator
-    # artifact, not a realistic batch.
-    import itertools
+    #          across the boundary we're trying to keep clean (see module docstring §3).
+    #
+    #          BUG FOUND, DIAGNOSED, AND FIXED (see docs/architecture.md Phase 3
+    #          notes for the full write-up — this is the project's documented
+    #          "what broke" story):
+    #
+    #          Observed: candidate-generation recall on many-to-one batches was
+    #          0% even after Phase 3's structural blocking pass was built
+    #          specifically to catch them.
+    #
+    #          Investigation: direct inspection of the hidden match map showed
+    #          batch member transactions genuinely months apart (one batch
+    #          spanned Jan 24 to Apr 19) — no bounded date window could ever
+    #          recover that.
+    #
+    #          Root cause: the original generator picked each ground-truth
+    #          transaction's date independently BEFORE deciding it would be
+    #          part of a batch, then grouped whichever same-vendor/same-split
+    #          leftovers happened to exist, with no proximity constraint.
+    #
+    #          First fix attempted: require batch members to already be close
+    #          in date before grouping them. This FAILED — with ~600
+    #          transactions spread across 20 vendors x 3 splits, most
+    #          vendor/split buckets contain fewer than one batch-eligible item
+    #          on average, so finding 2+ independently-dated items within a
+    #          few days of each other almost never happens by chance (measured:
+    #          0 of 50 batch-eligible transactions formed a valid group).
+    #
+    #          Actual fix: don't search for proximity among independently-dated
+    #          transactions after the fact — assign a shared anchor date to
+    #          each batch GROUP at formation time, and generate each member's
+    #          date as a small, bounded offset from that anchor. This is also
+    #          the more realistic model: a real settlement batch is defined by
+    #          the processor choosing to batch a set of transactions together
+    #          within a short operational window, not by coincidence. ---
+    MAX_BATCH_DATE_SPAN_DAYS = 3
+
+    def _make_ledger_row(gt: GroundTruthTxn, override_date: str) -> dict:
+        return {
+            "ledger_id": f"LED-{gt.txn_id[3:]}",
+            "vendor_name": _corrupt_vendor(rng, gt.vendor, severity=0.15),
+            "amount": round(gt.amount, 2),
+            "txn_date": override_date,
+            "reference_id": gt.ref_id,
+            "description": rng.choice(DESC_TEMPLATES).format(ref=gt.ref_id),
+            "_gt_txn_id": gt.txn_id,
+            "_split": gt.split,
+        }
+
     pending_batch_items.sort(key=lambda g: (g.split, g.vendor))
     grouped_chunks: list[list[GroundTruthTxn]] = []
     for _, bucket_iter in itertools.groupby(pending_batch_items, key=lambda g: (g.split, g.vendor)):
@@ -286,9 +337,11 @@ def generate(n_transactions: int, seed: int, out_dir: Path) -> None:
 
     for group in grouped_chunks:
         if len(group) < 2:
-            # leftover single item: fall back to a normal one-to-one settlement
+            # leftover single item: fall back to a normal one-to-one settlement,
+            # using its own original date (nothing to synchronize with).
             gt = group[0]
             base_dt = datetime.fromisoformat(gt.date)
+            ledger_rows.append(_make_ledger_row(gt, gt.date))
             settlement_rows.append({
                 "settlement_id": f"STL-{gt.txn_id[3:]}-0",
                 "vendor_name": _corrupt_vendor(rng, gt.vendor, severity=0.55),
@@ -302,14 +355,28 @@ def generate(n_transactions: int, seed: int, out_dir: Path) -> None:
                                "settlement_ids": [f"STL-{gt.txn_id[3:]}-0"], "split": gt.split})
             continue
 
+        # Real batch: pick one shared anchor date for the group, then give each
+        # member a small, bounded offset from it — this is what actually makes
+        # the batch temporally realistic and recoverable by a bounded date
+        # window, instead of relying on coincidence.
+        anchor_date = datetime.fromisoformat(group[0].date)
+        member_dates = []
+        for g in group:
+            offset = rng.randint(0, MAX_BATCH_DATE_SPAN_DAYS)
+            member_date = (anchor_date + timedelta(days=offset)).date().isoformat()
+            member_dates.append(member_date)
+            ledger_rows.append(_make_ledger_row(g, member_date))
+
         combined_amount = sum(g.amount for g in group)
-        batch_settlement_date = datetime.fromisoformat(group[0].date)
+        # Settlement happens after the LAST member transaction, not the first —
+        # a batch can't be settled before all its component transactions occurred.
+        latest_member_date = max(datetime.fromisoformat(d) for d in member_dates)
         batch_id = "STL-BATCH-" + "-".join(g.txn_id[3:] for g in group)
         settlement_rows.append({
             "settlement_id": batch_id,
             "vendor_name": _corrupt_vendor(rng, group[0].vendor, severity=0.55),
             "amount": _corrupt_amount(rng, combined_amount, is_settlement=True),
-            "txn_date": _corrupt_date(rng, batch_settlement_date, is_settlement=True),
+            "txn_date": _corrupt_date(rng, latest_member_date, is_settlement=True),
             # a batched settlement line legitimately carries no single clean reference
             "reference_id": "",
             "description": f"Merchant settlement batch covering {len(group)} transactions",
