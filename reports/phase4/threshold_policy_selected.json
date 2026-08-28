@@ -1,0 +1,21 @@
+{
+  "cost_assumptions": {
+    "FP_COST": 10,
+    "FN_COST": 3,
+    "REVIEW_COST": 1
+  },
+  "selected_policy": {
+    "low": 0.5,
+    "high": 0.85,
+    "n_auto_match": 95,
+    "n_review": 6,
+    "n_no_match": 50,
+    "auto_match_precision": 1.0,
+    "auto_match_recall": 0.9406,
+    "review_positive_rate": 1.0,
+    "likely_no_match_error_rate": 0.0,
+    "fp_in_auto_match": 0,
+    "fn_in_no_match": 0,
+    "total_expected_cost": 6
+  }
+}

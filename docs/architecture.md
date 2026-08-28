@@ -126,3 +126,61 @@ a true one-to-one pair). Full write-up: `docs/model_baseline.md`.
 **Explicit scope boundary carried to Phase 4:** structural (split/batch)
 candidates are not yet classified by any model — this baseline covers
 one-to-one reconciliation only.
+
+## Phase 4 — Structural classification, LightGBM, calibration, thresholds (done)
+
+**Structural classification gap found and fixed first, per Objective 1's
+stop-and-fix requirement:** Phase 3's labeled dataset was pairwise-only;
+structural (V2) candidates had recall but no feature vector or label. Built
+`ml/features/group_extractor.py`, generalizing Phase 2's pairwise features to
+any group shape (verified bit-identical on the 15 core features for (1,1)
+candidates; 5 count-based structural features intentionally redefined over
+the full V1+V2 pool, documented not hidden). Unified dataset: 10,980
+candidates, 3,629 labeled after leakage exclusion (7,351 excluded for
+cross-split disagreement — a real, substantial fraction, much larger than
+Phase 3's 28% because structural candidates freely span the date-windowed
+pool). Train positive rate 11.1% (a realistic imbalance, vs Phase 3's
+54.6%); val has **zero many-to-one positives**, a real evaluation blind spot
+carried forward.
+
+**Model comparison:** LightGBM (config: num_leaves=15, max_depth=4,
+learning_rate=0.05, n_estimators=200, class_weight=balanced) outperformed
+Logistic Regression on every validation metric (F1 1.0 vs 0.9902, zero FP vs
+2). Notably the *simplest* of 4 tried configs won — flagged as a legitimate
+finding, not a search failure. `reference_missing_settlement` investigated
+and removed: 100% correlated with relationship type purely due to a
+generator construction quirk (batch settlements always blank), not real
+financial signal; ablation showed negligible cost to removing it.
+
+**Calibration:** isotonic regression tried first, failed — collapsed
+LightGBM's output to 3 discrete values (0.0/0.995/1.0) when fit on a small,
+well-separated validation half, giving a trivially "perfect" but degenerate
+Brier score of 0.0. Switched to sigmoid (Platt) scaling: 121 distinct
+values, smooth 0.01-0.99 range, honestly higher Brier (0.00714) that
+reflects real calibration rather than a broken step function.
+
+**Threshold policy:** cost-sensitive three-way policy (HIGH=0.85, LOW=0.50)
+selected on validation; naive grid search first produced a degenerate
+zero-review-band policy (traced directly to the isotonic collapse above,
+fixed by the calibration fix). Final policy demonstrates genuine bounded
+autonomy: on validation, all 6 review-zone candidates were true matches the
+model correctly declined to auto-approve; zero false positives reached
+auto-match on either validation or test.
+
+**Held-out test (evaluated once):** precision 1.0, recall 0.961, F1 0.9801.
+**Real, uncomfortable finding surfaced only here:** one-to-many recall drops
+to 66.7% (2/6 missed) — invisible during validation (only 3 one-to-many
+positives there). Likely-no-match error rate on test: 11.5% (vs 0% on val),
+directly tracking this recall drop. Not re-tuned against — reported as a
+known limitation for future work.
+
+**Tests:** 15 new Phase 4 tests, 57/57 total passing.
+
+**Confidence-card explanation payload:** built using LightGBM's native
+`pred_contrib` (Shapley-consistent additive attributions) rather than adding
+a SHAP dependency — backend contract only, no UI built yet.
+
+**Explicit scope boundary carried to Phase 5:** threshold policy is uniform
+across relationship types despite one-to-many's measurably worse
+performance; a type-aware threshold is reasonable future work, not
+implemented due to too few structural positives to tune against safely.

@@ -1,0 +1,9 @@
+{
+  "high_threshold": 0.85,
+  "low_threshold": 0.5,
+  "cost_assumptions": {
+    "FP_COST": 10,
+    "FN_COST": 3,
+    "REVIEW_COST": 1
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "crosstab_all_labeled_data": {
+    "0": {
+      "many_to_one": 723,
+      "one_to_many": 1638,
+      "one_to_one": 681
+    },
+    "1": {
+      "many_to_one": 406,
+      "one_to_many": 43,
+      "one_to_one": 138
+    }
+  },
+  "crosstab_true_positives_only": {
+    "0": {
+      "many_to_one": 0,
+      "one_to_many": 36,
+      "one_to_one": 421
+    },
+    "1": {
+      "many_to_one": 14,
+      "one_to_many": 0,
+      "one_to_one": 81
+    }
+  },
+  "model_A_all_features": {
+    "n": 151,
+    "n_positive": 101,
+    "n_negative": 50,
+    "precision": 0.9806,
+    "recall": 1.0,
+    "f1": 0.9902,
+    "roc_auc": 0.9988,
+    "pr_auc": 0.9994,
+    "confusion_matrix": {
+      "tn": 48,
+      "fp": 2,
+      "fn": 0,
+      "tp": 101
+    }
+  },
+  "model_B_without_reference_missing_settlement": {
+    "n": 151,
+    "n_positive": 101,
+    "n_negative": 50,
+    "precision": 0.9806,
+    "recall": 1.0,
+    "f1": 0.9902,
+    "roc_auc": 0.9982,
+    "pr_auc": 0.9991,
+    "confusion_matrix": {
+      "tn": 48,
+      "fp": 2,
+      "fn": 0,
+      "tp": 101
+    }
+  }
+}

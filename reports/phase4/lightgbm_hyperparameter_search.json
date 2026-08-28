@@ -1,0 +1,106 @@
+[
+  {
+    "config_index": 0,
+    "params": {
+      "num_leaves": 15,
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "n_estimators": 200,
+      "min_child_samples": 10
+    },
+    "val_metrics": {
+      "n": 151,
+      "n_positive": 101,
+      "n_negative": 50,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 50,
+        "fp": 0,
+        "fn": 0,
+        "tp": 101
+      }
+    }
+  },
+  {
+    "config_index": 1,
+    "params": {
+      "num_leaves": 31,
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "n_estimators": 200,
+      "min_child_samples": 10
+    },
+    "val_metrics": {
+      "n": 151,
+      "n_positive": 101,
+      "n_negative": 50,
+      "precision": 0.99,
+      "recall": 0.9802,
+      "f1": 0.9851,
+      "roc_auc": 0.9996,
+      "pr_auc": 0.9998,
+      "confusion_matrix": {
+        "tn": 49,
+        "fp": 1,
+        "fn": 2,
+        "tp": 99
+      }
+    }
+  },
+  {
+    "config_index": 2,
+    "params": {
+      "num_leaves": 31,
+      "max_depth": -1,
+      "learning_rate": 0.1,
+      "n_estimators": 100,
+      "min_child_samples": 20
+    },
+    "val_metrics": {
+      "n": 151,
+      "n_positive": 101,
+      "n_negative": 50,
+      "precision": 1.0,
+      "recall": 0.9802,
+      "f1": 0.99,
+      "roc_auc": 0.9998,
+      "pr_auc": 0.9999,
+      "confusion_matrix": {
+        "tn": 50,
+        "fp": 0,
+        "fn": 2,
+        "tp": 99
+      }
+    }
+  },
+  {
+    "config_index": 3,
+    "params": {
+      "num_leaves": 63,
+      "max_depth": 8,
+      "learning_rate": 0.05,
+      "n_estimators": 300,
+      "min_child_samples": 5
+    },
+    "val_metrics": {
+      "n": 151,
+      "n_positive": 101,
+      "n_negative": 50,
+      "precision": 0.99,
+      "recall": 0.9802,
+      "f1": 0.9851,
+      "roc_auc": 0.9996,
+      "pr_auc": 0.9998,
+      "confusion_matrix": {
+        "tn": 49,
+        "fp": 1,
+        "fn": 2,
+        "tp": 99
+      }
+    }
+  }
+]

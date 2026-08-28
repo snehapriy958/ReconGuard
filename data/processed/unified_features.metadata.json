@@ -1,0 +1,8 @@
+{
+  "embedding_backend": "fallback_ngram_hash",
+  "embedding_dim": 256,
+  "n_groups": 10980,
+  "has_description_feature": true,
+  "n_v1_pairwise": 1142,
+  "n_v2_structural": 9838
+}

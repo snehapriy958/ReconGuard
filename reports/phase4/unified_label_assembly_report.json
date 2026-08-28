@@ -1,0 +1,74 @@
+{
+  "total_unified_candidates": 10980,
+  "excluded_cross_split_pairs": 7351,
+  "labeled_rows": 3629,
+  "train": {
+    "total": 3378,
+    "positive": 374,
+    "negative": 3004,
+    "positive_pct": 11.072,
+    "by_relationship_type": {
+      "one_to_one": {
+        "total": 613,
+        "positive": 334,
+        "negative": 279
+      },
+      "one_to_many": {
+        "total": 1653,
+        "positive": 27,
+        "negative": 1626
+      },
+      "many_to_one": {
+        "total": 1112,
+        "positive": 13,
+        "negative": 1099
+      }
+    }
+  },
+  "val": {
+    "total": 151,
+    "positive": 101,
+    "negative": 50,
+    "positive_pct": 66.887,
+    "by_relationship_type": {
+      "one_to_one": {
+        "total": 123,
+        "positive": 98,
+        "negative": 25
+      },
+      "one_to_many": {
+        "total": 17,
+        "positive": 3,
+        "negative": 14
+      },
+      "many_to_one": {
+        "total": 11,
+        "positive": 0,
+        "negative": 11
+      }
+    }
+  },
+  "test": {
+    "total": 100,
+    "positive": 77,
+    "negative": 23,
+    "positive_pct": 77.0,
+    "by_relationship_type": {
+      "one_to_one": {
+        "total": 83,
+        "positive": 70,
+        "negative": 13
+      },
+      "one_to_many": {
+        "total": 11,
+        "positive": 6,
+        "negative": 5
+      },
+      "many_to_one": {
+        "total": 6,
+        "positive": 1,
+        "negative": 5
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "feature": "abs_amount_diff",
+    "gain": 24619.63,
+    "split_count": 453
+  },
+  {
+    "feature": "group_size",
+    "gain": 8247.74,
+    "split_count": 249
+  },
+  {
+    "feature": "reference_similarity",
+    "gain": 6357.68,
+    "split_count": 194
+  },
+  {
+    "feature": "vendor_jaro_winkler_similarity",
+    "gain": 2129.81,
+    "split_count": 219
+  },
+  {
+    "feature": "date_diff_days",
+    "gain": 1773.34,
+    "split_count": 204
+  },
+  {
+    "feature": "amount_ratio",
+    "gain": 1677.06,
+    "split_count": 254
+  },
+  {
+    "feature": "reference_substring_overlap",
+    "gain": 828.26,
+    "split_count": 8
+  },
+  {
+    "feature": "vendor_token_set_similarity",
+    "gain": 599.14,
+    "split_count": 124
+  },
+  {
+    "feature": "relative_amount_diff",
+    "gain": 568.04,
+    "split_count": 163
+  },
+  {
+    "feature": "vendor_token_sort_similarity",
+    "gain": 255.26,
+    "split_count": 38
+  },
+  {
+    "feature": "reference_exact_match",
+    "gain": 211.44,
+    "split_count": 82
+  },
+  {
+    "feature": "description_embedding_cosine_similarity",
+    "gain": 160.08,
+    "split_count": 161
+  },
+  {
+    "feature": "competing_candidate_count",
+    "gain": 115.0,
+    "split_count": 54
+  },
+  {
+    "feature": "vendor_embedding_cosine_similarity",
+    "gain": 104.41,
+    "split_count": 43
+  },
+  {
+    "feature": "candidate_count_for_settlement",
+    "gain": 75.76,
+    "split_count": 69
+  },
+  {
+    "feature": "candidate_count_for_ledger",
+    "gain": 71.71,
+    "split_count": 88
+  },
+  {
+    "feature": "is_potential_one_to_many",
+    "gain": 23.52,
+    "split_count": 32
+  },
+  {
+    "feature": "vendor_levenshtein_similarity",
+    "gain": 7.85,
+    "split_count": 24
+  },
+  {
+    "feature": "vendor_exact_normalized_match",
+    "gain": 0.14,
+    "split_count": 2
+  },
+  {
+    "feature": "is_potential_many_to_one",
+    "gain": 0.0,
+    "split_count": 14
+  },
+  {
+    "feature": "reference_both_missing",
+    "gain": 0.0,
+    "split_count": 0
+  },
+  {
+    "feature": "reference_missing_ledger",
+    "gain": 0.0,
+    "split_count": 0
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "note": "Evaluated exactly once. No further tuning follows this.",
+  "final_metrics_default_threshold": {
+    "precision": 1.0,
+    "recall": 0.961,
+    "f1": 0.9801,
+    "roc_auc": 0.9983,
+    "pr_auc": 0.9995,
+    "confusion_matrix": {
+      "tn": 23,
+      "fp": 0,
+      "fn": 3,
+      "tp": 74
+    }
+  },
+  "three_way_policy_applied_to_test": {
+    "n_auto_match": 71,
+    "n_review": 3,
+    "n_no_match": 26,
+    "auto_match_precision": 1.0,
+    "auto_match_recall": 0.9221,
+    "review_positive_rate": 1.0,
+    "likely_no_match_error_rate": 0.1154
+  },
+  "by_relationship_type": {
+    "one_to_one": {
+      "n": 83,
+      "positive": 70,
+      "precision": 1.0,
+      "recall": 0.9857
+    },
+    "one_to_many": {
+      "n": 11,
+      "positive": 6,
+      "precision": 1.0,
+      "recall": 0.6667
+    },
+    "many_to_one": {
+      "n": 6,
+      "positive": 1,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "comparison_to_phase3_pairwise_only_baseline": {
+    "phase3_logreg_pairwise_only": {
+      "precision": 1.0,
+      "recall": 0.9857,
+      "f1": 0.9928
+    },
+    "phase4_lightgbm_unified": {
+      "precision": 1.0,
+      "recall": 0.961,
+      "f1": 0.9801,
+      "roc_auc": 0.9983,
+      "pr_auc": 0.9995,
+      "confusion_matrix": {
+        "tn": 23,
+        "fp": 0,
+        "fn": 3,
+        "tp": 74
+      }
+    },
+    "note": "Not directly comparable \u2014 Phase 3 test set was the pairwise-only labeled set (83 rows); Phase 4 test set is the unified pairwise+structural set (100 rows, including 6 many-to-one and 11 one-to-many candidates the Phase 3 model was never evaluated on at all)."
+  }
+}

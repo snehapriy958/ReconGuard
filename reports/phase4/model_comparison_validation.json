@@ -1,0 +1,43 @@
+{
+  "logistic_regression": {
+    "variant": "balanced",
+    "n": 151,
+    "n_positive": 101,
+    "n_negative": 50,
+    "precision": 0.9806,
+    "recall": 1.0,
+    "f1": 0.9902,
+    "roc_auc": 0.9982,
+    "pr_auc": 0.9991,
+    "confusion_matrix": {
+      "tn": 48,
+      "fp": 2,
+      "fn": 0,
+      "tp": 101
+    }
+  },
+  "lightgbm": {
+    "config_index": 0,
+    "params": {
+      "num_leaves": 15,
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "n_estimators": 200,
+      "min_child_samples": 10
+    },
+    "n": 151,
+    "n_positive": 101,
+    "n_negative": 50,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": {
+      "tn": 50,
+      "fp": 0,
+      "fn": 0,
+      "tp": 101
+    }
+  }
+}
