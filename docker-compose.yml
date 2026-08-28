@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: reconlens
+      POSTGRES_DB: reconlens
+    ports:
+      - "5432:5432"
+    volumes:
+      - reconlens_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:reconlens@postgres:5432/reconlens
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "cd backend && alembic upgrade head &&
+             uvicorn backend.app.api.main:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  reconlens_pgdata:

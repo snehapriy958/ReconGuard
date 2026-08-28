@@ -184,3 +184,56 @@ a SHAP dependency — backend contract only, no UI built yet.
 across relationship types despite one-to-many's measurably worse
 performance; a type-aware threshold is reasonable future work, not
 implemented due to too few structural positives to tune against safely.
+
+## Phase 5 — Workflow engine, audit trail, review queue, real PostgreSQL (done)
+
+**Real infrastructure, not simulated:** installed and ran PostgreSQL 16
+directly in the dev environment (spec section 21's own bar — "do NOT
+silently replace it with in-memory dictionaries"), created the database,
+wrote Postgres-compatible SQLAlchemy models (7 tables: batches,
+source_records, decisions, evidence_records, review_tasks,
+exception_records, audit_events), and generated/applied a real Alembic
+migration against it. SQLite is used ONLY for isolated test runs
+(`RECONLENS_TEST_SQLITE=1`), explicitly opt-in, never a silent fallback.
+
+**Two separate state machines**, not one shared: batch-level
+(CREATED/PROCESSING/COMPLETED/FAILED) and decision-level
+(PENDING/PROCESSING/AUTO_MATCHED/NEEDS_REVIEW/.../EXCEPTION/FAILED) — the
+first end-to-end run caught a real bug from conflating them (see
+docs/workflow.md).
+
+**Risk layer built as genuinely separate metadata**, verified structurally:
+`compute_risk_flags()` returns only `list[str]`, with no code path that can
+touch a probability or decision value. Surfaces Phase 4's measured
+limitations (one-to-many `KNOWN_LOW_GENERALIZATION`, many-to-one
+`INSUFFICIENT_VALIDATION_SAMPLE`) as operational metadata rather than
+silently changing thresholds, per spec section 29's explicit instruction.
+
+**Real end-to-end batch run against Postgres:** 130 records -> 72
+candidates -> 57 auto-matched / 1 review / 14 exceptions / 9 structural
+matches / 23 risk-flagged / 0 failed, verified independently via direct SQL
+query (72 decisions, 147 audit events, both matching the pipeline's own
+summary exactly). Idempotency verified: resubmitting the identical batch
+created zero new batches and zero new decisions. Review flow verified: a
+real NEEDS_REVIEW case (genuine one-to-many, KNOWN_LOW_GENERALIZATION
+flagged, calibrated probability 0.707) was approved via `approve_review()`,
+confirming the ML decision (`NEEDS_REVIEW`) stayed bit-identical while
+`workflow_state` advanced to `APPROVED_BY_REVIEWER`.
+
+**Three real failures found and fixed while running this** (full diagnosis
+in docs/workflow.md): batch/decision state machine conflation, NaN values
+breaking Postgres JSON columns (pandas reads empty CSV cells as float NaN;
+Postgres correctly rejects NaN as invalid JSON per RFC 8259, unlike Python's
+permissive `json.dumps`), and a session-management bug where the failure
+handler itself raised `PendingRollbackError` by touching the ORM session
+before calling `db.rollback()`.
+
+**Tests:** 22 new Phase 5 tests (18 passed, 4 honestly skipped — the tiny
+deterministic test fixture doesn't happen to produce a NEEDS_REVIEW case;
+that exact flow was independently verified against the real 130-record
+Postgres run instead). 79/79 total passing across all phases.
+
+**Explicit scope boundary carried to Phase 6:** no frontend yet, per spec —
+the API and Swagger UI are the full Phase 5 deliverable. Threshold policy
+remains uniform across relationship types (risk flags, not new thresholds,
+per spec section 29).
