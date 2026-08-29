@@ -258,3 +258,16 @@ after all schema changes.
 
 Not yet built: decision table, confidence card, review queue, exception
 intelligence, audit timeline, dashboard charts (Phase 6.3 onward).
+
+## Phase 6.3 — Reconciliation decision table (done)
+
+No backend changes needed — inspection of the real decisions endpoint
+confirmed `workflow_state` alone already encodes review/exception status.
+Built the decision table with client-side filtering (decision/relationship/
+risk), sorting, structural relationship display (never flattened), and
+strict confidence/risk separation. An initial "divergence note" design was
+removed after review showed it added ambiguous derived logic the two
+existing columns (Decision, Workflow Status) already made unnecessary —
+caught by the test suite before it shipped. 24/24 frontend tests passing,
+78/78 backend unchanged. Verified against real HTTP requests including a
+real structural decision's navigation. Full details in docs/frontend.md.

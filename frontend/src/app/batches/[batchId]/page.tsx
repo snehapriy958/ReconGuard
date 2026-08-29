@@ -41,6 +41,14 @@ export default function BatchDashboard({
               {state.data.batch_id}
             </h1>
             <BatchStatusBadge status={state.data.status} />
+            {state.data.status === "COMPLETED" && (
+              <Link
+                href={`/batches/${state.data.batch_id}/decisions`}
+                className="ml-auto text-sm text-slate-600 underline hover:text-slate-900"
+              >
+                View all decisions →
+              </Link>
+            )}
           </div>
 
           {state.data.status === "FAILED" && (
