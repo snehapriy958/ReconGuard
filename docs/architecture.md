@@ -237,3 +237,24 @@ Postgres run instead). 79/79 total passing across all phases.
 the API and Swagger UI are the full Phase 5 deliverable. Threshold policy
 remains uniform across relationship types (risk flags, not new thresholds,
 per spec section 29).
+
+## Phase 6.1-6.2 — Frontend foundation and batch overview (done)
+
+Next.js + TypeScript + Tailwind frontend scaffolded; typed API client as the
+single fetch layer; hand-built shadcn-style UI primitives (registry
+unreachable in this sandbox). Extended the backend with `GET /batches`,
+enriched `GET /decisions/{id}` and `GET /exceptions` responses, and CORS
+middleware — all justified by an actual frontend screen's data need, not
+spec-following for its own sake. Fixed a real Pydantic contract bug
+(`reference_id` rejecting `None`) caught only by submitting a genuine HTTP
+request. Full details, including four documented failures found while
+building this, in docs/frontend.md.
+
+Batch overview dashboard verified against a real submitted batch (180
+records -> 89 candidates -> 62/3/24 split, 18 structural, 35 risk-flagged)
+via actual HTTP requests to a running backend, with CORS confirmed for the
+frontend origin. 12 frontend tests passing; 78 backend tests still passing
+after all schema changes.
+
+Not yet built: decision table, confidence card, review queue, exception
+intelligence, audit timeline, dashboard charts (Phase 6.3 onward).

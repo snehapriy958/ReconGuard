@@ -17,6 +17,7 @@ import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.pool import StaticPool
 
 DATABASE_URL = os.environ.get(
     "DATABASE_URL", "postgresql+psycopg2://postgres:reconlens@localhost:5432/reconlens"
@@ -28,7 +29,16 @@ if os.environ.get("RECONLENS_TEST_SQLITE") == "1":
     DATABASE_URL = "sqlite:///:memory:"
 
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
+# SQLite's :memory: creates a SEPARATE database per connection by default —
+# a real bug caught while adding FastAPI TestClient coverage in Phase 6:
+# the test fixture's create_all() and the API's own request-scoped session
+# were silently hitting two different in-memory databases. StaticPool keeps
+# every connection on one shared in-memory DB for the life of the engine,
+# which is what an isolated-test SQLite setup actually needs.
+engine_kwargs = {"connect_args": connect_args}
+if DATABASE_URL == "sqlite:///:memory:":
+    engine_kwargs["poolclass"] = StaticPool
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 

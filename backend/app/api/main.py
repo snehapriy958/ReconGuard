@@ -6,7 +6,8 @@ here; this layer is orchestration, persistence, and human oversight.
 from typing import Optional
 
 from fastapi import FastAPI, Depends, HTTPException
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 
 from backend.app.db import get_db, init_db
@@ -17,9 +18,21 @@ from backend.app.models.batch import Batch
 from backend.app.models.decision import ReconciliationDecision
 from backend.app.models.review import ReviewTask
 from backend.app.models.exception import ExceptionRecord
+from backend.app.models.source_record import SourceRecord
 from backend.app.models.evidence import EvidenceRecord
 
 app = FastAPI(title="ReconLens API", version="phase5")
+
+# Frontend (Next.js dev server, typically :3000) calls this API cross-origin.
+# Scoped to local dev origins only — this is a local demonstration project,
+# not a deployed multi-tenant service, so a permissive-but-explicit list is
+# appropriate rather than a wildcard.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
@@ -34,8 +47,19 @@ class LedgerRecordIn(BaseModel):
     vendor_name: str
     amount: float
     txn_date: str
-    reference_id: str = ""
-    description: str = ""
+    # Optional[str], not just str="" — a submitting client (or our own
+    # pipeline's NaN sanitizer) may legitimately send null for a missing
+    # reference/description. Rejecting None here was a real bug caught while
+    # submitting a real batch through the HTTP API (see docs/frontend.md
+    # "Important Failures") — a client that already treats missing fields as
+    # null shouldn't have to know this API wants "" specifically.
+    reference_id: Optional[str] = ""
+    description: Optional[str] = ""
+
+    @field_validator("reference_id", "description", mode="before")
+    @classmethod
+    def _null_to_empty(cls, v):
+        return "" if v is None else v
 
 
 class SettlementRecordIn(BaseModel):
@@ -43,8 +67,13 @@ class SettlementRecordIn(BaseModel):
     vendor_name: str
     amount: float
     txn_date: str
-    reference_id: str = ""
-    description: str = ""
+    reference_id: Optional[str] = ""
+    description: Optional[str] = ""
+
+    @field_validator("reference_id", "description", mode="before")
+    @classmethod
+    def _null_to_empty(cls, v):
+        return "" if v is None else v
 
 
 class BatchIn(BaseModel):
@@ -79,6 +108,17 @@ def _evidence_to_dict(e: EvidenceRecord) -> dict:
 
 # ---------------- batches ----------------
 
+@app.get("/batches")
+def list_batches(db: Session = Depends(get_db)):
+    batches = db.query(Batch).order_by(Batch.created_at.desc()).all()
+    return {"batches": [
+        {"batch_id": b.id, "status": b.status, "n_ledger_records": b.n_ledger_records,
+         "n_settlement_records": b.n_settlement_records, "created_at": b.created_at.isoformat(),
+         "summary": b.summary}
+        for b in batches
+    ]}
+
+
 @app.post("/batches")
 def create_batch(payload: BatchIn, db: Session = Depends(get_db)):
     ledger_records = [r.model_dump() for r in payload.ledger_records]
@@ -112,8 +152,17 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
     if d is None:
         raise HTTPException(404, "Decision not found")
     evidence = db.query(EvidenceRecord).filter(EvidenceRecord.decision_id == decision_id).all()
+
+    all_ids = list(d.ledger_record_ids) + list(d.settlement_record_ids)
+    source_records = db.query(SourceRecord).filter(SourceRecord.id.in_(all_ids)).all()
+    by_id = {r.id: r.raw_data for r in source_records}
+
     payload = _decision_to_dict(d)
     payload["evidence"] = [_evidence_to_dict(e) for e in evidence]
+    # Real record content, not just IDs — needed for the record-comparison
+    # view; missing fields mean the record wasn't found (never fabricated).
+    payload["ledger_records"] = [by_id.get(lid) for lid in d.ledger_record_ids]
+    payload["settlement_records"] = [by_id.get(sid) for sid in d.settlement_record_ids]
     return payload
 
 
@@ -174,9 +223,18 @@ def list_exceptions(category: Optional[str] = None, db: Session = Depends(get_db
     if category:
         q = q.filter(ExceptionRecord.category == category)
     exceptions = q.all()
-    return {"exceptions": [{"exception_id": e.id, "decision_id": e.decision_id, "category": e.category,
-                             "reason": e.reason, "created_at": e.created_at.isoformat()}
-                            for e in exceptions]}
+    result = []
+    for e in exceptions:
+        d = e.decision
+        result.append({
+            "exception_id": e.id, "decision_id": e.decision_id, "category": e.category,
+            "reason": e.reason, "created_at": e.created_at.isoformat(),
+            "relationship_type": d.relationship_type if d else None,
+            "calibrated_probability": d.calibrated_probability if d else None,
+            "ledger_record_ids": d.ledger_record_ids if d else None,
+            "settlement_record_ids": d.settlement_record_ids if d else None,
+        })
+    return {"exceptions": result}
 
 
 # ---------------- audit ----------------
