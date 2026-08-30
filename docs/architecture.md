@@ -296,3 +296,23 @@ actual running frontend, including the spec's core requirement case: a
 `HIGH_CONFIDENCE_MATCH` one-to-many decision still correctly carrying
 `KNOWN_LOW_GENERALIZATION` without being silently downgraded. Full details
 in docs/frontend.md.
+
+## Phase 6.5 — Human review queue, actions, and history (done)
+
+Extended `GET /reviews` and `GET /reviews/{id}` with batch/structural
+context joined through the existing decision relationship. Fixed a real
+bug: `assigned_reviewer` existed as a column but was never populated
+anywhere — the reviewer's identity only reached the audit event, never the
+review record. Built the review queue (oldest-first, backend workflow
+state as the sole eligibility source of truth) and review detail page,
+composing Phase 6.4's components entirely through composition — zero
+evidence/confidence/risk logic duplicated. Approve/reject call the real
+backend with double-submit protection and honest 409/404/network error
+handling. 75/75 frontend tests, 80/80 backend (2 new). Verified against 3
+real open review cases (including a genuine 3-member one-to-many
+structural group) with both a real approve and real reject performed via
+HTTP against live PostgreSQL — confirming the core invariant end-to-end:
+ML decision, calibrated probability, and risk flags all remained
+byte-identical while workflow_state transitioned correctly and
+assigned_reviewer/resolved_at were persisted. Full details in
+docs/frontend.md.

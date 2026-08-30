@@ -14,7 +14,11 @@ export default function Home() {
     <main className="mx-auto max-w-3xl p-8">
       <h1 className="mb-1 text-xl font-semibold text-slate-900">ReconLens</h1>
       <p className="mb-6 text-sm text-slate-500">
-        Select a batch to see how it was reconciled.
+        Select a batch to see how it was reconciled, or open the{" "}
+        <Link href="/reviews" className="underline hover:text-slate-700">
+          review queue
+        </Link>
+        .
       </p>
 
       {state.status === "loading" && <LoadingState label="Loading batches…" />}

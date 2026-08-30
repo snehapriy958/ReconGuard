@@ -116,6 +116,12 @@ export interface ReviewListItem {
   calibrated_probability: number;
   risk_flags: string[];
   created_at: string;
+  // Joined through the decision — batch context and structural groups,
+  // so the queue never has to flatten a one-to-many/many-to-one case.
+  batch_id: string | null;
+  ledger_record_ids: string[] | null;
+  settlement_record_ids: string[] | null;
+  original_ml_decision: DecisionLabel | null;
 }
 
 export interface ReviewDetail extends ReviewListItem {

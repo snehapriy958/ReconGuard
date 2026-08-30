@@ -224,17 +224,31 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
 
 # ---------------- review queue ----------------
 
+def _review_to_dict(r: ReviewTask) -> dict:
+    d = r.decision
+    return {
+        "review_id": r.id, "decision_id": r.decision_id, "status": r.status,
+        "relationship_type": r.relationship_type,
+        "calibrated_probability": r.calibrated_probability,
+        "risk_flags": r.risk_flags, "created_at": r.created_at.isoformat(),
+        # Joined through the existing ReviewTask.decision relationship —
+        # not a new query pattern, just fields the queue genuinely needs
+        # (spec: batch context, ledger/settlement groups, original ML
+        # decision) that weren't previously selected.
+        "batch_id": d.batch_id if d else None,
+        "ledger_record_ids": d.ledger_record_ids if d else None,
+        "settlement_record_ids": d.settlement_record_ids if d else None,
+        "original_ml_decision": d.decision if d else None,
+    }
+
+
 @app.get("/reviews")
 def list_reviews(status: Optional[str] = None, db: Session = Depends(get_db)):
     q = db.query(ReviewTask)
     if status:
         q = q.filter(ReviewTask.status == status)
     reviews = q.all()
-    return {"reviews": [{"review_id": r.id, "decision_id": r.decision_id, "status": r.status,
-                          "relationship_type": r.relationship_type,
-                          "calibrated_probability": r.calibrated_probability,
-                          "risk_flags": r.risk_flags, "created_at": r.created_at.isoformat()}
-                         for r in reviews]}
+    return {"reviews": [_review_to_dict(r) for r in reviews]}
 
 
 @app.get("/reviews/{review_id}")
@@ -242,11 +256,11 @@ def get_review(review_id: str, db: Session = Depends(get_db)):
     r = db.query(ReviewTask).filter(ReviewTask.id == review_id).first()
     if r is None:
         raise HTTPException(404, "Review not found")
-    return {"review_id": r.id, "decision_id": r.decision_id, "status": r.status,
-            "relationship_type": r.relationship_type, "calibrated_probability": r.calibrated_probability,
-            "risk_flags": r.risk_flags, "evidence_snapshot": r.evidence_snapshot,
-            "assigned_reviewer": r.assigned_reviewer, "created_at": r.created_at.isoformat(),
-            "resolved_at": r.resolved_at.isoformat() if r.resolved_at else None}
+    payload = _review_to_dict(r)
+    payload["evidence_snapshot"] = r.evidence_snapshot
+    payload["assigned_reviewer"] = r.assigned_reviewer
+    payload["resolved_at"] = r.resolved_at.isoformat() if r.resolved_at else None
+    return payload
 
 
 @app.post("/reviews/{review_id}/approve")

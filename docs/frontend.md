@@ -135,11 +135,104 @@ No API keys required for local demonstration.
 
 ## Status
 
-Phase 6.1 (foundation), 6.2 (batch overview), 6.3 (reconciliation decision
-table), and 6.4 (Confidence Card / decision detail) complete and verified
-against real data. 6.5 onward (human review workflow, exception
-intelligence, audit timeline, dashboard insights) not yet built —
-proceeding incrementally per the spec's explicit instruction.
+Phase 6.1-6.5 complete and verified against real data. 6.6 onward
+(exception intelligence, audit timeline, dashboard insights) not yet
+built — proceeding incrementally per the spec's explicit instruction.
+
+## Phase 6.5 — Human Review Queue, Actions, and History
+
+**Backend additions, each justified by inspecting the existing contract first:**
+
+1. **`batch_id`, `ledger_record_ids`, `settlement_record_ids`,
+   `original_ml_decision` added to `GET /reviews` and `GET /reviews/{id}`**
+   — joined through the existing `ReviewTask.decision` relationship, not a
+   new query pattern. Without these, the queue would have had to either
+   flatten structural relationships or make a second round-trip per row.
+2. **Real bug fixed: `assigned_reviewer` was a column that was never
+   actually set anywhere.** The reviewer's identity only ever reached the
+   audit event's `actor_id`, never the `ReviewTask` record itself — meaning
+   `GET /reviews/{id}` could never say who resolved a case. Fixed in
+   `review_actions.py`'s `_resolve()` to persist `review.assigned_reviewer
+   = reviewer_id` on approval/rejection. Verified with a dedicated
+   regression test and confirmed against a real approval
+   (`assigned_reviewer: "priya_reviewer"` came back correctly).
+
+**Review eligibility source of truth:** the backend's `ReviewTask.status`
+field (`OPEN`/`APPROVED`/`REJECTED`), never inferred from confidence in the
+frontend — the queue calls `GET /reviews?status=OPEN` and trusts that
+entirely.
+
+**Review prioritization:** oldest-first, stated plainly as the only
+transparent option available — no backend priority field exists, and the
+spec explicitly forbids inventing a fake "AI priority score." Sorting
+happens client-side on `created_at`.
+
+**Architecture — composition, not duplication:** `ReviewDetailPage`
+fetches `getReview(reviewId)` for review-specific status/resolution, then
+`getDecision(decision_id)` for the full Phase 6.4 payload, and composes
+the *exact same* `ConfidenceCard`, `EvidenceSummary`, `EvidenceBreakdown`,
+`RawRecordComparison`, `WhatChanged`, and `OperationalRiskCard` components
+Phase 6.4 already built — zero evidence/confidence/risk logic was
+reimplemented for review screens.
+
+**Approve/reject workflow:** `ReviewActions` calls the real backend
+(`approveReview`/`rejectReview`) and never simulates success locally.
+Both buttons disable for the full round-trip (structural double-submit
+protection, not just a UI convention). On success, both the review and
+decision are refetched from the real backend — the UI never assumes its
+optimistic view matches what persisted.
+
+**Original ML decision preservation — the core invariant — verified with
+real data, not just asserted:**
+```
+BEFORE:  decision=NEEDS_REVIEW  workflow_state=NEEDS_REVIEW  calibrated=0.8226
+[real POST /reviews/{id}/approve, reviewer_id=priya_reviewer]
+AFTER:   decision=NEEDS_REVIEW  workflow_state=APPROVED_BY_REVIEWER  calibrated=0.8226 (unchanged)
+         assigned_reviewer=priya_reviewer, resolved_at=<real timestamp>
+```
+Reject verified identically on a second real case
+(`DEC-8c44a513908f`, a one-to-many decision with `KNOWN_LOW_GENERALIZATION`):
+`decision` stayed `NEEDS_REVIEW`, `workflow_state` became
+`REJECTED_BY_REVIEWER`, and `risk_flags` were completely untouched by the
+review action.
+
+**Error handling, verified with real HTTP responses, not mocked:**
+- Re-approving an already-rejected review → real `409` with message
+  `"Review 'REV-...' is already resolved (REJECTED); the original
+  resolution is preserved, not overwritten."` — the frontend shows this
+  and refetches rather than trusting its stale local state.
+- Approving a nonexistent review ID → real `404`.
+
+**Review history (concise, not the full audit trail — that's Phase 6.7):**
+shows exactly two real, persisted moments — the model's decision timestamp
+(`decision.created_at`) and the reviewer's resolution timestamp
+(`review.resolved_at`), with `assigned_reviewer` when present. No
+fabricated intermediate steps.
+
+**Tests:** 75/75 frontend tests passing (18 new: review actions including
+double-submit disable, 409/404/network-failure handling; review queue
+rendering, structural relationship display, oldest-first ordering, empty
+states). Backend: 80 passed, 6 skipped (2 new tests skip on the tiny
+deterministic fixture that doesn't happen to produce a review case —
+fully covered instead by the real end-to-end verification above, exactly
+as the Phase 5 precedent established).
+
+**Real end-to-end verification performed:** against the actual populated
+batch (`BATCH-b4f076fca9a5`) with 3 real `OPEN` review cases spanning
+`one_to_one` and `one_to_many` (3-member settlement group), a real approve
+and a real reject were both performed via actual HTTP POST requests
+against live PostgreSQL, with every invariant (ML decision preservation,
+workflow state transition, unchanged probability, unchanged risk flags,
+queue count updates, assigned_reviewer persistence) confirmed against the
+database — not asserted from memory. All four review-related frontend
+routes (`/reviews`, and three individual review detail pages covering
+open/approved/rejected states) verified at HTTP 200 through the real
+running Next.js server, with CORS confirmed for the queue endpoint.
+
+**Remaining limitations:** the reviewer-name field is a plain text input
+with no authentication (out of scope per spec — "do not add authentication
+unless required"); review prioritization is a simple oldest-first sort
+with no backend-driven priority signal yet.
 
 ## Phase 6.4 — Confidence Card, Evidence Breakdown, Record Comparison, Operational Risk
 

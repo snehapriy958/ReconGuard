@@ -49,6 +49,12 @@ def _resolve(db: Session, review_id: str, reviewer_id: str, action: str, comment
         raise ValueError(f"Unknown review action: {action!r}")
 
     review.resolved_at = datetime.now(timezone.utc)
+    # Real gap found and fixed here: this column existed on the model but
+    # was never populated — the reviewer's identity only ever reached the
+    # audit event's actor_id, not the ReviewTask itself, which meant
+    # GET /reviews/{id} couldn't say who resolved a case without a second
+    # query into the audit trail (Phase 6.7's job, not this one's).
+    review.assigned_reviewer = reviewer_id
 
     record_event(
         db, "REVIEW", review.id, event_type, actor_type="HUMAN", actor_id=reviewer_id,

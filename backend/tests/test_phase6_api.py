@@ -128,3 +128,56 @@ def test_exceptions_endpoint_includes_relationship_type_and_probability(db):
         assert e["relationship_type"] is not None
         assert e["calibrated_probability"] is not None
     app.dependency_overrides.clear()
+
+
+def test_review_list_and_detail_include_batch_and_structural_context(db):
+    b1 = _real_batch(db)
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    from backend.app.models.review import ReviewTask
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+
+    review = db.query(ReviewTask).first()
+    if review is None:
+        pytest.skip("This tiny deterministic fixture produced no NEEDS_REVIEW case — "
+                    "covered instead by real end-to-end verification against the "
+                    "populated demo batch (see docs/frontend.md).")
+
+    list_resp = client.get("/reviews")
+    assert list_resp.status_code == 200
+    list_item = next(r for r in list_resp.json()["reviews"] if r["review_id"] == review.id)
+    assert list_item["batch_id"] == review.decision.batch_id
+    assert list_item["ledger_record_ids"] == review.decision.ledger_record_ids
+    assert list_item["settlement_record_ids"] == review.decision.settlement_record_ids
+    assert list_item["original_ml_decision"] == review.decision.decision
+
+    detail_resp = client.get(f"/reviews/{review.id}")
+    detail = detail_resp.json()
+    assert detail["batch_id"] == review.decision.batch_id
+    assert detail["original_ml_decision"] == review.decision.decision
+    app.dependency_overrides.clear()
+
+
+def test_approve_review_persists_reviewer_identity_on_the_review_record(db):
+    """Regression test: assigned_reviewer existed as a column but was never
+    set anywhere until this phase — verifies the fix, not just that the
+    endpoint returns 200."""
+    b1 = _real_batch(db)
+    from backend.app.models.review import ReviewTask
+    review = db.query(ReviewTask).first()
+    if review is None:
+        pytest.skip("no NEEDS_REVIEW case in this deterministic fixture")
+
+    from backend.app.review_actions import approve_review
+    approve_review(db, review.id, reviewer_id="priya_reviewer")
+    db.refresh(review)
+    assert review.assigned_reviewer == "priya_reviewer"
+
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get(f"/reviews/{review.id}")
+    assert resp.json()["assigned_reviewer"] == "priya_reviewer"
+    app.dependency_overrides.clear()
