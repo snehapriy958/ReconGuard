@@ -64,6 +64,56 @@ def test_decision_detail_includes_real_source_records(db):
     assert payload["ledger_records"][0]["vendor_name"]  # real field present, not fabricated
     app.dependency_overrides.clear()
 
+def test_decision_detail_includes_recomputed_full_feature_vector(db):
+    b1 = _real_batch(db)
+    from backend.app.models.decision import ReconciliationDecision
+    decision = db.query(ReconciliationDecision).first()
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get(f"/decisions/{decision.id}")
+    assert resp.status_code == 200
+    payload = resp.json()
+    assert "all_features" in payload
+    assert payload["all_features"] is not None
+    # spot-check a few features that must be present for the evidence
+    # breakdown categories (amount, date, vendor, reference)
+    for feature in ("abs_amount_diff", "date_diff_days",
+                     "vendor_jaro_winkler_similarity", "reference_similarity"):
+        assert feature in payload["all_features"]
+    # identifier/categorical columns should be stripped — shown elsewhere
+    # in the payload already, not duplicated here
+    assert "ledger_public_id" not in payload["all_features"]
+    app.dependency_overrides.clear()
+
+
+def test_decision_detail_includes_real_risk_flag_explanations(db):
+    b1 = _real_batch(db)
+    from backend.app.models.decision import ReconciliationDecision
+    # find a decision that actually has risk flags, if this batch produced one
+    flagged = db.query(ReconciliationDecision).filter(
+        ReconciliationDecision.risk_flags != []
+    ).first()
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    if flagged is not None:
+        resp = client.get(f"/decisions/{flagged.id}")
+        payload = resp.json()
+        assert set(payload["risk_flag_explanations"].keys()) == set(flagged.risk_flags)
+        for explanation in payload["risk_flag_explanations"].values():
+            assert isinstance(explanation, str) and len(explanation) > 0
+    else:
+        # still verify the field exists and is correctly empty for an
+        # unflagged decision, rather than skipping silently
+        decision = db.query(ReconciliationDecision).first()
+        resp = client.get(f"/decisions/{decision.id}")
+        assert resp.json()["risk_flag_explanations"] == {}
+    app.dependency_overrides.clear()
+
+
 def test_exceptions_endpoint_includes_relationship_type_and_probability(db):
     b1 = _real_batch(db)
     from backend.app.api.main import app

@@ -271,3 +271,28 @@ existing columns (Decision, Workflow Status) already made unnecessary —
 caught by the test suite before it shipped. 24/24 frontend tests passing,
 78/78 backend unchanged. Verified against real HTTP requests including a
 real structural decision's navigation. Full details in docs/frontend.md.
+
+## Phase 6.4 — Confidence Card, evidence breakdown, record comparison, operational risk (done)
+
+Extended `GET /decisions/{id}` with two server-side additions, both
+justified by inspecting the existing contract first: `all_features`
+(recomputed via the same `ml/features/group_extractor` function the
+pipeline already uses — no duplicated logic, no new inference) and
+`risk_flag_explanations` (sourced from the existing `risk_explanation()`
+function, not copied into the frontend). Built the six-section Decision
+Detail page with the three-layer trust model enforced structurally in
+component prop types, not just visually. Evidence interpretation
+thresholds documented and reused from existing constants
+(`HIGH_COMPETITION_THRESHOLD`, `WEAK_REFERENCE_SIMILARITY_THRESHOLD`) for
+consistency between risk flags and evidence labels.
+
+Two real bugs found and fixed: a 75-second per-request latency bug (fresh
+`EmbeddingBackend()` construction on every call, fixed with a process-level
+singleton warmed at startup) and a silently-swallowed `NameError` from a
+broken import (fixed, plus added logging so a similar bug can't hide
+silently again). 62/62 frontend tests, 80/80 backend tests (2 new).
+Verified against 5 real decisions across every available category via the
+actual running frontend, including the spec's core requirement case: a
+`HIGH_CONFIDENCE_MATCH` one-to-many decision still correctly carrying
+`KNOWN_LOW_GENERALIZATION` without being silently downgraded. Full details
+in docs/frontend.md.

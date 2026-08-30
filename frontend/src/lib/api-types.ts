@@ -95,6 +95,15 @@ export interface DecisionDetail extends Decision {
   evidence: EvidenceItem[];
   ledger_records: (SourceRecordData | null)[];
   settlement_records: (SourceRecordData | null)[];
+  // Full feature vector, recomputed server-side from persisted source
+  // records via the same extraction function the ML pipeline uses (see
+  // backend/app/api/main.py get_decision) — null if recomputation failed
+  // for any reason (e.g. a source record was deleted), never fabricated.
+  all_features: Record<string, number> | null;
+  // Real explanation strings, sourced server-side from
+  // backend/app/workflow/risk.py's risk_explanation() — one entry per flag
+  // in risk_flags, never fabricated in the frontend.
+  risk_flag_explanations: Record<string, string>;
 }
 
 export type ReviewStatus = "OPEN" | "IN_REVIEW" | "APPROVED" | "REJECTED";

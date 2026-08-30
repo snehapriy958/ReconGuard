@@ -64,7 +64,7 @@ from ml.features.reference import (
     reference_exact_match, reference_substring_overlap, reference_similarity,
     reference_missing_ledger as ref_missing_l, reference_missing_settlement as ref_missing_s,
 )
-from ml.features.embeddings import EmbeddingBackend, EmbeddingCache, cosine_similarity
+from ml.features.embeddings import get_shared_backend, EmbeddingCache, cosine_similarity
 
 
 @dataclass
@@ -97,7 +97,7 @@ def extract_group_features(
     groups: list[CandidateGroup], ledger_idx: pd.DataFrame, settlement_idx: pd.DataFrame,
     has_description: bool,
 ) -> pd.DataFrame:
-    backend = EmbeddingBackend()
+    backend = get_shared_backend()
     cache = EmbeddingCache(backend.backend_name)
 
     def embed(text: str) -> np.ndarray:

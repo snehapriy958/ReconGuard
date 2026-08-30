@@ -135,11 +135,117 @@ No API keys required for local demonstration.
 
 ## Status
 
-Phase 6.1 (foundation), 6.2 (batch overview), and 6.3 (reconciliation
-decision table) complete and verified against real data. 6.4 onward
-(confidence card, review queue, exception intelligence, audit timeline,
-dashboard insights) not yet built — proceeding incrementally per the
-spec's explicit instruction.
+Phase 6.1 (foundation), 6.2 (batch overview), 6.3 (reconciliation decision
+table), and 6.4 (Confidence Card / decision detail) complete and verified
+against real data. 6.5 onward (human review workflow, exception
+intelligence, audit timeline, dashboard insights) not yet built —
+proceeding incrementally per the spec's explicit instruction.
+
+## Phase 6.4 — Confidence Card, Evidence Breakdown, Record Comparison, Operational Risk
+
+**Backend additions, each justified by inspecting the real data contract first:**
+
+1. **`all_features` field on `GET /decisions/{id}`** — `EvidenceRecord`
+   only ever persisted the top-5 features by `pred_contrib` magnitude
+   (Phase 5's design, sized for the confidence-card "top evidence" list),
+   which isn't enough for a full category-by-category technical breakdown
+   (e.g. every vendor-similarity metric, not just whichever ranked top-5).
+   Rather than duplicate feature-extraction logic in the frontend, the
+   endpoint now recomputes the full feature vector deterministically from
+   the same persisted source records, using the identical
+   `ml/features/group_extractor.extract_group_features` function the ML
+   pipeline itself uses. No new inference, no new model call — pure
+   recomputation of already-derivable values.
+2. **`risk_flag_explanations` field** — sourced server-side from
+   `backend/app/workflow/risk.py`'s existing `risk_explanation()` function,
+   not duplicated as a second copy of that text in the frontend.
+
+**Data flow:**
+```
+Persisted decision + source records (Postgres)
+        ↓
+GET /decisions/{id} — recomputes full features via the real ML pipeline
+        code, fetches real risk explanations, real evidence, real records
+        ↓
+Typed API client (DecisionDetail)
+        ↓
+Decision Detail page — assembles 6 components, each reading only its
+        own real, typed slice of the payload
+```
+
+**Three-Layer Trust Model, structurally enforced in the component API, not just visually:**
+- `ConfidenceCard` — its props type is `Pick<Decision, "probability" | "decision" | "thresholds">`; it has no code path that could accept a risk flag
+- `EvidenceSummary` / `EvidenceBreakdown` — read only `evidence` / `all_features`; render real attribution and real recomputed feature values through a documented, deterministic interpretation policy (`src/lib/evidence-interpretation.ts`) — never an LLM, never a per-case invention
+- `OperationalRiskCard` — takes no probability prop at all; explicitly states in its own copy that risk flags don't modify the calibrated probability shown elsewhere on the page
+
+**Evidence interpretation policy** (`src/lib/evidence-interpretation.ts`),
+every threshold documented and justified:
+- Amount: <1% strong, 1-3% moderate, >3% weak — grounded in the dataset's
+  documented `relative_amount_diff` range (`docs/feature_catalog.md`)
+- Date: ≤3 days strong, ≤7 moderate, beyond weak — grounded in the
+  generator's documented settlement-lag cap and batch-span limit
+- Vendor: uses `vendor_token_set_similarity` as the headline metric, not
+  Jaro-Winkler, because `docs/feature_catalog.md` documents Jaro-Winkler's
+  inflated-baseline quirk (still shown in the technical breakdown, just not
+  driving the business-facing label)
+- Competition and weak-reference thresholds are the **exact same constants**
+  (`HIGH_COMPETITION_THRESHOLD = 5`, `WEAK_REFERENCE_SIMILARITY_THRESHOLD = 0.3`)
+  already defined in `backend/app/workflow/risk.py` — reused, not reinvented,
+  so a decision's risk flag and its evidence-card label always agree
+
+**Raw record comparison and "What Changed":** structural groups are never
+flattened — every member ID gets its own inspectable card. For "What
+Changed," a structural group compares the **ledger total against the
+settlement group total**, never an individual member's amount against a
+multi-record group (the spec's explicit warning) — verified by a dedicated
+test asserting `"1,000 (total)"` vs `"1,000 (group total)"` render
+correctly for a true one-to-many case.
+
+**Real data verification** across 5 real decisions spanning every
+available category (no `many_to_one` existed in this particular batch):
+`one_to_one` auto-matched with no risk, `one_to_one` likely-no-match with
+`WEAK_REFERENCE_EVIDENCE`, `one_to_one` auto-matched *with* a risk flag
+(proving risk doesn't gate auto-match), `one_to_many` needs-review with
+full structural risk flags, and — the cleanest confirmation of the
+spec's core requirement — `one_to_many` **HIGH_CONFIDENCE_MATCH still
+carrying `KNOWN_LOW_GENERALIZATION`**, verified through the real running
+frontend at `/decisions/DEC-cc85d1911f31` (HTTP 200, correct CORS).
+
+**Tests:** 62/62 frontend tests passing (38 new for Phase 6.4: evidence
+interpretation thresholds, confidence/risk separation, evidence summary
+and breakdown rendering, record comparison including the structural-total
+calculation, missing-data handling, and operational risk rendering).
+Backend: 80 passed, 4 skipped (2 new tests for `all_features` and
+`risk_flag_explanations`).
+
+**Important failures found while building this:**
+1. *Observed:* first `all_features` request took 75 seconds. *Root cause:*
+   `extract_group_features` constructs a fresh `EmbeddingBackend()` on
+   every call, which retries (and times out on) an unreachable HuggingFace
+   connection each time — fine when called once per batch (the existing
+   pipeline path), broken when called once per API request (the new path
+   this phase added). *Fix:* added a process-level singleton
+   (`get_shared_backend()` in `ml/features/embeddings.py`) and warmed it at
+   app startup so no real user request ever pays the cost.
+   *Verification:* repeat requests measured at 0.18s; the first real
+   request after startup measured at 0.25s.
+2. *Observed:* `all_features` came back `null` in a test, silently.
+   *Root cause:* an unrelated import edit had accidentally deleted the
+   `CandidateGroup` import, causing a `NameError` inside a broad
+   `except Exception` block that swallowed it without a trace.
+   *Fix:* corrected the import; also added `logger.exception(...)` inside
+   that except block so a future bug of this shape shows up in server logs
+   instead of only manifesting as a quietly-null field.
+   *Verification:* the dedicated `all_features` test now passes, and
+   the failure mode itself is now visible if it recurs.
+
+**Remaining limitations:** no `many_to_one` decision existed in the
+verification batch to visually confirm that specific grouping (the logic
+is identical to `one_to_many`'s and covered by a dedicated unit test, but
+not yet seen live against the real running app); the technical evidence
+`<details>` disclosure is a plain HTML element rather than an animated
+accordion (a deliberate simplicity choice, not a gap).
+
 
 ## Phase 6.3 — Reconciliation Decision Table
 

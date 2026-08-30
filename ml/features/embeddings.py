@@ -134,3 +134,23 @@ def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
     sim = float(np.dot(a, b) / (na * nb))
     # guard against float noise pushing marginally outside [-1, 1]
     return round(max(-1.0, min(1.0, sim)), 6)
+
+
+_shared_backend: "EmbeddingBackend | None" = None
+
+
+def get_shared_backend() -> "EmbeddingBackend":
+    """Process-level singleton. Each EmbeddingBackend() construction attempts
+    (and, when unreachable, times out on) a HuggingFace connection before
+    falling back — cheap once per process, but a real, measured 68-second
+    latency bug when done on every single API request (Phase 6.4's
+    decision-detail endpoint recomputes features per request; see
+    docs/frontend.md "Important Failures"). Batch processing in
+    pipeline.py was never affected since it only calls extract_group_features
+    once per batch — this cache benefits the new per-request usage without
+    changing any existing behavior for the batch path.
+    """
+    global _shared_backend
+    if _shared_backend is None:
+        _shared_backend = EmbeddingBackend()
+    return _shared_backend

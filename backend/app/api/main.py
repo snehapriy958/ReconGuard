@@ -4,6 +4,7 @@ layer — per spec section 5, the learned reconciliation engine IS the AI
 here; this layer is orchestration, persistence, and human oversight.
 """
 from typing import Optional
+import logging
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,7 +22,11 @@ from backend.app.models.exception import ExceptionRecord
 from backend.app.models.source_record import SourceRecord
 from backend.app.models.evidence import EvidenceRecord
 
+from backend.app.workflow.risk import risk_explanation
+from ml.features.group_extractor import CandidateGroup, extract_group_features
+
 app = FastAPI(title="ReconLens API", version="phase5")
+logger = logging.getLogger("reconlens")
 
 # Frontend (Next.js dev server, typically :3000) calls this API cross-origin.
 # Scoped to local dev origins only — this is a local demonstration project,
@@ -38,6 +43,12 @@ app.add_middleware(
 @app.on_event("startup")
 def _startup():
     init_db()
+    # Warm the embedding backend now (paying the ~75s HuggingFace-timeout-then-
+    # fallback cost once, at process startup) rather than on the first real
+    # request to GET /decisions/{id} — see docs/frontend.md "Important
+    # Failures" for how this was discovered (a 68-75s decision-detail load).
+    from ml.features.embeddings import get_shared_backend
+    get_shared_backend()
 
 
 # ---------------- schemas ----------------
@@ -159,10 +170,55 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
 
     payload = _decision_to_dict(d)
     payload["evidence"] = [_evidence_to_dict(e) for e in evidence]
-    # Real record content, not just IDs — needed for the record-comparison
-    # view; missing fields mean the record wasn't found (never fabricated).
     payload["ledger_records"] = [by_id.get(lid) for lid in d.ledger_record_ids]
     payload["settlement_records"] = [by_id.get(sid) for sid in d.settlement_record_ids]
+
+    # Real explanation text, sourced from the same risk_explanation()
+    # function backend/app/workflow/risk.py already uses to build exception
+    # reasons — reused here rather than duplicated in the frontend, so a
+    # wording change only ever needs to happen in one place.
+    payload["risk_flag_explanations"] = {
+        flag: risk_explanation(flag, d.relationship_type) for flag in d.risk_flags
+    }
+
+    # Full feature vector, recomputed deterministically from the same
+    # persisted source records via the SAME extraction function the
+    # pipeline itself uses (ml/features/group_extractor.py) — not a
+    # frontend reimplementation of feature logic, and not a new model
+    # inference. This exists because EvidenceRecord only persists the top-5
+    # features by pred_contrib magnitude (Phase 5's design, for the
+    # confidence-card "top evidence" list), which isn't enough for a full
+    # category-by-category technical breakdown (Phase 6.4 needs e.g. every
+    # vendor-similarity metric, not just whichever ranked in the top 5).
+    payload["all_features"] = None
+    if all(by_id.get(i) is not None for i in all_ids):
+        try:
+            import pandas as pd
+            ledger_rows = [{"ledger_id": lid, **by_id[lid]} for lid in d.ledger_record_ids]
+            settlement_rows = [{"settlement_id": sid, **by_id[sid]} for sid in d.settlement_record_ids]
+            ledger_idx = pd.DataFrame(ledger_rows).set_index("ledger_id")
+            settlement_idx = pd.DataFrame(settlement_rows).set_index("settlement_id")
+            has_description = "description" in ledger_idx.columns and "description" in settlement_idx.columns
+            group = CandidateGroup(ledger_ids=tuple(d.ledger_record_ids), settlement_ids=tuple(d.settlement_record_ids))
+            feature_df, _ = extract_group_features([group], ledger_idx, settlement_idx, has_description)
+            row = feature_df.iloc[0].to_dict()
+            # drop identifier/categorical columns already shown elsewhere in the payload
+            for k in ("ledger_public_id", "settlement_public_id", "relationship_type_candidate"):
+                row.pop(k, None)
+            payload["all_features"] = row
+        except Exception:
+            # Recomputation is best-effort supplementary detail, not the
+            # decision itself — if it fails, the endpoint still returns the
+            # real persisted decision/evidence/records rather than a 500.
+            # Logged, not silently swallowed: an earlier version of this
+            # except block hid a real NameError (a broken import) for a
+            # while, caught only because a dedicated test asserted
+            # all_features was non-None — see docs/frontend.md "Important
+            # Failures". A production bug deserves to show up in logs even
+            # when the user-facing response degrades gracefully.
+            logger.exception(f"all_features recomputation failed for decision {decision_id}")
+            payload["all_features"] = None
+
     return payload
 
 
