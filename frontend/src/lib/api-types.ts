@@ -140,6 +140,33 @@ export interface ExceptionListItem {
   calibrated_probability: number | null;
   ledger_record_ids: string[] | null;
   settlement_record_ids: string[] | null;
+  risk_flags: string[] | null;
+  primary_root_cause: string | null;
+}
+
+export interface RootCauseAnalysis {
+  primary_root_cause: string;
+  observed: string[];
+  interpretation: string[];
+  contributing_factors: string[];
+  investigation_guidance: string;
+  taxonomy_version: string;
+}
+
+export interface ExceptionDetail {
+  exception_id: string;
+  decision_id: string;
+  batch_id: string | null;
+  original_category: string;
+  original_reason: string;
+  created_at: string;
+  relationship_type: RelationshipType | null;
+  calibrated_probability: number | null;
+  workflow_state: DecisionWorkflowState | null;
+  risk_flags: string[] | null;
+  ledger_record_ids: string[] | null;
+  settlement_record_ids: string[] | null;
+  root_cause_analysis: RootCauseAnalysis;
 }
 
 export interface AuditEventItem {

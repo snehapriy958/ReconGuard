@@ -13,6 +13,7 @@ import type {
   ReviewListItem,
   ReviewDetail,
   ExceptionListItem,
+  ExceptionDetail,
   AuditEventItem,
 } from "./api-types";
 
@@ -123,6 +124,10 @@ export function listExceptions(
 ): Promise<{ exceptions: ExceptionListItem[] }> {
   const qs = category ? `?category=${encodeURIComponent(category)}` : "";
   return request(`/exceptions${qs}`);
+}
+
+export function getException(exceptionId: string): Promise<ExceptionDetail> {
+  return request(`/exceptions/${exceptionId}`);
 }
 
 // ---------------- audit ----------------

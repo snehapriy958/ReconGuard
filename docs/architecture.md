@@ -316,3 +316,24 @@ ML decision, calibrated probability, and risk flags all remained
 byte-identical while workflow_state transitioned correctly and
 assigned_reviewer/resolved_at were persisted. Full details in
 docs/frontend.md.
+
+## Phase 6.6 — Exception Intelligence (done)
+
+Built a deterministic root-cause engine (`backend/app/workflow/exception_intelligence.py`)
+that refines Phase 5's existing `classify_exception()` taxonomy — reused,
+not replaced — with evidence-dimension drill-down (amount/date/vendor/
+reference) for its generic fallback categories. Added `GET /exceptions/{id}`
+(previously only the list endpoint existed) returning original,
+immutable facts and derived root-cause analysis in clearly separate
+fields. Feature recomputation reuses the exact helper factored out of
+`GET /decisions/{id}` — zero duplicated logic. Precedence for
+simultaneously-weak dimensions (amount > reference > vendor > date) is
+grounded in Phase 4's own feature-importance and ablation findings, not
+arbitrary. Honest finding: `PROCESSING_FAILURE` is a real taxonomy branch
+that is currently structurally unreachable, since failed candidates are
+skipped during processing rather than becoming exceptions — documented
+rather than worked around. 87/87 frontend tests, 97/97 backend (17 new).
+Verified against 24 real exceptions spanning 5 of 9 reachable root-cause
+categories, with two cases spot-checked in full against real feature
+values, including confirmation that the amount-precedence rule holds on
+real (not just synthetic test) data. Full details in docs/frontend.md.

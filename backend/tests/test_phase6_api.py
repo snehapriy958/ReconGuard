@@ -181,3 +181,53 @@ def test_approve_review_persists_reviewer_identity_on_the_review_record(db):
     resp = client.get(f"/reviews/{review.id}")
     assert resp.json()["assigned_reviewer"] == "priya_reviewer"
     app.dependency_overrides.clear()
+
+
+def test_exception_list_includes_primary_root_cause(db):
+    b1 = _real_batch(db)
+    from backend.app.models.exception import ExceptionRecord
+    exc = db.query(ExceptionRecord).first()
+    if exc is None:
+        pytest.skip("no LIKELY_NO_MATCH/exception case in this deterministic fixture")
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get("/exceptions")
+    item = next(e for e in resp.json()["exceptions"] if e["exception_id"] == exc.id)
+    assert item["primary_root_cause"] is not None
+    app.dependency_overrides.clear()
+
+
+def test_exception_detail_separates_original_facts_from_derived_analysis(db):
+    b1 = _real_batch(db)
+    from backend.app.models.exception import ExceptionRecord
+    exc = db.query(ExceptionRecord).first()
+    if exc is None:
+        pytest.skip("no LIKELY_NO_MATCH/exception case in this deterministic fixture")
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get(f"/exceptions/{exc.id}")
+    assert resp.status_code == 200
+    payload = resp.json()
+    # original, immutable facts
+    assert payload["original_category"] == exc.category
+    assert payload["original_reason"] == exc.reason
+    # derived analysis, in its own clearly separate object
+    ra = payload["root_cause_analysis"]
+    assert ra["primary_root_cause"]
+    assert ra["investigation_guidance"]
+    assert ra["taxonomy_version"] == "v1"
+    app.dependency_overrides.clear()
+
+
+def test_exception_not_found_returns_404(db):
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get("/exceptions/EXC-doesnotexist")
+    assert resp.status_code == 404
+    app.dependency_overrides.clear()

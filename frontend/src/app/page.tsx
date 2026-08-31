@@ -17,6 +17,10 @@ export default function Home() {
         Select a batch to see how it was reconciled, or open the{" "}
         <Link href="/reviews" className="underline hover:text-slate-700">
           review queue
+        </Link>{" "}
+        or{" "}
+        <Link href="/exceptions" className="underline hover:text-slate-700">
+          exception intelligence
         </Link>
         .
       </p>

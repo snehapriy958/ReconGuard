@@ -135,9 +135,119 @@ No API keys required for local demonstration.
 
 ## Status
 
-Phase 6.1-6.5 complete and verified against real data. 6.6 onward
-(exception intelligence, audit timeline, dashboard insights) not yet
-built — proceeding incrementally per the spec's explicit instruction.
+Phase 6.1-6.6 complete and verified against real data. 6.7 onward (full
+audit timeline, dashboard insights) not yet built — proceeding
+incrementally per the spec's explicit instruction.
+
+## Phase 6.6 — Exception Intelligence
+
+**Backend additions, each justified by inspecting the existing contract first:**
+
+Inspection found that `classify_exception()` (in `risk.py`) already exists
+as a real, deterministic, priority-ordered taxonomy
+(`NO_CANDIDATE_FOUND` → `STRUCTURAL_AMBIGUITY` → `HIGH_COMPETITION` →
+`INSUFFICIENT_EVIDENCE` → fallback `LOW_MATCH_CONFIDENCE`), already used
+to create every persisted `ExceptionRecord`. Phase 6.6 does not replace
+this — it builds a second, more granular layer on top
+(`backend/app/workflow/exception_intelligence.py`) that refines the
+generic `LOW_MATCH_CONFIDENCE`/`INSUFFICIENT_EVIDENCE` fallback into a
+specific evidence dimension (amount/date/vendor/reference), since "low
+confidence" alone doesn't tell an operator *which* evidence was weak.
+
+1. **New module `exception_intelligence.py`** — `analyze_exception()`
+   takes the already-persisted category, the recomputed feature vector
+   (reusing the exact same `_recompute_full_features()` helper factored
+   out of `GET /decisions/{id}` — no duplicated feature logic), workflow
+   state, and source-record presence, and returns a primary root cause,
+   observed facts, interpretation, contributing factors, and investigation
+   guidance.
+2. **`GET /exceptions` extended** with `primary_root_cause` (cheap — one
+   recomputation per row, using the shared cached embedding backend).
+3. **New `GET /exceptions/{id}` endpoint** (didn't exist before — only the
+   list endpoint did) — returns the full root-cause analysis, with
+   `original_category`/`original_reason` (the immutable, already-persisted
+   facts) kept in clearly separate fields from `root_cause_analysis` (the
+   derived analysis), per the spec's explicit "clearly distinguish
+   original facts from derived analysis."
+
+**Root-cause taxonomy** (`taxonomy_version: "v1"`, documented for future
+versioning):
+
+| Cause | Trigger | System failure? |
+|---|---|---|
+| `PROCESSING_FAILURE` | `workflow_state == "FAILED"` | Yes |
+| `MISSING_SOURCE_RECORD` | A referenced ledger/settlement record can't be found | Yes |
+| `NO_VIABLE_CANDIDATE` | Existing category `NO_CANDIDATE_FOUND` | No |
+| `STRUCTURAL_MATCH_FAILURE` | Existing category `STRUCTURAL_AMBIGUITY` | No |
+| `WEAK_MATCH_EVIDENCE` | Existing category `HIGH_COMPETITION` | No |
+| `AMOUNT_DISCREPANCY` / `DATE_DISCREPANCY` / `VENDOR_MISMATCH` / `REFERENCE_MISMATCH` | Drill-down within the fallback categories — whichever evidence dimension is "weak" per the shared thresholds | No |
+| `MODEL_UNCERTAINTY` | Fallback categories, but no single dimension is individually weak | No |
+| `UNKNOWN_OR_INSUFFICIENT_EVIDENCE` | Features couldn't be recomputed at all | No |
+
+**Honest finding, not glossed over:** `PROCESSING_FAILURE` is included in
+the taxonomy for correctness, but inspection confirmed it is currently
+**structurally unreachable** — a candidate that fails during pipeline
+processing is logged as a batch-level audit event and simply skipped;
+no `ReconciliationDecision` or `ExceptionRecord` is ever created for it,
+and no decision has ever reached `workflow_state=FAILED` in practice. This
+is documented in the module docstring rather than worked around by
+fabricating a decision-level failure that doesn't reflect real backend
+behavior.
+
+**Precedence when multiple dimensions are weak** (amount > reference >
+vendor > date): grounded in real, already-established Phase 4 findings —
+`abs_amount_diff` ranked far above every other feature in LightGBM's gain
+importance, and removing reference features cost the most accuracy of any
+group in the Phase 4 ablation. Not an arbitrary choice.
+
+**No fabricated confidence score** (spec Step 7): every root cause is
+accompanied by real `observed` values (actual feature numbers) and a
+separate `interpretation` (the deterministic label derived from them) —
+never a percentage claiming the cause itself is "87% likely."
+
+**System failures vs. reconciliation failures, visually distinct:** the
+frontend's `RootCauseCard` shows an explicit red banner
+("This is a technical processing issue, not a reconciliation-quality
+finding") for `PROCESSING_FAILURE`/`MISSING_SOURCE_RECORD`, and uses a
+different badge color (red vs. amber) — verified by a dedicated test that
+the banner does NOT appear for ordinary reconciliation findings.
+
+**Root cause vs. operational risk, kept structurally separate:**
+`RootCauseCard` takes no `risk_flags` prop at all — the two concepts
+can never be accidentally merged, the same pattern already established
+for confidence vs. risk in Phase 6.4.
+
+**Real data verification** against the actual populated batch (24 real
+exceptions): confirmed root causes across **5 of the 9 reachable
+categories** — `REFERENCE_MISMATCH` (11), `VENDOR_MISMATCH` (5),
+`AMOUNT_DISCREPANCY` (3), `MODEL_UNCERTAINTY` (3), `WEAK_MATCH_EVIDENCE`
+(2). Two specific cases spot-checked in full: a `REFERENCE_MISMATCH` case
+where `reference_similarity=0.23` correctly triggered the cause with
+vendor weakness correctly listed as contributing, and an
+`AMOUNT_DISCREPANCY` case where `relative_amount_diff=0.0427` correctly
+took precedence over two other simultaneously-weak dimensions (reference,
+vendor), confirming the documented precedence rule works on real data, not
+just in unit tests. **Not verified against real data** (none existed in
+this batch): `NO_VIABLE_CANDIDATE`, `STRUCTURAL_MATCH_FAILURE`,
+`DATE_DISCREPANCY`, `MISSING_SOURCE_RECORD`, `PROCESSING_FAILURE`,
+`UNKNOWN_OR_INSUFFICIENT_EVIDENCE` — these are covered by the 14 backend
+unit tests in `test_exception_intelligence.py` (which exercise the
+deterministic engine directly, independent of any specific dataset) but
+not claimed as end-to-end verified, per the spec's explicit instruction
+not to claim verification a category didn't actually receive.
+
+**Tests:** 87/87 frontend (24 new: root-cause card rendering, system-
+failure distinction, contributing-factors conditional display, no-
+fabricated-confidence check, exception queue rendering/filtering/empty
+states). Backend: 97 passed, 6 skipped (17 new: 14 pure unit tests on the
+deterministic engine covering every reachable category and precedence
+rule, 3 API-level tests for the enriched endpoints).
+
+**Remaining limitations:** `PROCESSING_FAILURE` and several other taxonomy
+branches remain real but unverified against production-shaped data (see
+above); the list endpoint recomputes features per exception row (fast
+after the shared embedding-backend warmup, but would need pagination or a
+persisted cache for a much larger exception volume than this demo scale).
 
 ## Phase 6.5 — Human Review Queue, Actions, and History
 

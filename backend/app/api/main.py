@@ -23,6 +23,7 @@ from backend.app.models.source_record import SourceRecord
 from backend.app.models.evidence import EvidenceRecord
 
 from backend.app.workflow.risk import risk_explanation
+from backend.app.workflow.exception_intelligence import analyze_exception
 from ml.features.group_extractor import CandidateGroup, extract_group_features
 
 app = FastAPI(title="ReconLens API", version="phase5")
@@ -157,6 +158,38 @@ def get_batch_decisions(batch_id: str, db: Session = Depends(get_db)):
 
 # ---------------- decisions (confidence card) ----------------
 
+def _recompute_full_features(d: ReconciliationDecision, db: Session) -> tuple[dict | None, bool, dict]:
+    """Shared by GET /decisions/{id} and the exception endpoints — one
+    recomputation path, not two copies of the same logic (spec's explicit
+    instruction: reuse, don't duplicate). Returns (features_or_None,
+    all_source_records_present, ledger_and_settlement_raw_by_id).
+    """
+    all_ids = list(d.ledger_record_ids) + list(d.settlement_record_ids)
+    source_records = db.query(SourceRecord).filter(SourceRecord.id.in_(all_ids)).all()
+    by_id = {r.id: r.raw_data for r in source_records}
+    all_present = all(by_id.get(i) is not None for i in all_ids)
+
+    if not all_present:
+        return None, False, by_id
+
+    try:
+        import pandas as pd
+        ledger_rows = [{"ledger_id": lid, **by_id[lid]} for lid in d.ledger_record_ids]
+        settlement_rows = [{"settlement_id": sid, **by_id[sid]} for sid in d.settlement_record_ids]
+        ledger_idx = pd.DataFrame(ledger_rows).set_index("ledger_id")
+        settlement_idx = pd.DataFrame(settlement_rows).set_index("settlement_id")
+        has_description = "description" in ledger_idx.columns and "description" in settlement_idx.columns
+        group = CandidateGroup(ledger_ids=tuple(d.ledger_record_ids), settlement_ids=tuple(d.settlement_record_ids))
+        feature_df, _ = extract_group_features([group], ledger_idx, settlement_idx, has_description)
+        row = feature_df.iloc[0].to_dict()
+        for k in ("ledger_public_id", "settlement_public_id", "relationship_type_candidate"):
+            row.pop(k, None)
+        return row, True, by_id
+    except Exception:
+        logger.exception(f"feature recomputation failed for decision {d.id}")
+        return None, True, by_id
+
+
 @app.get("/decisions/{decision_id}")
 def get_decision(decision_id: str, db: Session = Depends(get_db)):
     d = db.query(ReconciliationDecision).filter(ReconciliationDecision.id == decision_id).first()
@@ -164,9 +197,7 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
         raise HTTPException(404, "Decision not found")
     evidence = db.query(EvidenceRecord).filter(EvidenceRecord.decision_id == decision_id).all()
 
-    all_ids = list(d.ledger_record_ids) + list(d.settlement_record_ids)
-    source_records = db.query(SourceRecord).filter(SourceRecord.id.in_(all_ids)).all()
-    by_id = {r.id: r.raw_data for r in source_records}
+    features, _, by_id = _recompute_full_features(d, db)
 
     payload = _decision_to_dict(d)
     payload["evidence"] = [_evidence_to_dict(e) for e in evidence]
@@ -180,44 +211,7 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
     payload["risk_flag_explanations"] = {
         flag: risk_explanation(flag, d.relationship_type) for flag in d.risk_flags
     }
-
-    # Full feature vector, recomputed deterministically from the same
-    # persisted source records via the SAME extraction function the
-    # pipeline itself uses (ml/features/group_extractor.py) — not a
-    # frontend reimplementation of feature logic, and not a new model
-    # inference. This exists because EvidenceRecord only persists the top-5
-    # features by pred_contrib magnitude (Phase 5's design, for the
-    # confidence-card "top evidence" list), which isn't enough for a full
-    # category-by-category technical breakdown (Phase 6.4 needs e.g. every
-    # vendor-similarity metric, not just whichever ranked in the top 5).
-    payload["all_features"] = None
-    if all(by_id.get(i) is not None for i in all_ids):
-        try:
-            import pandas as pd
-            ledger_rows = [{"ledger_id": lid, **by_id[lid]} for lid in d.ledger_record_ids]
-            settlement_rows = [{"settlement_id": sid, **by_id[sid]} for sid in d.settlement_record_ids]
-            ledger_idx = pd.DataFrame(ledger_rows).set_index("ledger_id")
-            settlement_idx = pd.DataFrame(settlement_rows).set_index("settlement_id")
-            has_description = "description" in ledger_idx.columns and "description" in settlement_idx.columns
-            group = CandidateGroup(ledger_ids=tuple(d.ledger_record_ids), settlement_ids=tuple(d.settlement_record_ids))
-            feature_df, _ = extract_group_features([group], ledger_idx, settlement_idx, has_description)
-            row = feature_df.iloc[0].to_dict()
-            # drop identifier/categorical columns already shown elsewhere in the payload
-            for k in ("ledger_public_id", "settlement_public_id", "relationship_type_candidate"):
-                row.pop(k, None)
-            payload["all_features"] = row
-        except Exception:
-            # Recomputation is best-effort supplementary detail, not the
-            # decision itself — if it fails, the endpoint still returns the
-            # real persisted decision/evidence/records rather than a 500.
-            # Logged, not silently swallowed: an earlier version of this
-            # except block hid a real NameError (a broken import) for a
-            # while, caught only because a dedicated test asserted
-            # all_features was non-None — see docs/frontend.md "Important
-            # Failures". A production bug deserves to show up in logs even
-            # when the user-facing response degrades gracefully.
-            logger.exception(f"all_features recomputation failed for decision {decision_id}")
-            payload["all_features"] = None
+    payload["all_features"] = features
 
     return payload
 
@@ -296,6 +290,15 @@ def list_exceptions(category: Optional[str] = None, db: Session = Depends(get_db
     result = []
     for e in exceptions:
         d = e.decision
+        # List view: primary_root_cause only (cheap — reuses cached
+        # feature recomputation, but full observed/contributing detail is
+        # reserved for the single-item detail endpoint below to keep the
+        # list endpoint fast for larger exception counts).
+        primary_root_cause = None
+        if d is not None:
+            features, all_present, _ = _recompute_full_features(d, db)
+            analysis = analyze_exception(e.category, features, d.workflow_state, all_present)
+            primary_root_cause = analysis.primary_root_cause
         result.append({
             "exception_id": e.id, "decision_id": e.decision_id, "category": e.category,
             "reason": e.reason, "created_at": e.created_at.isoformat(),
@@ -303,8 +306,47 @@ def list_exceptions(category: Optional[str] = None, db: Session = Depends(get_db
             "calibrated_probability": d.calibrated_probability if d else None,
             "ledger_record_ids": d.ledger_record_ids if d else None,
             "settlement_record_ids": d.settlement_record_ids if d else None,
+            "risk_flags": d.risk_flags if d else None,
+            "primary_root_cause": primary_root_cause,
         })
     return {"exceptions": result}
+
+
+@app.get("/exceptions/{exception_id}")
+def get_exception(exception_id: str, db: Session = Depends(get_db)):
+    e = db.query(ExceptionRecord).filter(ExceptionRecord.id == exception_id).first()
+    if e is None:
+        raise HTTPException(404, "Exception not found")
+    d = e.decision
+
+    features, all_present, _ = _recompute_full_features(d, db) if d else (None, False, {})
+    analysis = analyze_exception(e.category, features, d.workflow_state if d else "FAILED", all_present)
+
+    return {
+        "exception_id": e.id, "decision_id": e.decision_id,
+        "batch_id": d.batch_id if d else None,
+        "original_category": e.category,   # the original classify_exception() output — never overwritten
+        "original_reason": e.reason,        # the original persisted reason text — never overwritten
+        "created_at": e.created_at.isoformat(),
+        "relationship_type": d.relationship_type if d else None,
+        "calibrated_probability": d.calibrated_probability if d else None,
+        "workflow_state": d.workflow_state if d else None,
+        "risk_flags": d.risk_flags if d else None,
+        "ledger_record_ids": d.ledger_record_ids if d else None,
+        "settlement_record_ids": d.settlement_record_ids if d else None,
+        # Derived root-cause analysis — clearly separated from the fields
+        # above, which are the original, immutable, persisted facts (spec
+        # Step 12: "clearly distinguish original facts from derived
+        # analysis").
+        "root_cause_analysis": {
+            "primary_root_cause": analysis.primary_root_cause,
+            "observed": analysis.observed,
+            "interpretation": analysis.interpretation,
+            "contributing_factors": analysis.contributing_factors,
+            "investigation_guidance": analysis.investigation_guidance,
+            "taxonomy_version": analysis.taxonomy_version,
+        },
+    }
 
 
 # ---------------- audit ----------------
