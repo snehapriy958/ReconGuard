@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session
 from backend.app.db import get_db, init_db
 from backend.app.pipeline import process_batch
 from backend.app.review_actions import approve_review, reject_review, ReviewNotFoundError, ReviewAlreadyResolvedError
-from backend.app.audit import get_audit_trail
+from backend.app.audit import get_audit_trail, get_decision_audit_trail
 from backend.app.models.batch import Batch
 from backend.app.models.decision import ReconciliationDecision
 from backend.app.models.review import ReviewTask
@@ -214,6 +214,23 @@ def get_decision(decision_id: str, db: Session = Depends(get_db)):
     payload["all_features"] = features
 
     return payload
+
+
+@app.get("/decisions/{decision_id}/audit")
+def get_decision_audit(decision_id: str, db: Session = Depends(get_db)):
+    d = db.query(ReconciliationDecision).filter(ReconciliationDecision.id == decision_id).first()
+    if d is None:
+        raise HTTPException(404, "Decision not found")
+    review = db.query(ReviewTask).filter(ReviewTask.decision_id == decision_id).first()
+    events = get_decision_audit_trail(db, decision_id, review.id if review else None)
+    return {
+        "decision_id": decision_id,
+        "events": [{"event_id": e.event_id, "event_type": e.event_type,
+                    "actor_type": e.actor_type, "actor_id": e.actor_id,
+                    "previous_state": e.previous_state, "new_state": e.new_state,
+                    "payload": e.payload, "timestamp": e.timestamp.isoformat()}
+                   for e in events],
+    }
 
 
 # ---------------- review queue ----------------

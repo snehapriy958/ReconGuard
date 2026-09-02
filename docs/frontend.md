@@ -135,9 +135,116 @@ No API keys required for local demonstration.
 
 ## Status
 
-Phase 6.1-6.6 complete and verified against real data. 6.7 onward (full
-audit timeline, dashboard insights) not yet built — proceeding
-incrementally per the spec's explicit instruction.
+Phase 6.1-6.7 complete and verified against real data. 6.8 (dashboard
+charts, polish, full Docker integration test) and submission packaging
+remain — proceeding incrementally per the spec's explicit instruction.
+
+## Phase 6.7 — Immutable Audit Timeline and Decision Traceability
+
+**Real gap found during inspection, fixed — not a redesign:**
+`REVIEW_APPROVED`/`REVIEW_REJECTED` events are persisted under
+`entity_type="REVIEW"`, keyed by `review.id` — a *different* id namespace
+than `entity_type="DECISION"` events (`MODEL_EVALUATED`,
+`AUTO_MATCH_CREATED`, `REVIEW_TASK_CREATED`, `EXCEPTION_CREATED`), which
+are keyed by `decision.id`. The pre-existing generic
+`GET /audit/{entity_type}/{entity_id}` endpoint only ever queries one
+namespace at a time — calling it with `DECISION/{decision_id}` alone would
+have **completely omitted the human review outcome** from a decision's
+timeline, directly contradicting this phase's core requirement. Fixed with
+a new, server-side merge (`get_decision_audit_trail()` in
+`backend/app/audit.py`) that looks up the decision's associated
+`ReviewTask` (if any) and merges both namespaces, sorted chronologically —
+exposed via the new `GET /decisions/{id}/audit` endpoint.
+
+**Actual event taxonomy discovered** (12 real event types, all
+already-emitted by Phase 5's pipeline and review-action code — none
+invented for this phase):
+
+| event_type | entity_type | actor_type | Category |
+|---|---|---|---|
+| `BATCH_CREATED`, `PROCESSING_STARTED`, `PROCESSING_FAILED`, `BATCH_COMPLETED`, `DUPLICATE_SUBMISSION_DETECTED` | BATCH | SYSTEM | SYSTEM |
+| `CANDIDATE_PROCESSING_FAILED` | BATCH | SYSTEM | SYSTEM |
+| `MODEL_EVALUATED` | DECISION | MODEL | MODEL |
+| `AUTO_MATCH_CREATED`, `REVIEW_TASK_CREATED` | DECISION | SYSTEM | WORKFLOW |
+| `EXCEPTION_CREATED` | DECISION | SYSTEM | EXCEPTION |
+| `REVIEW_APPROVED`, `REVIEW_REJECTED` | REVIEW | HUMAN | HUMAN |
+
+**Immutability — verified, not just claimed:** `backend/app/audit.py`
+exposes exactly one write function, `record_event()`, which only ever
+`INSERT`s (verified since Phase 5 by
+`test_audit_events_append_only_no_update_function_exists`, which asserts
+no `update_event()`/`delete_event()` exist on the module at all). This is
+**application-level, conventional append-only behavior** — there is no
+database-level immutability constraint (no `REVOKE UPDATE`, no trigger).
+Stated honestly rather than described as cryptographic or tamper-proof,
+per the spec's explicit instruction not to overclaim.
+
+**Ordering fix:** `get_audit_trail()` previously sorted by `timestamp`
+only; added a secondary sort by the autoincrement `id` (monotonic with
+insertion order) for genuine determinism when timestamps could collide at
+datetime resolution — verified by a dedicated repeated-request test.
+
+**Decision-centric timeline:** scoped correctly to one decision's real
+lifecycle only — verified directly that an unrelated batch's
+`CANDIDATE_PROCESSING_FAILED` events never leak into a decision's audit
+view (structurally impossible, since those events carry no `decision.id`
+at all).
+
+**Batch-centric timeline:** deliberately concise — filtered client-side to
+5 real lifecycle event types
+(`BATCH_CREATED`/`PROCESSING_STARTED`/`PROCESSING_FAILED`/
+`BATCH_COMPLETED`/`DUPLICATE_SUBMISSION_DETECTED`), excluding individual
+`CANDIDATE_PROCESSING_FAILED` rows (already surfaced as a count via
+`summary.failed_candidates`). Verified against the real populated batch:
+exactly 3 real lifecycle events, zero noise.
+
+**Invariant visualization (Step 9), using data that already existed:**
+`review_actions.py` has recorded `model_decision_preserved` and
+`model_calibrated_probability` in the `REVIEW_APPROVED`/`REVIEW_REJECTED`
+payload since Phase 5 — this phase's `AuditEventCard` renders a banner
+from those exact fields when present, and only then (verified by a
+dedicated test that the banner does NOT appear for a
+similarly-shaped-but-different event type, and does NOT appear when those
+specific fields are absent).
+
+**Technical payload safety (Step 13):** hidden by default behind a
+`<details>` disclosure on every event card — verified by a test asserting
+the element has no `open` attribute initially.
+
+**Real end-to-end verification**, all three required cases, against live
+PostgreSQL:
+- **CASE 1 (automated):** `MODEL_EVALUATED → AUTO_MATCH_CREATED`, correct order, correct actor types.
+- **CASE 2 (human review, both directions):** approved case —
+  `MODEL_EVALUATED → REVIEW_TASK_CREATED → REVIEW_APPROVED`, spanning a
+  real one-day gap between review creation and human action, correctly
+  ordered; invariant payload confirmed
+  `model_decision_preserved=NEEDS_REVIEW`,
+  `model_calibrated_probability=0.8226` (untouched by the approval).
+  Rejected case verified identically:
+  `model_decision_preserved=NEEDS_REVIEW`,
+  `model_calibrated_probability=0.7106` (untouched by the rejection).
+- **CASE 3 (exception):** `MODEL_EVALUATED → EXCEPTION_CREATED`, correct
+  order, real `category` payload.
+- All four decision/batch pages confirmed rendering at HTTP 200 through
+  the actual running Next.js server, with CORS confirmed for the new
+  `/decisions/{id}/audit` endpoint.
+
+**Tests:** 100/100 frontend (13 new: event categorization/summarization
+from real payload fields, state-transition honest-nulling, invariant
+banner shown/not-shown correctly, technical details hidden by default,
+timeline ordering and empty state). Backend: 100 passed, 7 skipped (6 new:
+3 pure endpoint tests plus the regression test that specifically proves
+the review-merge gap is fixed, 1 of which skips on the tiny deterministic
+fixture and is covered instead by the real verification above).
+
+**Remaining limitations:** the batch-level timeline's noise-reduction
+(collapsing `CANDIDATE_PROCESSING_FAILED`) has only been verified against
+a batch with zero such failures — the real populated batch never
+generated one, so the "avoid dumping every candidate-level event" behavior
+is implemented and unit-testable but not demonstrated at real volume.
+No database-level immutability enforcement exists (append-only is
+enforced by the application's code surface only, stated honestly above,
+not oversold).
 
 ## Phase 6.6 — Exception Intelligence
 

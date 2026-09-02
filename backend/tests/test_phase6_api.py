@@ -231,3 +231,91 @@ def test_exception_not_found_returns_404(db):
     resp = client.get("/exceptions/EXC-doesnotexist")
     assert resp.status_code == 404
     app.dependency_overrides.clear()
+
+
+def test_decision_audit_includes_model_events_for_auto_matched_decision(db):
+    """CASE 1 — automated decision, no human review involved."""
+    b1 = _real_batch(db)
+    from backend.app.models.decision import ReconciliationDecision
+    d = db.query(ReconciliationDecision).filter(
+        ReconciliationDecision.decision == "HIGH_CONFIDENCE_MATCH"
+    ).first()
+    if d is None:
+        pytest.skip("no auto-matched decision in this deterministic fixture")
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get(f"/decisions/{d.id}/audit")
+    assert resp.status_code == 200
+    event_types = [e["event_type"] for e in resp.json()["events"]]
+    assert "MODEL_EVALUATED" in event_types
+    assert "AUTO_MATCH_CREATED" in event_types
+    app.dependency_overrides.clear()
+
+
+def test_decision_audit_merges_review_events_a_real_gap_this_phase_fixed(db):
+    """CASE 2 — human review. Regression test for the real gap found during
+    inspection: REVIEW_APPROVED/REJECTED events are persisted under
+    entity_type=REVIEW keyed by review.id, a DIFFERENT id than the decision
+    they belong to — the generic /audit/DECISION/{id} endpoint alone would
+    never surface them. This endpoint must merge both namespaces."""
+    b1 = _real_batch(db)
+    from backend.app.models.review import ReviewTask
+    review = db.query(ReviewTask).first()
+    if review is None:
+        pytest.skip("no NEEDS_REVIEW case in this deterministic fixture")
+
+    from backend.app.review_actions import approve_review
+    approve_review(db, review.id, reviewer_id="priya_reviewer")
+
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get(f"/decisions/{review.decision_id}/audit")
+    assert resp.status_code == 200
+    events = resp.json()["events"]
+    event_types = [e["event_type"] for e in events]
+
+    assert "MODEL_EVALUATED" in event_types
+    assert "REVIEW_TASK_CREATED" in event_types
+    assert "REVIEW_APPROVED" in event_types, (
+        "REGRESSION: the review outcome is missing from the decision's audit "
+        "trail — this is exactly the gap Phase 6.7 was built to fix"
+    )
+
+    # chronological order: model evaluation must precede the review approval
+    model_idx = event_types.index("MODEL_EVALUATED")
+    approval_idx = event_types.index("REVIEW_APPROVED")
+    assert model_idx < approval_idx
+
+    # the invariant-preservation payload (already emitted by Phase 5) must
+    # be present and correct — not fabricated for this endpoint
+    approval_event = events[approval_idx]
+    assert approval_event["payload"]["model_decision_preserved"] == "NEEDS_REVIEW"
+    app.dependency_overrides.clear()
+
+
+def test_decision_audit_not_found_returns_404(db):
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp = client.get("/decisions/DEC-doesnotexist/audit")
+    assert resp.status_code == 404
+    app.dependency_overrides.clear()
+
+
+def test_audit_trail_ordering_is_deterministic_with_id_tiebreak(db):
+    b1 = _real_batch(db)
+    from backend.app.models.decision import ReconciliationDecision
+    d = db.query(ReconciliationDecision).first()
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+    resp1 = client.get(f"/decisions/{d.id}/audit")
+    resp2 = client.get(f"/decisions/{d.id}/audit")
+    assert [e["event_id"] for e in resp1.json()["events"]] == [e["event_id"] for e in resp2.json()["events"]]
+    app.dependency_overrides.clear()

@@ -337,3 +337,26 @@ Verified against 24 real exceptions spanning 5 of 9 reachable root-cause
 categories, with two cases spot-checked in full against real feature
 values, including confirmation that the amount-precedence rule holds on
 real (not just synthetic test) data. Full details in docs/frontend.md.
+
+## Phase 6.7 — Immutable audit timeline and decision traceability (done)
+
+Real gap found and fixed during inspection: REVIEW_APPROVED/REJECTED
+events live under entity_type=REVIEW keyed by review.id, a different
+namespace than entity_type=DECISION events keyed by decision.id — the
+pre-existing generic audit endpoint alone would have silently omitted
+human review outcomes from a decision's timeline. Fixed with a server-side
+merge (`get_decision_audit_trail()`) exposed via new
+`GET /decisions/{id}/audit`. Also fixed non-deterministic ordering
+(added id as a secondary sort key alongside timestamp). Built the event
+presentation layer, event cards (with the Step 9 invariant-preservation
+banner rendered only when the real persisted payload fields support it),
+and a concise batch-level timeline that filters out per-candidate noise.
+100/100 frontend tests, 100/107 backend (7 skip on the tiny fixture,
+covered by real verification instead). Verified against live PostgreSQL
+across all three required cases (automated, human review in both
+directions, exception) — confirming the core trust demonstration end to
+end: a real approved case and a real rejected case both show the ML
+decision and calibrated probability completely untouched by the human
+action. Immutability is honestly documented as application-level
+append-only (single INSERT-only write function), not oversold as
+database-enforced or cryptographic. Full details in docs/frontend.md.

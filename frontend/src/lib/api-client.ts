@@ -132,6 +132,12 @@ export function getException(exceptionId: string): Promise<ExceptionDetail> {
 
 // ---------------- audit ----------------
 
+export function getDecisionAudit(
+  decisionId: string
+): Promise<{ decision_id: string; events: AuditEventItem[] }> {
+  return request(`/decisions/${decisionId}/audit`);
+}
+
 export function getAuditTrail(
   entityType: string,
   entityId: string

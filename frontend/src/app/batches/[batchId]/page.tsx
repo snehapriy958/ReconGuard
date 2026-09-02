@@ -2,12 +2,23 @@
 
 import Link from "next/link";
 import { use } from "react";
-import { getBatch } from "@/lib/api-client";
+import { getBatch, getAuditTrail } from "@/lib/api-client";
 import { useApi } from "@/lib/use-api";
 import { LoadingState, ErrorState } from "@/components/dashboard/states";
 import { BatchStatusBadge } from "@/components/dashboard/batch-status-badge";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { Card, CardContent } from "@/components/ui/card";
+import { AuditTimeline } from "@/components/decision/audit-timeline";
+
+// Concise operational summary, not a full event dump (spec Step 6): a
+// batch can have one CANDIDATE_PROCESSING_FAILED event per failed
+// candidate, which would make the batch history noisy at any real volume
+// — those are already surfaced as a count via summary.failed_candidates
+// above, so the batch-level timeline only shows true lifecycle events.
+const BATCH_LIFECYCLE_EVENT_TYPES = new Set([
+  "BATCH_CREATED", "PROCESSING_STARTED", "PROCESSING_FAILED",
+  "BATCH_COMPLETED", "DUPLICATE_SUBMISSION_DETECTED",
+]);
 
 export default function BatchDashboard({
   params,
@@ -16,6 +27,7 @@ export default function BatchDashboard({
 }) {
   const { batchId } = use(params);
   const state = useApi(() => getBatch(batchId), [batchId]);
+  const auditState = useApi(() => getAuditTrail("BATCH", batchId), [batchId]);
 
   return (
     <main className="mx-auto max-w-5xl p-8">
@@ -139,6 +151,16 @@ export default function BatchDashboard({
               No summary available yet — this batch hasn&apos;t finished
               processing.
             </p>
+          )}
+
+          {auditState.status === "success" && (
+            <div className="mt-6">
+              <AuditTimeline
+                events={auditState.data.events.filter((e) =>
+                  BATCH_LIFECYCLE_EVENT_TYPES.has(e.event_type)
+                )}
+              />
+            </div>
           )}
         </>
       )}

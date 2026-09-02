@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { use } from "react";
-import { getDecision, ApiError } from "@/lib/api-client";
+import { getDecision, getDecisionAudit, ApiError } from "@/lib/api-client";
 import { useApi } from "@/lib/use-api";
 import { LoadingState, ErrorState } from "@/components/dashboard/states";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,7 @@ import { EvidenceSummary } from "@/components/decision/evidence-summary";
 import { EvidenceBreakdown } from "@/components/decision/evidence-breakdown";
 import { RawRecordComparison, WhatChanged } from "@/components/decision/record-comparison";
 import { OperationalRiskCard } from "@/components/decision/operational-risk-card";
+import { AuditTimeline } from "@/components/decision/audit-timeline";
 
 export default function DecisionDetailPage({
   params,
@@ -20,6 +21,7 @@ export default function DecisionDetailPage({
 }) {
   const { decisionId } = use(params);
   const state = useApi(() => getDecision(decisionId), [decisionId]);
+  const auditState = useApi(() => getDecisionAudit(decisionId), [decisionId]);
 
   return (
     <main className="mx-auto max-w-3xl p-8">
@@ -116,6 +118,13 @@ export default function DecisionDetailPage({
             riskFlags={state.data.risk_flags}
             explanations={state.data.risk_flag_explanations}
           />
+
+          {/* SECTION G — audit timeline, scoped to THIS decision only */}
+          {auditState.status === "success" && <AuditTimeline events={auditState.data.events} />}
+          {auditState.status === "loading" && <LoadingState label="Loading audit timeline…" />}
+          {auditState.status === "error" && (
+            <ErrorState error={auditState.error} onRetry={auditState.refetch} />
+          )}
         </div>
       )}
     </main>
