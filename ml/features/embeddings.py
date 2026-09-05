@@ -22,6 +22,7 @@ import hashlib
 import json
 from pathlib import Path
 from typing import Optional
+import zipfile
 
 import numpy as np
 
@@ -112,10 +113,19 @@ class EmbeddingCache:
         return hashlib.sha256(raw.encode()).hexdigest()
 
     def _load_disk(self):
-        if self._path.exists():
+        if not self._path.exists():
+            return
+
+        try:
             data = np.load(self._path, allow_pickle=False)
             for k in data.files:
                 self._mem[k] = data[k]
+        except (OSError, ValueError, zipfile.BadZipFile):
+            # Recover from an interrupted/corrupted cache write.
+            try:
+                self._path.unlink()
+            except OSError:
+                pass
 
     def get(self, text: str) -> Optional[np.ndarray]:
         return self._mem.get(self._key(text))
@@ -124,7 +134,27 @@ class EmbeddingCache:
         self._mem[self._key(text)] = vec
 
     def flush(self):
-        np.savez_compressed(self._path, **self._mem)
+        import os
+        import tempfile
+
+        fd, tmp_name = tempfile.mkstemp(
+            dir=self.cache_dir,
+            prefix=f"{self._path.stem}.",
+            suffix=".tmp",
+        )
+
+        try:
+            with os.fdopen(fd, "wb") as f:
+                np.savez_compressed(f, **self._mem)
+                f.flush()
+                os.fsync(f.fileno())
+
+            os.replace(tmp_name, self._path)
+        finally:
+            try:
+                os.unlink(tmp_name)
+            except FileNotFoundError:
+                pass
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:

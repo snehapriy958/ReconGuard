@@ -327,11 +327,13 @@ def list_exceptions(category: Optional[str] = None, batch_id: Optional[str] = No
         # feature recomputation, but full observed/contributing detail is
         # reserved for the single-item detail endpoint below to keep the
         # list endpoint fast for larger exception counts).
-        primary_root_cause = None
-        if d is not None:
-            features, all_present, _ = _recompute_full_features(d, db)
-            analysis = analyze_exception(e.category, features, d.workflow_state, all_present)
-            primary_root_cause = analysis.primary_root_cause
+        primary_root_cause = {
+            "NO_CANDIDATE_FOUND": "NO_VIABLE_CANDIDATE",
+            "STRUCTURAL_AMBIGUITY": "STRUCTURAL_MATCH_FAILURE",
+            "HIGH_COMPETITION": "WEAK_MATCH_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE": "WEAK_MATCH_EVIDENCE",
+            "LOW_MATCH_CONFIDENCE": "MODEL_UNCERTAINTY",
+        }.get(e.category)
         result.append({
             "exception_id": e.id, "decision_id": e.decision_id, "category": e.category,
             "reason": e.reason, "created_at": e.created_at.isoformat(),

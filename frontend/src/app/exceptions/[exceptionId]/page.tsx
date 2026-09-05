@@ -72,6 +72,15 @@ export default function ExceptionDetailPage({
 
           <RootCauseCard analysis={excState.data.root_cause_analysis} />
 
+          {decisionId && (
+            <Link
+              href={`/decisions/${decisionId}`}
+              className="inline-flex items-center text-sm font-medium text-slate-700 hover:text-slate-950"
+            >
+              View decision &amp; audit →
+            </Link>
+          )}
+
           {decisionState.status === "loading" && <LoadingState label="Loading related records…" />}
           {decisionState.status === "success" && (
             <>
