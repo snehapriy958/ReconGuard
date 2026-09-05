@@ -26,7 +26,7 @@ from backend.app.workflow.risk import risk_explanation
 from backend.app.workflow.exception_intelligence import analyze_exception
 from ml.features.group_extractor import CandidateGroup, extract_group_features
 
-app = FastAPI(title="ReconLens API", version="phase5")
+app = FastAPI(title="ReconGuard API", version="1.0.0")
 logger = logging.getLogger("reconlens")
 
 # Frontend (Next.js dev server, typically :3000) calls this API cross-origin.
@@ -50,6 +50,13 @@ def _startup():
     # Failures" for how this was discovered (a 68-75s decision-detail load).
     from ml.features.embeddings import get_shared_backend
     get_shared_backend()
+
+
+# ---------------- health ----------------
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 # ---------------- schemas ----------------
@@ -254,11 +261,18 @@ def _review_to_dict(r: ReviewTask) -> dict:
 
 
 @app.get("/reviews")
-def list_reviews(status: Optional[str] = None, db: Session = Depends(get_db)):
+def list_reviews(status: Optional[str] = None, batch_id: Optional[str] = None, db: Session = Depends(get_db)):
     q = db.query(ReviewTask)
     if status:
         q = q.filter(ReviewTask.status == status)
     reviews = q.all()
+    # Filtered in Python, not SQL: ReviewTask has no batch_id column of its
+    # own (batch context only exists via the decision relationship), and
+    # review volume at this project's scale doesn't justify a join just for
+    # this filter — same reasoning already applied to _review_to_dict's
+    # other decision-derived fields.
+    if batch_id:
+        reviews = [r for r in reviews if r.decision and r.decision.batch_id == batch_id]
     return {"reviews": [_review_to_dict(r) for r in reviews]}
 
 
@@ -299,11 +313,13 @@ def reject(review_id: str, payload: ReviewActionIn, db: Session = Depends(get_db
 # ---------------- exceptions ----------------
 
 @app.get("/exceptions")
-def list_exceptions(category: Optional[str] = None, db: Session = Depends(get_db)):
+def list_exceptions(category: Optional[str] = None, batch_id: Optional[str] = None, db: Session = Depends(get_db)):
     q = db.query(ExceptionRecord)
     if category:
         q = q.filter(ExceptionRecord.category == category)
     exceptions = q.all()
+    if batch_id:
+        exceptions = [e for e in exceptions if e.decision and e.decision.batch_id == batch_id]
     result = []
     for e in exceptions:
         d = e.decision

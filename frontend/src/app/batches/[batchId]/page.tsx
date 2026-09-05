@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { use } from "react";
-import { getBatch, getAuditTrail } from "@/lib/api-client";
+import { getBatch, getAuditTrail, getBatchDecisions, listExceptions } from "@/lib/api-client";
 import { useApi } from "@/lib/use-api";
 import { LoadingState, ErrorState } from "@/components/dashboard/states";
 import { BatchStatusBadge } from "@/components/dashboard/batch-status-badge";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { AuditTimeline } from "@/components/decision/audit-timeline";
+import { OutcomeDistributionChart } from "@/components/dashboard/charts/outcome-distribution-chart";
+import { ConfidenceDistributionChart } from "@/components/dashboard/charts/confidence-distribution-chart";
+import { RootCauseDistributionChart } from "@/components/dashboard/charts/root-cause-distribution-chart";
 
 // Concise operational summary, not a full event dump (spec Step 6): a
 // batch can have one CANDIDATE_PROCESSING_FAILED event per failed
@@ -28,6 +31,8 @@ export default function BatchDashboard({
   const { batchId } = use(params);
   const state = useApi(() => getBatch(batchId), [batchId]);
   const auditState = useApi(() => getAuditTrail("BATCH", batchId), [batchId]);
+  const decisionsState = useApi(() => getBatchDecisions(batchId), [batchId]);
+  const exceptionsState = useApi(() => listExceptions(undefined, batchId), [batchId]);
 
   return (
     <main className="mx-auto max-w-5xl p-8">
@@ -126,6 +131,20 @@ export default function BatchDashboard({
                     tone="warning"
                   />
                 </div>
+              </section>
+
+              <section className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <OutcomeDistributionChart summary={state.data.summary} />
+                {decisionsState.status === "success" && (
+                  <ConfidenceDistributionChart
+                    decisions={decisionsState.data.decisions}
+                  />
+                )}
+                {exceptionsState.status === "success" && (
+                  <RootCauseDistributionChart
+                    exceptions={exceptionsState.data.exceptions}
+                  />
+                )}
               </section>
 
               {state.data.summary.failed_candidates > 0 && (

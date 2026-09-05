@@ -28,7 +28,7 @@ export default function BatchDecisionsPage({
         Decisions for {batchId}
       </h1>
       <p className="mb-6 text-sm text-slate-500">
-        What ReconLens decided for each reconciliation candidate, and why it
+        What ReconGuard decided for each reconciliation candidate, and why it
         should (or shouldn&apos;t) be trusted at face value.
       </p>
 

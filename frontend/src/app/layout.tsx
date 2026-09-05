@@ -11,7 +11,7 @@ import "./globals.css";
 // access it doesn't strictly need.
 
 export const metadata: Metadata = {
-  title: "ReconLens",
+  title: "ReconGuard",
   description: "AI-powered multi-source financial reconciliation",
 };
 

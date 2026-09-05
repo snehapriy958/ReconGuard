@@ -41,7 +41,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     // HTTP error status so the UI can show "can't reach the backend"
     // rather than a generic error.
     throw new ApiError(
-      `Could not reach the ReconLens API at ${API_BASE_URL}. Is the backend running?`,
+      `Could not reach the ReconGuard API at ${API_BASE_URL}. Is the backend running?`,
       0
     );
   }
@@ -85,10 +85,14 @@ export function getDecision(decisionId: string): Promise<DecisionDetail> {
 // ---------------- reviews ----------------
 
 export function listReviews(
-  status?: string
+  status?: string,
+  batchId?: string
 ): Promise<{ reviews: ReviewListItem[] }> {
-  const qs = status ? `?status=${encodeURIComponent(status)}` : "";
-  return request(`/reviews${qs}`);
+  const params = new URLSearchParams();
+  if (status) params.set("status", status);
+  if (batchId) params.set("batch_id", batchId);
+  const qs = params.toString();
+  return request(`/reviews${qs ? `?${qs}` : ""}`);
 }
 
 export function getReview(reviewId: string): Promise<ReviewDetail> {
@@ -120,10 +124,14 @@ export function rejectReview(
 // ---------------- exceptions ----------------
 
 export function listExceptions(
-  category?: string
+  category?: string,
+  batchId?: string
 ): Promise<{ exceptions: ExceptionListItem[] }> {
-  const qs = category ? `?category=${encodeURIComponent(category)}` : "";
-  return request(`/exceptions${qs}`);
+  const params = new URLSearchParams();
+  if (category) params.set("category", category);
+  if (batchId) params.set("batch_id", batchId);
+  const qs = params.toString();
+  return request(`/exceptions${qs ? `?${qs}` : ""}`);
 }
 
 export function getException(exceptionId: string): Promise<ExceptionDetail> {

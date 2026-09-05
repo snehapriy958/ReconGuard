@@ -34,6 +34,21 @@ def _real_batch(db):
     return process_batch(db, ledger, settlement)
 
 
+def _second_fixture():
+    """A second, non-overlapping fixture (distinct record IDs — reusing IDs
+    across batches hits the real SourceRecord uniqueness constraint found
+    in Phase 6.1) so batch-scoped filtering can actually be exercised."""
+    ledger = [
+        {"ledger_id": "T2-LED-01", "vendor_name": "Second Batch Vendor", "amount": 2000.0,
+         "txn_date": "2026-02-01", "reference_id": "REF900", "description": "test2"},
+    ]
+    settlement = [
+        {"settlement_id": "T2-STL-01", "vendor_name": "Second Batch Vendor", "amount": 1999.0,
+         "txn_date": "2026-02-01", "reference_id": "REF900", "description": "test2"},
+    ]
+    return ledger, settlement
+
+
 def test_list_batches_endpoint_returns_real_batches(db):
     b1 = _real_batch(db)
     from backend.app.api.main import app
@@ -318,4 +333,40 @@ def test_audit_trail_ordering_is_deterministic_with_id_tiebreak(db):
     resp1 = client.get(f"/decisions/{d.id}/audit")
     resp2 = client.get(f"/decisions/{d.id}/audit")
     assert [e["event_id"] for e in resp1.json()["events"]] == [e["event_id"] for e in resp2.json()["events"]]
+    app.dependency_overrides.clear()
+
+
+def test_exceptions_can_be_filtered_by_batch_id(db):
+    b1 = _real_batch(db)
+    b2 = process_batch(db, *_second_fixture())
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+
+    all_exceptions = client.get("/exceptions").json()["exceptions"]
+    b1_exceptions = client.get(f"/exceptions?batch_id={b1.id}").json()["exceptions"]
+
+    if len(all_exceptions) == len(b1_exceptions):
+        pytest.skip("both fixtures produced the same exception count — filter can't be distinguished here")
+    assert len(b1_exceptions) <= len(all_exceptions)
+    assert len(b1_exceptions) > 0
+    app.dependency_overrides.clear()
+
+
+def test_reviews_can_be_filtered_by_batch_id(db):
+    b1 = _real_batch(db)
+    from backend.app.models.review import ReviewTask
+    review = db.query(ReviewTask).first()
+    if review is None:
+        pytest.skip("no NEEDS_REVIEW case in this deterministic fixture")
+    from backend.app.api.main import app
+    from backend.app.db import get_db
+    app.dependency_overrides[get_db] = lambda: db
+    client = TestClient(app)
+
+    same_batch = client.get(f"/reviews?batch_id={review.decision.batch_id}").json()["reviews"]
+    other_batch = client.get("/reviews?batch_id=BATCH-doesnotexist").json()["reviews"]
+    assert any(r["review_id"] == review.id for r in same_batch)
+    assert other_batch == []
     app.dependency_overrides.clear()

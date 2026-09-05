@@ -85,7 +85,7 @@ describe("ReviewActions", () => {
   });
 
   it("shows a network-failure message distinct from a backend rejection", async () => {
-    vi.mocked(approveReview).mockRejectedValue(new ApiError("Could not reach the ReconLens API", 0));
+    vi.mocked(approveReview).mockRejectedValue(new ApiError("Could not reach the ReconGuard API", 0));
     render(<ReviewActions reviewId="REV-1" status="OPEN" onResolved={vi.fn()} />);
     fireEvent.change(screen.getByPlaceholderText("e.g. priya"), { target: { value: "priya" } });
     fireEvent.click(screen.getByRole("button", { name: "Approve" }));
