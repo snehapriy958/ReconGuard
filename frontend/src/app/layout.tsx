@@ -10,15 +10,19 @@ import "./globals.css";
 // docs/architecture.md Phase 2 notes): don't make a demo depend on network
 // access it doesn't strictly need.
 
+import { AppShell } from "@/components/layout/app-shell";
+
 export const metadata: Metadata = {
   title: "ReconGuard",
   description: "AI-powered multi-source financial reconciliation",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <AppShell>{children}</AppShell>
+      </body>
     </html>
   );
 }

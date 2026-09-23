@@ -1,0 +1,70 @@
+import {
+  LayoutDashboard,
+  Layers,
+  ClipboardCheck,
+  AlertTriangle,
+  type LucideIcon,
+} from "lucide-react";
+
+export interface NavItem {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+  description: string;
+}
+
+export const NAV_ITEMS: NavItem[] = [
+  {
+    name: "Dashboard",
+    href: "/",
+    icon: LayoutDashboard,
+    description: "System overview and batch activity",
+  },
+  {
+    name: "Batches",
+    href: "/batches",
+    icon: Layers,
+    description: "Reconciliation runs and decision records",
+  },
+  {
+    name: "Reviews",
+    href: "/reviews",
+    icon: ClipboardCheck,
+    description: "Human review queue and approvals",
+  },
+  {
+    name: "Exceptions",
+    href: "/exceptions",
+    icon: AlertTriangle,
+    description: "Root-cause intelligence for unresolved items",
+  },
+];
+
+/**
+ * Determines whether a navigation item is currently active.
+ *
+ * Rules:
+ * - "/" (Dashboard) is active only on exact root "/".
+ * - "/batches" is active on "/batches", any nested "/batches/*", or "/decisions/*" (since decisions belong to batches).
+ * - "/reviews" is active on "/reviews" and any nested "/reviews/*".
+ * - "/exceptions" is active on "/exceptions" and any nested "/exceptions/*".
+ */
+export function isNavItemActive(href: string, pathname: string): boolean {
+  if (href === "/") {
+    return pathname === "/";
+  }
+  if (href === "/batches") {
+    return (
+      pathname === "/batches" ||
+      pathname.startsWith("/batches/") ||
+      pathname.startsWith("/decisions")
+    );
+  }
+  if (href === "/reviews") {
+    return pathname === "/reviews" || pathname.startsWith("/reviews/");
+  }
+  if (href === "/exceptions") {
+    return pathname === "/exceptions" || pathname.startsWith("/exceptions/");
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
