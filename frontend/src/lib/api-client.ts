@@ -18,6 +18,7 @@ import type {
   AuditEventItem,
   ModelEvaluationResponse,
   DemoDatasetsResponse,
+  ReconciliationStatementResponse,
 } from "./api-types";
 
 const API_BASE_URL =
@@ -213,4 +214,19 @@ export function getDemoDatasetFileUrl(
   fileType: "ledger" | "settlement"
 ): string {
   return `${API_BASE_URL}/demo-datasets/${encodeURIComponent(datasetId)}/files/${fileType}`;
+}
+
+// ---------------- exports & close package ----------------
+
+export function getBatchExportUrl(
+  batchId: string,
+  type: "matched" | "exceptions"
+): string {
+  return `${API_BASE_URL}/batches/${encodeURIComponent(batchId)}/export/${type}`;
+}
+
+export function getReconciliationStatement(
+  batchId: string
+): Promise<ReconciliationStatementResponse> {
+  return request(`/batches/${encodeURIComponent(batchId)}/export/statement`);
 }

@@ -31,6 +31,9 @@ not a deployed multi-tenant service. There is no authentication layer.
 | GET | `/demo-datasets` | List curated demonstration reconciliation scenarios with record counts and tags |
 | POST | `/demo-datasets/{dataset_id}/process` | Execute a curated demonstration scenario directly through the reconciliation pipeline |
 | GET | `/demo-datasets/{dataset_id}/files/{file_type}` | Inspect or download the raw CSV (`ledger` or `settlement`) for a demonstration scenario |
+| GET | `/batches/{batch_id}/export/matched` | Export reconciled matched pairs (auto-matched and approved) as CSV |
+| GET | `/batches/{batch_id}/export/exceptions` | Export unresolved exception records with primary root-cause taxonomy as CSV |
+| GET | `/batches/{batch_id}/export/statement` | Export reconciliation closing statement with application-verified financial invariants as JSON |
 
 ### Request/response notes
 
@@ -192,6 +195,36 @@ namespace.
   - Raw model Brier score: 0.00355 $\to$ Calibrated Brier score: 0.00714.
   - Methodology note explains the rationale: isotonic calibration collapsed to a step-function on extreme validation predictions, whereas sigmoid scaling preserved continuous, well-ordered probabilities necessary for granular three-way threshold routing (`LIKELY_NO_MATCH` < 0.50, `NEEDS_REVIEW` 0.50–0.85, `HIGH_CONFIDENCE_MATCH` $\ge$ 0.85).
 - **Governance Notes:** Explicit operational caveats regarding held-out candidate distribution, zero false positives at default thresholds, and human review routing for borderline cases.
+
+## Reconciliation Export & Financial Close Package
+
+The export package provides read-only extraction and application-level financial invariant verification for completed reconciliation runs (`backend/app/export.py`):
+
+1. **Reconciled Matched Export (`GET /batches/{batch_id}/export/matched`)**:
+   - Media Type: `text/csv` with `Content-Disposition: attachment; filename="reconguard_{batch_id}_matched.csv"`.
+   - Columns: `ledger_id`, `settlement_id`, `relationship_type`, `amount`, `vendor_name`, `calibrated_probability`, `workflow_state`.
+   - Inclusions: `HIGH_CONFIDENCE_MATCH` decisions and reviewer-approved decisions (`APPROVED`, `APPROVED_BY_REVIEWER`).
+   - Exclusions: Rejected decisions (`REJECTED`) and pending review decisions.
+   - Structural Integrity: 1:N and N:1 grouped records join multiple IDs with pipe delimiters (`|`) without amount duplication. Persisted calibrated probabilities are preserved without re-inference.
+
+2. **Unresolved Exceptions Export (`GET /batches/{batch_id}/export/exceptions`)**:
+   - Media Type: `text/csv` with `Content-Disposition: attachment; filename="reconguard_{batch_id}_exceptions.csv"`.
+   - Columns: `exception_id`, `decision_id`, `record_ids`, `category`, `primary_root_cause`, `reason`.
+   - Taxonomy: Coarse categories are mapped to standardized root-cause taxonomy (e.g., `NO_CANDIDATE_FOUND` $\to$ `NO_VIABLE_CANDIDATE`, `STRUCTURAL_AMBIGUITY` $\to$ `STRUCTURAL_MATCH_FAILURE`, `HIGH_COMPETITION` $\to$ `WEAK_MATCH_EVIDENCE`, `LOW_MATCH_CONFIDENCE` $\to$ `MODEL_UNCERTAINTY`).
+
+3. **Reconciliation Closing Statement (`GET /batches/{batch_id}/export/statement`)**:
+   - Media Type: `application/json`.
+   - Reuses Phase 3 financial summary as the single source of truth:
+     - `ledger`: `total_amount`, `matched_amount`, `review_amount`, `exception_amount`, `matched_rate`, `review_rate`, `exception_rate`.
+     - `settlement`: `total_amount`, `matched_amount`, `review_amount`, `exception_amount`, `matched_rate`, `review_rate`, `exception_rate`.
+     - `invariants`: `ledger_amount_conservation`, `settlement_amount_conservation`, `ledger_rate_unity`, `settlement_rate_unity`, `all_invariants_hold`.
+     - `summary`: counts of high-confidence matches, reviews, exceptions, and structural matches.
+   - *Application-level verification note*: "Financial invariants verified" refers strictly to ReconGuard's programmatic validation of its defined mathematical conservation rules ($|\Delta| < \$0.01$), NOT an external accounting, audit, regulatory, or professional certification.
+
+Constraints & Safety:
+- Returns `404 Not Found` if the batch ID does not exist.
+- Returns `400 Bad Request` if the batch status is not `COMPLETED`.
+- Strictly read-only: no database writes, no new batch rows, and no audit event emissions.
 
 ## No LLM agents, no chatbot layer
 

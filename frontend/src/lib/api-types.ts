@@ -339,3 +339,43 @@ export interface DemoDatasetItem {
 export interface DemoDatasetsResponse {
   datasets: DemoDatasetItem[];
 }
+
+// ---------------- close package & export ----------------
+
+export interface ReconciliationStatementFinancials {
+  total_amount: number;
+  matched_amount: number;
+  review_amount: number;
+  exception_amount: number;
+  matched_rate: number;
+  review_rate: number;
+  exception_rate: number;
+}
+
+export interface ReconciliationStatementInvariants {
+  ledger_amount_conservation: boolean;
+  settlement_amount_conservation: boolean;
+  ledger_rate_unity: boolean;
+  settlement_rate_unity: boolean;
+  all_invariants_hold: boolean;
+}
+
+export interface ReconciliationStatementSummary {
+  high_confidence_matches: number;
+  needs_review: number;
+  exceptions: number;
+  structural_matches: number;
+}
+
+export interface ReconciliationStatementResponse {
+  batch_id: string;
+  status: BatchStatus;
+  created_at: string | null;
+  completed_at: string | null;
+  ledger_record_count: number;
+  settlement_record_count: number;
+  ledger: ReconciliationStatementFinancials;
+  settlement: ReconciliationStatementFinancials;
+  invariants: ReconciliationStatementInvariants;
+  summary: ReconciliationStatementSummary;
+}

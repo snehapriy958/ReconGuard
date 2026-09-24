@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { use } from "react";
+import { use, useState } from "react";
+import { Download } from "lucide-react";
 import {
   getBatch,
   getAuditTrail,
@@ -18,6 +19,7 @@ import { OutcomeDistributionChart } from "@/components/dashboard/charts/outcome-
 import { ConfidenceDistributionChart } from "@/components/dashboard/charts/confidence-distribution-chart";
 import { RootCauseDistributionChart } from "@/components/dashboard/charts/root-cause-distribution-chart";
 import { FinancialSummarySection } from "@/components/dashboard/financial-summary-section";
+import { ExportDialog } from "@/components/dashboard/export-dialog";
 
 const BATCH_LIFECYCLE_EVENT_TYPES = new Set([
   "BATCH_CREATED",
@@ -33,6 +35,7 @@ export default function BatchDashboard({
   params: Promise<{ batchId: string }>;
 }) {
   const { batchId } = use(params);
+  const [isExportOpen, setIsExportOpen] = useState(false);
 
   const state = useApi(() => getBatch(batchId), [batchId]);
 
@@ -100,15 +103,25 @@ export default function BatchDashboard({
                 </div>
 
                 {state.data.status === "COMPLETED" && (
-                  <Link
-                    href={`/batches/${state.data.batch_id}/decisions`}
-                    className="inline-flex shrink-0 items-center justify-center rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
-                  >
-                    Review decisions
-                    <span className="ml-2" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setIsExportOpen(true)}
+                      className="inline-flex shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-slate-900"
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      Export Results
+                    </button>
+                    <Link
+                      href={`/batches/${state.data.batch_id}/decisions`}
+                      className="inline-flex shrink-0 items-center justify-center rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+                    >
+                      Review decisions
+                      <span className="ml-2" aria-hidden="true">
+                        →
+                      </span>
+                    </Link>
+                  </div>
                 )}
               </div>
             </header>
@@ -339,6 +352,12 @@ export default function BatchDashboard({
                 />
               </section>
             )}
+
+            <ExportDialog
+              isOpen={isExportOpen}
+              onClose={() => setIsExportOpen(false)}
+              batchId={state.data.batch_id}
+            />
           </>
         )}
       </div>

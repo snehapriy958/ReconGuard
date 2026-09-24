@@ -8,7 +8,7 @@ import logging
 
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 
@@ -20,6 +20,13 @@ from backend.app.demo_datasets import (
     get_demo_dataset_file_path,
 )
 from backend.app.model_evaluation import get_model_evaluation_data
+from backend.app.export import (
+    generate_matched_export_csv,
+    generate_exceptions_export_csv,
+    generate_reconciliation_statement,
+    BatchNotFoundError,
+    BatchNotCompletedError,
+)
 
 from backend.app.db import get_db, init_db
 from backend.app.pipeline import process_batch
@@ -483,3 +490,48 @@ def download_demo_dataset_file(dataset_id: str, file_type: str):
         )
     except (KeyError, ValueError, FileNotFoundError):
         raise HTTPException(status_code=404, detail="Requested file not found")
+
+
+# ---------------- export & close package ----------------
+
+@app.get("/batches/{batch_id}/export/matched")
+def export_matched_reconciliation(batch_id: str, db: Session = Depends(get_db)):
+    """Export reconciled matched pairs (auto-matched and approved) as CSV."""
+    try:
+        csv_text = generate_matched_export_csv(db, batch_id)
+        return Response(
+            content=csv_text,
+            media_type="text/csv",
+            headers={"Content-Disposition": f'attachment; filename="reconguard_{batch_id}_matched.csv"'},
+        )
+    except BatchNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except BatchNotCompletedError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/batches/{batch_id}/export/exceptions")
+def export_exceptions(batch_id: str, db: Session = Depends(get_db)):
+    """Export unresolved exception records as CSV."""
+    try:
+        csv_text = generate_exceptions_export_csv(db, batch_id)
+        return Response(
+            content=csv_text,
+            media_type="text/csv",
+            headers={"Content-Disposition": f'attachment; filename="reconguard_{batch_id}_exceptions.csv"'},
+        )
+    except BatchNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except BatchNotCompletedError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/batches/{batch_id}/export/statement")
+def export_statement(batch_id: str, db: Session = Depends(get_db)):
+    """Export reconciliation closing statement and verified financial invariants as JSON."""
+    try:
+        return generate_reconciliation_statement(db, batch_id)
+    except BatchNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except BatchNotCompletedError as e:
+        raise HTTPException(status_code=400, detail=str(e))
