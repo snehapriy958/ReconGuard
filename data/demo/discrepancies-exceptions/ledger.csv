@@ -1,0 +1,21 @@
+ledger_id,vendor_name,amount,txn_date,reference_id,description
+EXC-LED-001,Tata Consultancy Services,50000.00,2026-03-01,RZP3001,Invoice 3001 payment
+EXC-LED-002,Wipro Limited,12000.00,2026-03-02,RZP3002,Invoice 3002
+EXC-LED-003,Infosys Limited,18500.00,2026-03-01,RZP3003,Invoice 3003
+EXC-LED-004,HDFC Bank Limited,22000.00,2026-03-02,RZP3004,Invoice 3004
+EXC-LED-005,Reliance Industries Limited,35000.00,2026-03-05,RZP3005,Enterprise payout RZP3005
+EXC-LED-006,Bharti Airtel Limited,73421.50,2026-03-08,RZP3006,Pending settlement payout RZP3006
+EXC-LED-007,Larsen & Toubro Limited,91230.00,2026-03-08,RZP3007,Pending settlement payout RZP3007
+EXC-LED-008,Mahindra & Mahindra Limited,46800.00,2026-03-08,RZP3008,Pending settlement payout RZP3008
+EXC-LED-009,Zomato Limited,15400.00,2026-03-08,RZP3009,Pending settlement payout RZP3009
+EXC-LED-010,Nykaa E-Retail Private Limited,28900.00,2026-03-08,RZP3010,Pending settlement payout RZP3010
+EXC-LED-011,Swiggy Bundl Technologies Private Limited,50000.00,2026-03-12,RZP3011,Commercial invoice RZP3011
+EXC-LED-012,Flipkart Internet Private Limited,84000.00,2026-03-12,RZP3012,Commercial invoice RZP3012
+EXC-LED-013,BigBasket Innovative Retail Concepts,36000.00,2026-03-12,RZP3013,Commercial invoice RZP3013
+EXC-LED-014,PhonePe Private Limited,62000.00,2026-03-12,RZP3014,Commercial invoice RZP3014
+EXC-LED-015,Ola Cabs Private Limited,28000.00,2026-03-12,RZP3015,Commercial invoice RZP3015
+EXC-LED-016,Urban Company Technologies Private Limited,14500.00,2026-03-16,RZP3016,Payment RZP3016
+EXC-LED-017,Cred Dreamplug Technologies Private Limited,23000.00,2026-03-16,RZP3017,Payment RZP3017
+EXC-LED-018,Meesho Fashnear Technologies,19200.00,2026-03-16,RZP3018,Payment RZP3018
+EXC-LED-019,ICICI Bank Limited,41000.00,2026-03-16,RZP3019,Payment RZP3019
+EXC-LED-020,Larsen & Toubro Limited,53000.00,2026-03-16,RZP3020,Payment RZP3020

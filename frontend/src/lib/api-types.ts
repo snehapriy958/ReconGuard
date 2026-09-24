@@ -324,3 +324,18 @@ export interface ModelEvaluationResponse {
   calibration: CalibrationInfo;
   notes: string[];
 }
+
+// ---------------- demo datasets ----------------
+
+export interface DemoDatasetItem {
+  id: string;
+  name: string;
+  description: string;
+  ledger_record_count: number;
+  settlement_record_count: number;
+  tags: string[];
+}
+
+export interface DemoDatasetsResponse {
+  datasets: DemoDatasetItem[];
+}

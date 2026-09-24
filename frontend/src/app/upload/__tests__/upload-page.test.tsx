@@ -26,6 +26,9 @@ vi.mock("@/lib/api-client", () => {
   return {
     uploadBatch: vi.fn(),
     ApiError: MockApiError,
+    getDemoDatasets: vi.fn().mockResolvedValue({ datasets: [] }),
+    processDemoDataset: vi.fn().mockResolvedValue({ batch_id: "batch-demo-1", status: "COMPLETED", summary: null }),
+    getDemoDatasetFileUrl: vi.fn((id: string, type: string) => `http://localhost:8000/demo-datasets/${id}/files/${type}`),
   };
 });
 

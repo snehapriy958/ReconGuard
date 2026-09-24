@@ -28,6 +28,9 @@ not a deployed multi-tenant service. There is no authentication layer.
 | GET | `/exceptions/{exception_id}` | Exception detail: original immutable facts plus a full derived root-cause analysis (observed evidence, interpretation, contributing factors, investigation guidance) |
 | GET | `/audit/{entity_type}/{entity_id}` | Full ordered audit history for a batch, decision, or review |
 | GET | `/model/evaluation` | Offline model performance, calibration, and threshold policy evaluation on held-out test data |
+| GET | `/demo-datasets` | List curated demonstration reconciliation scenarios with record counts and tags |
+| POST | `/demo-datasets/{dataset_id}/process` | Execute a curated demonstration scenario directly through the reconciliation pipeline |
+| GET | `/demo-datasets/{dataset_id}/files/{file_type}` | Inspect or download the raw CSV (`ledger` or `settlement`) for a demonstration scenario |
 
 ### Request/response notes
 
@@ -63,6 +66,16 @@ not a deployed multi-tenant service. There is no authentication layer.
   (`root_cause_analysis.*`) — the two are never merged into one field.
 - Batch submission is idempotent by content hash: resubmitting an
   identical batch returns the existing batch and creates no new decisions.
+- `GET /demo-datasets` lists allowlisted scenario datasets (`clean-settlement`,
+  `structural-splits`, `discrepancies-exceptions`, `balanced-portfolio`) with
+  metadata, record counts, and behavioral tags.
+- `POST /demo-datasets/{dataset_id}/process` runs a demonstration scenario
+  through the EXACT existing `process_batch()` pipeline. Results are NOT faked
+  or hardcoded. Primary keys and record IDs (`CLN-`, `STR-`, `EXC-`, `BAL-`)
+  are strictly unique across datasets to eliminate database collisions.
+  Arbitrary filesystem path traversal attempts return `404 Not Found`.
+- `GET /demo-datasets/{dataset_id}/files/{file_type}` streams raw `ledger.csv`
+  or `settlement.csv` for inspection or local testing. Returns `text/csv`.
 
 ## Batch processing
 

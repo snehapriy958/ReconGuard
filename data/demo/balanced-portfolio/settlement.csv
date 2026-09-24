@@ -1,0 +1,46 @@
+settlement_id,vendor_name,amount,txn_date,reference_id,description
+BAL-STL-001,HDFC Bank Ltd,14200.00,2026-03-03,RZP4001,Standard settlement RZP4001
+BAL-STL-002,TCS,67000.00,2026-03-04,RZP4002,Standard settlement RZP4002
+BAL-STL-003,Infosys Ltd,45000.00,2026-03-05,RZP4003,Standard settlement RZP4003
+BAL-STL-004,Reliance Ind Ltd,185000.00,2026-03-06,RZP4004,Standard settlement RZP4004
+BAL-STL-005,ICICI Bank Ltd,38000.00,2026-03-07,RZP4005,Standard settlement RZP4005
+BAL-STL-006,Bharti Airtel Ltd,24000.00,2026-03-08,RZP4006,Standard settlement RZP4006
+BAL-STL-007,L&T Ltd,95000.00,2026-03-09,RZP4007,Standard settlement RZP4007
+BAL-STL-008,Wipro Ltd,31000.00,2026-03-10,RZP4008,Standard settlement RZP4008
+BAL-STL-009,M&M Ltd,54000.00,2026-03-11,RZP4009,Standard settlement RZP4009
+BAL-STL-010,Zomato Ltd,16800.00,2026-03-12,RZP4010,Standard settlement RZP4010
+BAL-STL-011,Swiggy Pvt Ltd,42000.00,2026-03-13,RZP4011,Standard settlement RZP4011
+BAL-STL-012,Nykaa Pvt Ltd,28500.00,2026-03-14,RZP4012,Standard settlement RZP4012
+BAL-STL-013,Flipkart Pvt Ltd,115000.00,2026-03-15,RZP4013,Standard settlement RZP4013
+BAL-STL-014,BigBasket Pvt Ltd,22000.00,2026-03-16,RZP4014,Standard settlement RZP4014
+BAL-STL-015,PhonePe Pvt Ltd,49000.00,2026-03-17,RZP4015,Standard settlement RZP4015
+BAL-STL-016,Ola Cabs Pvt Ltd,34500.00,2026-03-18,RZP4016,Standard settlement RZP4016
+BAL-STL-017,Urban Company Pvt Ltd,72000.00,2026-03-19,RZP4017,Standard settlement RZP4017
+BAL-STL-018,Cred Pvt Ltd,58000.00,2026-03-20,RZP4018,Standard settlement RZP4018
+BAL-STL-019,Meesho Pvt Ltd,39000.00,2026-03-21,RZP4019,Standard settlement RZP4019
+BAL-STL-020,Adani Ent Ltd,88000.00,2026-03-02,RZP4020,Standard settlement RZP4020
+BAL-STL-021,Tata Consult Services,52000.00,2026-03-03,RZP4021,Standard settlement RZP4021
+BAL-STL-022,INFY,61000.00,2026-03-04,RZP4022,Standard settlement RZP4022
+BAL-STL-023,HDFC Bk,29500.00,2026-03-05,RZP4023,Standard settlement RZP4023
+BAL-STL-024,WIPRO,44000.00,2026-03-06,RZP4024,Standard settlement RZP4024
+BAL-STL-025,RIL,132000.00,2026-03-07,RZP4025,Standard settlement RZP4025
+BAL-STL-026,ZOMATO,18900.00,2026-03-08,RZP4026,Standard settlement RZP4026
+BAL-STL-027,Swiggy Pvt Ltd,12000.00,2026-03-21,RZP4027,Payout part A
+BAL-STL-028,Swiggy Pvt Ltd,8000.00,2026-03-22,RZP4027,Payout part B
+BAL-STL-029,Nykaa Pvt Ltd,7500.00,2026-03-22,RZP4028,Settlement split line 1
+BAL-STL-030,Nykaa Pvt Ltd,7500.00,2026-03-23,RZP4028,Settlement split line 2
+BAL-STL-031,Zomato Ltd,12000.00,2026-03-25,,Merchant batch settlement covering 2 txns
+BAL-STL-032,BigBasket Pvt Ltd,20000.00,2026-03-26,,Merchant batch settlement covering 3 txns
+BAL-STL-033,Flipkart Pvt Ltd,47280.00,2026-03-27,RZP403,Settlement RZP403 net of gateway charge
+BAL-STL-034,Ola Cabs Pvt Ltd,19207.50,2026-03-27,RZP403,Settlement RZP403 net of gateway charge
+BAL-STL-035,Urban Company Pvt Ltd,31520.00,2026-03-27,RZP403,Settlement RZP403 net of gateway charge
+BAL-STL-036,Cred Pvt Ltd,40385.00,2026-03-27,RZP403,Settlement RZP403 net of gateway charge
+BAL-STL-037,Tata Consultancy Services,78000.00,2026-03-28,RZP4041,Bank statement line 37
+BAL-STL-038,Infosys Limited,45000.00,2026-03-28,,Bank statement line 38
+BAL-STL-039,HDFC Bank Limited,33000.00,2026-03-28,RZP4043,Bank statement line 39
+BAL-STL-040,Wipro Limited,51000.00,2026-03-28,RZP4044,Bank statement line 40
+BAL-STL-041,Reliance Industries Limited,110000.00,2026-03-28,,Bank statement line 41
+BAL-STL-042,Interchange Monthly Settlement Fee,1850.00,2026-03-29,,Direct bank charge without ledger entry
+BAL-STL-043,Chargeback Recovery Debit,9500.00,2026-03-29,,Direct bank charge without ledger entry
+BAL-STL-044,Card Scheme Maintenance Charge,3200.00,2026-03-29,,Direct bank charge without ledger entry
+BAL-STL-045,Merchant Payout Adjustment,4120.00,2026-03-29,,Direct bank charge without ledger entry

@@ -6,6 +6,7 @@ import { useApi } from "@/lib/use-api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingState, ErrorState, EmptyState } from "@/components/dashboard/states";
 import { BatchStatusBadge } from "@/components/dashboard/batch-status-badge";
+import { DemoScenarioSelector } from "@/components/upload/demo-scenario-selector";
 
 export default function Home() {
   const state = useApi(() => listBatches(), []);
@@ -40,14 +41,27 @@ export default function Home() {
         <ErrorState error={state.error} onRetry={state.refetch} />
       )}
       {state.status === "success" && state.data.batches.length === 0 && (
-        <EmptyState>
-          No batches have been processed yet.{" "}
-          <Link href="/upload" className="underline font-medium hover:text-slate-900">
-            Upload CSV files
-          </Link>{" "}
-          or submit via <code className="rounded bg-slate-100 px-1">POST /batches</code> to
-          see it here.
-        </EmptyState>
+        <div className="space-y-6">
+          <EmptyState>
+            No batches have been processed yet.{" "}
+            <Link href="/upload" className="underline font-medium hover:text-slate-900">
+              Upload CSV files
+            </Link>{" "}
+            or select a demonstration scenario below to run one immediately.
+          </EmptyState>
+
+          <div className="pt-2">
+            <div className="mb-4">
+              <h2 className="text-base font-semibold text-slate-900">
+                Or Quick-Start with a Demonstration Scenario
+              </h2>
+              <p className="text-xs text-slate-500">
+                Run a curated reconciliation batch without uploading your own CSV files.
+              </p>
+            </div>
+            <DemoScenarioSelector />
+          </div>
+        </div>
       )}
 
       {state.status === "success" && state.data.batches.length > 0 && (

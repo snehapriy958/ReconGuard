@@ -1,0 +1,21 @@
+settlement_id,vendor_name,amount,txn_date,reference_id,description
+EXC-STL-001,TCS Ltd,42000.00,2026-03-02,RZP3001,Settlement 3001 net of disputed retention
+EXC-STL-002,Wipro Ltd,10500.00,2026-03-03,RZP3002,Payout with disputed line deduction
+EXC-STL-003,Infosys Ltd,18500.00,2026-03-24,,Late bank deposit without reference
+EXC-STL-004,HDFC Bank Ltd,22000.00,2026-03-28,,Delayed reconciliation line without reference
+EXC-STL-005,Adani Enterprises Limited,35000.00,2026-03-06,RZP3005,Settlement line with mismatched counterparty
+EXC-STL-006,Payment Gateway Charges,1450.00,2026-03-15,,Bank fee debit without internal ledger posting
+EXC-STL-007,Chargeback Adjustment Reserve,8500.00,2026-03-15,,Bank fee debit without internal ledger posting
+EXC-STL-008,Bank Annual Regulatory Fee,2500.00,2026-03-15,,Bank fee debit without internal ledger posting
+EXC-STL-009,Interchange Fee Surcharge,680.50,2026-03-15,,Bank fee debit without internal ledger posting
+EXC-STL-010,Direct Tax Assessment Debit,11200.00,2026-03-15,,Bank fee debit without internal ledger posting
+EXC-STL-011,Bundl Technologies,49250.00,2026-03-14,RZP301,Settlement RZP301 net of MDR fee
+EXC-STL-012,Flipkart Internet Ltd,82740.00,2026-03-14,RZP301,Settlement RZP301 net of MDR fee
+EXC-STL-013,Innovative Retail Concepts,35460.00,2026-03-14,RZP301,Settlement RZP301 net of MDR fee
+EXC-STL-014,PhonePe Internet Pvt Ltd,61070.00,2026-03-14,RZP301,Settlement RZP301 net of MDR fee
+EXC-STL-015,ANI Technologies Ola,27580.00,2026-03-14,RZP301,Settlement RZP301 net of MDR fee
+EXC-STL-016,Urban Company Pvt Ltd,14500.00,2026-03-16,RZP3016,Settlement RZP3016
+EXC-STL-017,Cred Pvt Ltd,23000.00,2026-03-16,RZP3017,Settlement RZP3017
+EXC-STL-018,Meesho Pvt Ltd,19200.00,2026-03-16,RZP3018,Settlement RZP3018
+EXC-STL-019,ICICI Bank Ltd,41000.00,2026-03-16,RZP3019,Settlement RZP3019
+EXC-STL-020,L&T Ltd,53000.00,2026-03-16,RZP3020,Settlement RZP3020

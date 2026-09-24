@@ -1,0 +1,26 @@
+settlement_id,vendor_name,amount,txn_date,reference_id,description
+STR-STL-001,Swiggy Pvt Ltd,5000.00,2026-03-10,RZP2001,Disbursement part 1 RZP2001
+STR-STL-002,Swiggy Pvt Ltd,10000.00,2026-03-11,RZP2001,Disbursement part 2 RZP2001
+STR-STL-003,Nykaa Pvt Ltd,12000.00,2026-03-12,RZP2002,Settlement split A RZP2002
+STR-STL-004,Nykaa Pvt Ltd,12500.00,2026-03-13,RZP2002,Settlement split B RZP2002
+STR-STL-005,Urban Company Pvt Ltd,10000.00,2026-03-14,RZP2003,Split settlement line 1
+STR-STL-006,Urban Company Pvt Ltd,10000.00,2026-03-15,RZP2003,Split settlement line 2
+STR-STL-007,Urban Company Pvt Ltd,10000.00,2026-03-15,RZP2003,Split settlement line 3
+STR-STL-008,Zomato Ltd,20000.00,2026-03-17,,Merchant settlement batch covering 2 transactions
+STR-STL-009,BigBasket Pvt Ltd,10000.00,2026-03-19,,Merchant settlement batch covering 2 transactions
+STR-STL-010,Flipkart Pvt Ltd,45000.00,2026-03-22,,Merchant settlement batch covering 3 transactions
+STR-STL-011,TCS,42000.00,2026-03-22,RZP2011,Standard settlement RZP2011
+STR-STL-012,Infosys Ltd,38500.00,2026-03-11,RZP2012,Standard settlement RZP2012
+STR-STL-013,WIPRO,29000.00,2026-03-12,RZP2013,Standard settlement RZP2013
+STR-STL-014,HDFC Bank Ltd,51200.00,2026-03-13,RZP2014,Standard settlement RZP2014
+STR-STL-015,ICICI Bank Ltd,63000.00,2026-03-14,RZP2015,Standard settlement RZP2015
+STR-STL-016,Bharti Airtel Ltd,17400.00,2026-03-15,RZP2016,Standard settlement RZP2016
+STR-STL-017,L&T Ltd,84000.00,2026-03-16,RZP2017,Standard settlement RZP2017
+STR-STL-018,M&M Ltd,33500.00,2026-03-17,RZP2018,Standard settlement RZP2018
+STR-STL-019,Adani Ent Ltd,48000.00,2026-03-18,RZP2019,Standard settlement RZP2019
+STR-STL-020,PHONEPE,14500.00,2026-03-19,RZP2020,Standard settlement RZP2020
+STR-STL-021,Ola Cabs Pvt Ltd,22800.00,2026-03-20,RZP2021,Standard settlement RZP2021
+STR-STL-022,CRED,19500.00,2026-03-21,RZP2022,Standard settlement RZP2022
+STR-STL-023,MEESHO,31000.00,2026-03-22,RZP2023,Standard settlement RZP2023
+STR-STL-024,Reliance Ind Ltd,142000.00,2026-03-11,RZP2024,Standard settlement RZP2024
+STR-STL-025,SWIGGY,27000.00,2026-03-12,RZP2025,Standard settlement RZP2025

@@ -1,0 +1,21 @@
+ledger_id,vendor_name,amount,txn_date,reference_id,description
+CLN-LED-001,HDFC Bank Limited,12450.00,2026-03-01,RZP10001,Payment for invoice RZP10001
+CLN-LED-002,Tata Consultancy Services,34200.50,2026-03-02,RZP10002,Payment for invoice RZP10002
+CLN-LED-003,Infosys Limited,8900.00,2026-03-03,RZP10003,Payment for invoice RZP10003
+CLN-LED-004,Reliance Industries Limited,154200.00,2026-03-04,RZP10004,Payment for invoice RZP10004
+CLN-LED-005,ICICI Bank Limited,4560.75,2026-03-05,RZP10005,Payment for invoice RZP10005
+CLN-LED-006,Bharti Airtel Limited,67800.00,2026-03-01,RZP10006,Payment for invoice RZP10006
+CLN-LED-007,Larsen & Toubro Limited,92100.00,2026-03-02,RZP10007,Payment for invoice RZP10007
+CLN-LED-008,Wipro Limited,18500.25,2026-03-03,RZP10008,Payment for invoice RZP10008
+CLN-LED-009,Mahindra & Mahindra Limited,54300.00,2026-03-04,RZP10009,Payment for invoice RZP10009
+CLN-LED-010,Zomato Limited,12900.00,2026-03-05,RZP10010,Payment for invoice RZP10010
+CLN-LED-011,Swiggy Bundl Technologies Private Limited,78500.00,2026-03-01,RZP10011,Payment for invoice RZP10011
+CLN-LED-012,Nykaa E-Retail Private Limited,23400.00,2026-03-02,RZP10012,Payment for invoice RZP10012
+CLN-LED-013,Flipkart Internet Private Limited,112000.00,2026-03-03,RZP10013,Payment for invoice RZP10013
+CLN-LED-014,BigBasket Innovative Retail Concepts,19800.50,2026-03-04,RZP10014,Payment for invoice RZP10014
+CLN-LED-015,PhonePe Private Limited,43100.00,2026-03-05,RZP10015,Payment for invoice RZP10015
+CLN-LED-016,Ola Cabs Private Limited,31200.00,2026-03-01,RZP10016,Payment for invoice RZP10016
+CLN-LED-017,Urban Company Technologies Private Limited,87400.00,2026-03-02,RZP10017,Payment for invoice RZP10017
+CLN-LED-018,Cred Dreamplug Technologies Private Limited,65000.00,2026-03-03,RZP10018,Payment for invoice RZP10018
+CLN-LED-019,Meesho Fashnear Technologies,27900.00,2026-03-04,RZP10019,Payment for invoice RZP10019
+CLN-LED-020,Adani Enterprises Limited,98200.00,2026-03-05,RZP10020,Payment for invoice RZP10020

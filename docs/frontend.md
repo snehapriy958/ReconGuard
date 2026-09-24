@@ -727,3 +727,34 @@ The `/model-evaluation` route surfaces comprehensive offline model performance, 
   - Loading spinner via `LoadingState`.
   - Error alert with retry button via `ErrorState`.
   - Graceful degradation if optional sections or features are missing.
+
+---
+
+## Phase 5 — Demo / Scenario Dataset Experience
+
+The Demo Scenario Experience provides users without custom CSV files a one-click gateway to evaluate ReconGuard against authentic real-world reconciliation challenges.
+
+### Key Capabilities:
+- **Authentic End-to-End Pipeline Execution (No Faked Results):**
+  - Triggering a scenario issues `POST /demo-datasets/{dataset_id}/process`.
+  - Input records are parsed, validated, and passed directly into `process_batch()`.
+  - Executes real pairwise and structural blocking, 22 ML feature extractions, LightGBM inference, Platt scaling probability calibration, risk policy flagging, audit event creation, and financial accounting aggregation.
+  - Automatically redirects to `/batches/{batch_id}` on completion.
+- **Curated Scenario Registry:**
+  - `clean-settlement` (Clean Daily Settlement): 20 ledger + 20 settlement records ($N=40$). High-confidence 1:1 transactions with matching amounts and clean reference identifiers.
+  - `structural-splits` (Structural 1:N & N:1 Batches): 25 ledger + 25 settlement records ($N=50$). Complex one-to-many split invoices and many-to-one batch payouts.
+  - `discrepancies-exceptions` (Discrepancy & Exception Queue): 20 ledger + 20 settlement records ($N=40$). Amount variances, fee deductions, multi-day settlement lags, and unmatched pending items.
+  - `balanced-portfolio` (Balanced Real-World Batch): 40 ledger + 45 settlement records ($N=85$). Realistic cross-section spanning clean matches, structural groups, review boundaries, and exceptions.
+- **Demo Scenario Selector Component (`DemoScenarioSelector`):**
+  - Located in `src/components/upload/demo-scenario-selector.tsx`.
+  - Renders scenario cards displaying title, description, tags, and record counts.
+  - Interactive "Run Scenario" button with loading state (`Reconciling Scenario…` with spinner).
+  - Download / preview links for raw CSV files (`/demo-datasets/{dataset_id}/files/ledger` and `/settlement`).
+  - Error banner on failure with explicit message and retry option.
+- **Dual Placement:**
+  - **Upload Page (`/upload`):** Dedicated section beneath the dual-dropzone area: *"Don't have CSV files? Try a Demonstration Scenario"*.
+  - **Dashboard Empty State (`/`):** When zero batches exist, displays quick-start scenario cards directly on the home page.
+- **Data Integrity & Security:**
+  - Primary keys use scenario-prefixed prefixes (`CLN-`, `STR-`, `EXC-`, `BAL-`) to avoid record ID collisions.
+  - Strict backend allowlisting blocks path traversal.
+  - Idempotency preserved: resubmitting a scenario returns the existing batch safely.

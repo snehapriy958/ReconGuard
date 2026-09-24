@@ -17,6 +17,7 @@ import type {
   ExceptionDetail,
   AuditEventItem,
   ModelEvaluationResponse,
+  DemoDatasetsResponse,
 } from "./api-types";
 
 const API_BASE_URL =
@@ -191,4 +192,25 @@ export function getAuditTrail(
 
 export function getModelEvaluation(): Promise<ModelEvaluationResponse> {
   return request("/model/evaluation");
+}
+
+// ---------------- demo datasets ----------------
+
+export function getDemoDatasets(): Promise<DemoDatasetsResponse> {
+  return request("/demo-datasets");
+}
+
+export function processDemoDataset(
+  datasetId: string
+): Promise<BatchCreateResponse> {
+  return request(`/demo-datasets/${encodeURIComponent(datasetId)}/process`, {
+    method: "POST",
+  });
+}
+
+export function getDemoDatasetFileUrl(
+  datasetId: string,
+  fileType: "ledger" | "settlement"
+): string {
+  return `${API_BASE_URL}/demo-datasets/${encodeURIComponent(datasetId)}/files/${fileType}`;
 }

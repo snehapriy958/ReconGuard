@@ -1,0 +1,26 @@
+ledger_id,vendor_name,amount,txn_date,reference_id,description
+STR-LED-001,Swiggy Bundl Technologies Private Limited,15000.00,2026-03-10,RZP2001,Merchant payout batch RZP2001
+STR-LED-002,Nykaa E-Retail Private Limited,24500.00,2026-03-12,RZP2002,Invoice payment RZP2002
+STR-LED-003,Urban Company Technologies Private Limited,30000.00,2026-03-14,RZP2003,Vendor payout RZP2003
+STR-LED-004,Zomato Limited,8200.00,2026-03-15,RZP2004,Order settlement RZP2004
+STR-LED-005,Zomato Limited,11800.00,2026-03-16,RZP2005,Order settlement RZP2005
+STR-LED-006,BigBasket Innovative Retail Concepts,4500.00,2026-03-18,RZP2006,Daily payout RZP2006
+STR-LED-007,BigBasket Innovative Retail Concepts,5500.00,2026-03-18,RZP2007,Daily payout RZP2007
+STR-LED-008,Flipkart Internet Private Limited,12000.00,2026-03-20,RZP2008,Order line A RZP2008
+STR-LED-009,Flipkart Internet Private Limited,18000.00,2026-03-20,RZP2009,Order line B RZP2009
+STR-LED-010,Flipkart Internet Private Limited,15000.00,2026-03-21,RZP2010,Order line C RZP2010
+STR-LED-011,Tata Consultancy Services,42000.00,2026-03-21,RZP2011,Standard payment RZP2011
+STR-LED-012,Infosys Limited,38500.00,2026-03-10,RZP2012,Standard payment RZP2012
+STR-LED-013,Wipro Limited,29000.00,2026-03-11,RZP2013,Standard payment RZP2013
+STR-LED-014,HDFC Bank Limited,51200.00,2026-03-12,RZP2014,Standard payment RZP2014
+STR-LED-015,ICICI Bank Limited,63000.00,2026-03-13,RZP2015,Standard payment RZP2015
+STR-LED-016,Bharti Airtel Limited,17400.00,2026-03-14,RZP2016,Standard payment RZP2016
+STR-LED-017,Larsen & Toubro Limited,84000.00,2026-03-15,RZP2017,Standard payment RZP2017
+STR-LED-018,Mahindra & Mahindra Limited,33500.00,2026-03-16,RZP2018,Standard payment RZP2018
+STR-LED-019,Adani Enterprises Limited,48000.00,2026-03-17,RZP2019,Standard payment RZP2019
+STR-LED-020,PhonePe Private Limited,14500.00,2026-03-18,RZP2020,Standard payment RZP2020
+STR-LED-021,Ola Cabs Private Limited,22800.00,2026-03-19,RZP2021,Standard payment RZP2021
+STR-LED-022,Cred Dreamplug Technologies Private Limited,19500.00,2026-03-20,RZP2022,Standard payment RZP2022
+STR-LED-023,Meesho Fashnear Technologies,31000.00,2026-03-21,RZP2023,Standard payment RZP2023
+STR-LED-024,Reliance Industries Limited,142000.00,2026-03-10,RZP2024,Standard payment RZP2024
+STR-LED-025,Swiggy Bundl Technologies Private Limited,27000.00,2026-03-11,RZP2025,Standard payment RZP2025

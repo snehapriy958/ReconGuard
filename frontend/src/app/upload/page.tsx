@@ -3,12 +3,13 @@
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
-import { UploadCloud, FileText, CheckCircle2, AlertCircle, Loader2, ArrowRight } from "lucide-react";
+import { UploadCloud, FileText, CheckCircle2, AlertCircle, Loader2, ArrowRight, Sparkles } from "lucide-react";
 import { uploadBatch, ApiError } from "@/lib/api-client";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/formatters";
+import { DemoScenarioSelector } from "@/components/upload/demo-scenario-selector";
 import type { CsvValidationErrorDetail, CsvValidationResponseError } from "@/lib/api-types";
 
 interface ParsedFileInfo {
@@ -490,6 +491,24 @@ export default function UploadPage() {
           inference, and generates an immutable audit timeline. Batches with hundreds of records typically complete
           in 2 to 6 seconds.
         </p>
+      </div>
+
+      {/* Demonstration Scenarios Section */}
+      <div className="mt-12 pt-8 border-t border-slate-200">
+        <div className="mb-6">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-slate-700" />
+            <h2 className="text-lg font-semibold text-slate-900">
+              Don&apos;t have CSV files? Try a Demonstration Scenario
+            </h2>
+          </div>
+          <p className="mt-1 text-xs text-slate-500 max-w-2xl">
+            Choose from pre-configured real-world reconciliation scenarios. Each scenario runs through the full
+            reconciliation pipeline with real candidate generation, ML scoring, and accounting invariants.
+          </p>
+        </div>
+
+        <DemoScenarioSelector />
       </div>
     </div>
   );

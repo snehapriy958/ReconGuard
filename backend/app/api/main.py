@@ -8,10 +8,17 @@ import logging
 
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 
 from backend.app.csv_validator import validate_and_parse_csv
+from backend.app.demo_datasets import (
+    list_demo_datasets,
+    get_demo_dataset_metadata,
+    get_demo_dataset_records,
+    get_demo_dataset_file_path,
+)
 from backend.app.model_evaluation import get_model_evaluation_data
 
 from backend.app.db import get_db, init_db
@@ -429,3 +436,50 @@ def audit_trail(entity_type: str, entity_id: str, db: Session = Depends(get_db))
 @app.get("/model/evaluation")
 def get_model_evaluation():
     return get_model_evaluation_data()
+
+
+# ---------------- demo datasets ----------------
+
+@app.get("/demo-datasets")
+def get_demo_datasets():
+    """List all available preconfigured demo reconciliation scenarios."""
+    return {"datasets": list_demo_datasets()}
+
+
+@app.post("/demo-datasets/{dataset_id}/process")
+def process_demo_dataset_batch(dataset_id: str, db: Session = Depends(get_db)):
+    """Process an allowlisted demo scenario through the reconciliation pipeline."""
+    meta = get_demo_dataset_metadata(dataset_id)
+    if meta is None:
+        raise HTTPException(status_code=404, detail=f"Demo dataset '{dataset_id}' not found")
+
+    try:
+        ledger_records, settlement_records = get_demo_dataset_records(dataset_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Demo dataset '{dataset_id}' not found")
+    except Exception as e:
+        logger.exception("Failed to load demo dataset records for %s", dataset_id)
+        raise HTTPException(status_code=500, detail=f"Failed to load demo dataset: {e}")
+
+    batch = process_batch(db, ledger_records, settlement_records)
+    return {
+        "batch_id": batch.id,
+        "status": batch.status,
+        "summary": batch.summary,
+    }
+
+
+@app.get("/demo-datasets/{dataset_id}/files/{file_type}")
+def download_demo_dataset_file(dataset_id: str, file_type: str):
+    """Download the raw CSV file for a given demo dataset and file type (ledger or settlement)."""
+    if get_demo_dataset_metadata(dataset_id) is None:
+        raise HTTPException(status_code=404, detail=f"Demo dataset '{dataset_id}' not found")
+    try:
+        path = get_demo_dataset_file_path(dataset_id, file_type)
+        return FileResponse(
+            path=str(path),
+            media_type="text/csv",
+            filename=f"{dataset_id}_{file_type}.csv",
+        )
+    except (KeyError, ValueError, FileNotFoundError):
+        raise HTTPException(status_code=404, detail="Requested file not found")

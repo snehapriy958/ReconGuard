@@ -1,0 +1,41 @@
+ledger_id,vendor_name,amount,txn_date,reference_id,description
+BAL-LED-001,HDFC Bank Limited,14200.00,2026-03-02,RZP4001,Standard payment RZP4001
+BAL-LED-002,Tata Consultancy Services,67000.00,2026-03-03,RZP4002,Standard payment RZP4002
+BAL-LED-003,Infosys Limited,45000.00,2026-03-04,RZP4003,Standard payment RZP4003
+BAL-LED-004,Reliance Industries Limited,185000.00,2026-03-05,RZP4004,Standard payment RZP4004
+BAL-LED-005,ICICI Bank Limited,38000.00,2026-03-06,RZP4005,Standard payment RZP4005
+BAL-LED-006,Bharti Airtel Limited,24000.00,2026-03-07,RZP4006,Standard payment RZP4006
+BAL-LED-007,Larsen & Toubro Limited,95000.00,2026-03-08,RZP4007,Standard payment RZP4007
+BAL-LED-008,Wipro Limited,31000.00,2026-03-09,RZP4008,Standard payment RZP4008
+BAL-LED-009,Mahindra & Mahindra Limited,54000.00,2026-03-10,RZP4009,Standard payment RZP4009
+BAL-LED-010,Zomato Limited,16800.00,2026-03-11,RZP4010,Standard payment RZP4010
+BAL-LED-011,Swiggy Bundl Technologies Private Limited,42000.00,2026-03-12,RZP4011,Standard payment RZP4011
+BAL-LED-012,Nykaa E-Retail Private Limited,28500.00,2026-03-13,RZP4012,Standard payment RZP4012
+BAL-LED-013,Flipkart Internet Private Limited,115000.00,2026-03-14,RZP4013,Standard payment RZP4013
+BAL-LED-014,BigBasket Innovative Retail Concepts,22000.00,2026-03-15,RZP4014,Standard payment RZP4014
+BAL-LED-015,PhonePe Private Limited,49000.00,2026-03-16,RZP4015,Standard payment RZP4015
+BAL-LED-016,Ola Cabs Private Limited,34500.00,2026-03-17,RZP4016,Standard payment RZP4016
+BAL-LED-017,Urban Company Technologies Private Limited,72000.00,2026-03-18,RZP4017,Standard payment RZP4017
+BAL-LED-018,Cred Dreamplug Technologies Private Limited,58000.00,2026-03-19,RZP4018,Standard payment RZP4018
+BAL-LED-019,Meesho Fashnear Technologies,39000.00,2026-03-20,RZP4019,Standard payment RZP4019
+BAL-LED-020,Adani Enterprises Limited,88000.00,2026-03-01,RZP4020,Standard payment RZP4020
+BAL-LED-021,Tata Consultancy Services,52000.00,2026-03-02,RZP4021,Standard payment RZP4021
+BAL-LED-022,Infosys Limited,61000.00,2026-03-03,RZP4022,Standard payment RZP4022
+BAL-LED-023,HDFC Bank Limited,29500.00,2026-03-04,RZP4023,Standard payment RZP4023
+BAL-LED-024,Wipro Limited,44000.00,2026-03-05,RZP4024,Standard payment RZP4024
+BAL-LED-025,Reliance Industries Limited,132000.00,2026-03-06,RZP4025,Standard payment RZP4025
+BAL-LED-026,Zomato Limited,18900.00,2026-03-07,RZP4026,Standard payment RZP4026
+BAL-LED-027,Swiggy Bundl Technologies Private Limited,20000.00,2026-03-21,RZP4027,Split settlement invoice RZP4027
+BAL-LED-028,Nykaa E-Retail Private Limited,15000.00,2026-03-22,RZP4028,Invoice RZP4028
+BAL-LED-029,Zomato Limited,5000.00,2026-03-23,RZP4029,Batch item 1 RZP4029
+BAL-LED-030,Zomato Limited,7000.00,2026-03-24,RZP4030,Batch item 2 RZP4030
+BAL-LED-031,BigBasket Innovative Retail Concepts,6000.00,2026-03-24,RZP4031,Daily batch item A
+BAL-LED-032,BigBasket Innovative Retail Concepts,9000.00,2026-03-25,RZP4032,Daily batch item B
+BAL-LED-033,BigBasket Innovative Retail Concepts,5000.00,2026-03-25,RZP4033,Daily batch item C
+BAL-LED-034,Flipkart Internet Private Limited,48000.00,2026-03-25,RZP4034,Commercial transaction RZP4034
+BAL-LED-035,Ola Cabs Private Limited,19500.00,2026-03-25,RZP4035,Commercial transaction RZP4035
+BAL-LED-036,Urban Company Technologies Private Limited,32000.00,2026-03-25,RZP4036,Commercial transaction RZP4036
+BAL-LED-037,Cred Dreamplug Technologies Private Limited,41000.00,2026-03-25,RZP4037,Commercial transaction RZP4037
+BAL-LED-038,Bharti Airtel Limited,56000.00,2026-03-26,RZP4038,Pending un-settled transaction RZP4038
+BAL-LED-039,Mahindra & Mahindra Limited,82500.00,2026-03-26,RZP4039,Pending un-settled transaction RZP4039
+BAL-LED-040,Meesho Fashnear Technologies,24000.00,2026-03-26,RZP4040,Pending un-settled transaction RZP4040
