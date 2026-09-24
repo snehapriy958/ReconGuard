@@ -21,6 +21,7 @@ from backend.app.models.review import ReviewTask
 from backend.app.models.exception import ExceptionRecord
 from backend.app.workflow.state_machine import transition, transition_batch, InvalidTransitionError
 from backend.app.workflow.risk import compute_risk_flags, classify_exception, risk_explanation
+from backend.app.financials import FinancialAccumulator
 
 from ml.candidate_generation.blocking_v1 import generate_candidates as blocking_v1
 from ml.candidate_generation.blocking_v2 import generate_structural_candidates
@@ -158,6 +159,8 @@ def process_batch(db: Session, ledger_records: list[dict], settlement_records: l
     counts = {"HIGH_CONFIDENCE_MATCH": 0, "NEEDS_REVIEW": 0, "LIKELY_NO_MATCH": 0,
               "one_to_many": 0, "many_to_one": 0, "risk_flagged": 0, "failed_candidates": 0}
 
+    accumulator = FinancialAccumulator(ledger_records, settlement_records)
+
     for i, group in enumerate(groups):
         row = feature_df.iloc[i]
         try:
@@ -237,6 +240,12 @@ def process_batch(db: Session, ledger_records: list[dict], settlement_records: l
             if risk_flags:
                 counts["risk_flagged"] += 1
 
+            accumulator.record_candidate_outcome(
+                ledger_ids=group.ledger_ids,
+                settlement_ids=group.settlement_ids,
+                outcome=decision_label,
+            )
+
             db.commit()
 
         except (InvalidTransitionError, Exception) as e:
@@ -245,6 +254,8 @@ def process_batch(db: Session, ledger_records: list[dict], settlement_records: l
                          payload={"candidate_index": i, "error": f"{type(e).__name__}: {e}"})
             db.commit()
             counts["failed_candidates"] += 1
+
+    financial_summary = accumulator.compute_summary()
 
     batch.status = transition_batch(batch.status, "COMPLETED")
     batch.summary = {
@@ -260,6 +271,7 @@ def process_batch(db: Session, ledger_records: list[dict], settlement_records: l
         "risk_flagged_decisions": counts["risk_flagged"],
         "failed_candidates": counts["failed_candidates"],
         "processing_time_seconds": round(time.time() - t0, 3),
+        "financials": financial_summary.to_dict(),
     }
     import datetime as _dt
     batch.completed_at = _dt.datetime.now(_dt.timezone.utc)

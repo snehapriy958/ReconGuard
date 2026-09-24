@@ -666,3 +666,24 @@ The `/upload` route allows users to upload Ledger and Settlement CSV files direc
 - **Error Display:**
   - Structured error notification card displaying server-side 400 validation failures.
   - Detailed error table breaking down each failure by File, Row, Field, and Reason.
+
+---
+
+## Phase 3 — Financial Metrics (`/batches/{batchId}`)
+
+The batch dashboard surfaces full financial exposure metrics computed by unique source record:
+
+### Key Capabilities:
+- **Centralized Formatters (`frontend/src/lib/formatters.ts`):**
+  - `formatCurrency()`: Formats amounts with locale grouping and 2 decimal places using configurable currency symbol (defaults to ₹ matching source datasets).
+  - `formatPercent()`: Formats 0-1 ratios as percentages (e.g. 85.2%).
+- **Financial Summary Section (`FinancialSummarySection`):**
+  - Displays distinct cards for Internal Accounts Ledger and External Settlement Records.
+  - Shows Total Value, Reconciled rate badges, and breakdown buckets:
+    - Matched Amount + Rate
+    - In Review Amount + Rate
+    - Exception Amount + Rate
+  - Displays explicit mathematical invariant equation ensuring transparency.
+- **Financial Breakdown Chart (`FinancialBreakdownChart`):**
+  - Recharts horizontal stacked bar chart visualizing Matched, Review, and Exception exposure across both Ledger and Settlement sides.
+  - Interactive tooltips formatted with `formatCurrency()`.

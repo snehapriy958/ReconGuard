@@ -8,6 +8,7 @@ import { uploadBatch, ApiError } from "@/lib/api-client";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { formatCurrency } from "@/lib/formatters";
 import type { CsvValidationErrorDetail, CsvValidationResponseError } from "@/lib/api-types";
 
 interface ParsedFileInfo {
@@ -311,7 +312,7 @@ export default function UploadPage() {
                   <div className="flex justify-between text-slate-600">
                     <span>Total ledger amount:</span>
                     <span className="font-mono font-medium text-slate-900">
-                      ₹{ledgerInfo.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {formatCurrency(ledgerInfo.totalAmount)}
                     </span>
                   </div>
                 )}
@@ -424,7 +425,7 @@ export default function UploadPage() {
                   <div className="flex justify-between text-slate-600">
                     <span>Total settlement amount:</span>
                     <span className="font-mono font-medium text-slate-900">
-                      ₹{settlementInfo.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {formatCurrency(settlementInfo.totalAmount)}
                     </span>
                   </div>
                 )}

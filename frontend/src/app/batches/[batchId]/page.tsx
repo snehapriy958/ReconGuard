@@ -17,6 +17,7 @@ import { AuditTimeline } from "@/components/decision/audit-timeline";
 import { OutcomeDistributionChart } from "@/components/dashboard/charts/outcome-distribution-chart";
 import { ConfidenceDistributionChart } from "@/components/dashboard/charts/confidence-distribution-chart";
 import { RootCauseDistributionChart } from "@/components/dashboard/charts/root-cause-distribution-chart";
+import { FinancialSummarySection } from "@/components/dashboard/financial-summary-section";
 
 const BATCH_LIFECYCLE_EVENT_TYPES = new Set([
   "BATCH_CREATED",
@@ -237,6 +238,11 @@ export default function BatchDashboard({
                     </div>
                   )}
                 </section>
+
+                {/* Financial Accounting & Exposure */}
+                {state.data.summary.financials && (
+                  <FinancialSummarySection financials={state.data.summary.financials} />
+                )}
 
                 {/* Intelligence */}
                 <section className="mb-8">

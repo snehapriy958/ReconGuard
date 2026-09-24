@@ -69,9 +69,41 @@ not a deployed multi-tenant service. There is no authentication layer.
 request: candidate generation (blocking V1 + V2) → feature extraction →
 LightGBM prediction + sigmoid calibration → risk-flag computation →
 per-candidate routing (auto-match / review / exception) → audit events →
-batch summary. There is no background task queue — this is appropriate
+financial metrics aggregation → batch summary. There is no background task queue — this is appropriate
 at this project's data volumes but would need an async worker to scale to
 much larger production batches.
+
+## Financial Metrics & Accounting
+
+Every completed batch summary includes a `financials` object aggregating exposure for both `ledger` and `settlement`:
+
+```json
+{
+  "financials": {
+    "ledger": {
+      "total_amount": 100000.0,
+      "matched_amount": 85000.0,
+      "review_amount": 10000.0,
+      "exception_amount": 5000.0,
+      "matched_rate": 0.85,
+      "review_rate": 0.1,
+      "exception_rate": 0.05
+    },
+    "settlement": { ... }
+  }
+}
+```
+
+### Accounting Rules & Invariants
+1. **Unique Source Record Accounting:** Money is counted by UNIQUE source record (`ledger_id` / `settlement_id`). Candidate groups are candidate relationships, NOT financial units. A source record appearing in multiple candidate groups is counted exactly once.
+2. **Outcome Precedence:** Where a source record participates in multiple candidate groups with differing outcomes, its single financial bucket is determined by the highest-precedence outcome:
+   `HIGH_CONFIDENCE_MATCH` (matched) > `NEEDS_REVIEW` (review) > `LIKELY_NO_MATCH` (exception).
+3. **Structural Matches (1:N, N:1):** In one-to-many, the ledger amount is counted once, and each participating settlement record amount is counted once. In many-to-one, each ledger amount is counted once, and the settlement amount is counted once.
+4. **Zero-Candidate Records:** Records that participate in no candidate groups are classified as exceptions and included in total and exception amounts.
+5. **Independent Invariant:** For both ledger and settlement independently:
+   `matched_amount + review_amount + exception_amount == total_amount`
+   `matched_rate = matched_amount / total_amount` (with safe handling for 0 total).
+
 
 ## Decisions
 

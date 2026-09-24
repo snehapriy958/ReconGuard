@@ -6,6 +6,21 @@
 // schema. If a backend field is optional or nullable in practice (e.g. a
 // decision with no risk flags), the type reflects that.
 
+export interface FinancialSideMetrics {
+  total_amount: number;
+  matched_amount: number;
+  review_amount: number;
+  exception_amount: number;
+  matched_rate: number;
+  review_rate: number;
+  exception_rate: number;
+}
+
+export interface FinancialSummary {
+  ledger: FinancialSideMetrics;
+  settlement: FinancialSideMetrics;
+}
+
 export interface BatchSummary {
   total_records: number;
   candidates_generated: number;
@@ -19,6 +34,7 @@ export interface BatchSummary {
   risk_flagged_decisions: number;
   failed_candidates: number;
   processing_time_seconds: number;
+  financials?: FinancialSummary;
 }
 
 export type BatchStatus = "CREATED" | "PROCESSING" | "COMPLETED" | "FAILED";
