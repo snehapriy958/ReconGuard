@@ -27,6 +27,7 @@ not a deployed multi-tenant service. There is no authentication layer.
 | GET | `/exceptions?category=...&batch_id=...` | List exceptions, optionally filtered by category and/or batch, each with a cheap `primary_root_cause` summary |
 | GET | `/exceptions/{exception_id}` | Exception detail: original immutable facts plus a full derived root-cause analysis (observed evidence, interpretation, contributing factors, investigation guidance) |
 | GET | `/audit/{entity_type}/{entity_id}` | Full ordered audit history for a batch, decision, or review |
+| GET | `/model/evaluation` | Offline model performance, calibration, and threshold policy evaluation on held-out test data |
 
 ### Request/response notes
 
@@ -157,6 +158,27 @@ decision's own events with the events of its associated review (if any) —
 without it, human review outcomes would be invisible from a decision's
 timeline, since they're recorded under a separate `REVIEW` entity
 namespace.
+
+## Model Evaluation
+
+`GET /model/evaluation` is a read-only endpoint that serves authentic, precomputed offline evaluation results from `reports/phase4/` (including `final_held_out_test_evaluation.json`, `calibration_report.json`, `threshold_policy_selected.json`, and `lightgbm_feature_importance.json`):
+
+- **Model Specifications:** Model architecture (`Gradient Boosted Decision Trees (LightGBM)`), bundle path (`models/reconciliation_model.pkl`), feature count (22 engineered features), top predictive features by gain, and operational threshold policy boundaries (LOW = 0.50, HIGH = 0.85).
+- **Evaluation Dataset:** Held-out test set ($N=100$ candidate groups: 77 positive, 23 negative; 83 1:1, 11 1:N, 6 N:1) strictly isolated from model training and hyperparameter tuning.
+- **Classification Performance:**
+  - Accuracy: **97.0%** ($74\text{ TP} + 23\text{ TN} = 97/100$)
+  - Precision: **100.0%** ($1.0$, zero false positives)
+  - Recall: **96.1%** ($74 / 77$ true matches identified)
+  - F1-Score: **0.9801**
+  - ROC-AUC: **0.9983**
+  - PR-AUC: **0.9995**
+- **Confusion Matrix:** True Positive = 74, True Negative = 23, False Positive = 0, False Negative = 3.
+- **Class-Level Metrics:** Precision and recall breakdowns for 1:1, 1:N, and N:1 matching structures.
+- **Probability Calibration:**
+  - Platt scaling (sigmoid) chosen over isotonic calibration.
+  - Raw model Brier score: 0.00355 $\to$ Calibrated Brier score: 0.00714.
+  - Methodology note explains the rationale: isotonic calibration collapsed to a step-function on extreme validation predictions, whereas sigmoid scaling preserved continuous, well-ordered probabilities necessary for granular three-way threshold routing (`LIKELY_NO_MATCH` < 0.50, `NEEDS_REVIEW` 0.50–0.85, `HIGH_CONFIDENCE_MATCH` $\ge$ 0.85).
+- **Governance Notes:** Explicit operational caveats regarding held-out candidate distribution, zero false positives at default thresholds, and human review routing for borderline cases.
 
 ## No LLM agents, no chatbot layer
 

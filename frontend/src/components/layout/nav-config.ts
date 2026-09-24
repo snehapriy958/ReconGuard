@@ -4,6 +4,7 @@ import {
   UploadCloud,
   ClipboardCheck,
   AlertTriangle,
+  BarChart3,
   type LucideIcon,
 } from "lucide-react";
 
@@ -45,6 +46,12 @@ export const NAV_ITEMS: NavItem[] = [
     icon: AlertTriangle,
     description: "Root-cause intelligence for unresolved items",
   },
+  {
+    name: "Model Evaluation",
+    href: "/model-evaluation",
+    icon: BarChart3,
+    description: "Model performance, calibration, and routing metrics",
+  },
 ];
 
 /**
@@ -76,6 +83,12 @@ export function isNavItemActive(href: string, pathname: string): boolean {
   }
   if (href === "/exceptions") {
     return pathname === "/exceptions" || pathname.startsWith("/exceptions/");
+  }
+  if (href === "/model-evaluation") {
+    return (
+      pathname === "/model-evaluation" ||
+      pathname.startsWith("/model-evaluation/")
+    );
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }

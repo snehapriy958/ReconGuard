@@ -16,6 +16,7 @@ import type {
   ExceptionListItem,
   ExceptionDetail,
   AuditEventItem,
+  ModelEvaluationResponse,
 } from "./api-types";
 
 const API_BASE_URL =
@@ -184,4 +185,10 @@ export function getAuditTrail(
   entityId: string
 ): Promise<{ entity_type: string; entity_id: string; events: AuditEventItem[] }> {
   return request(`/audit/${entityType}/${entityId}`);
+}
+
+// ---------------- model evaluation ----------------
+
+export function getModelEvaluation(): Promise<ModelEvaluationResponse> {
+  return request("/model/evaluation");
 }

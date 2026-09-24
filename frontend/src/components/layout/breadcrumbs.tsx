@@ -57,6 +57,8 @@ export function Breadcrumbs() {
     if (parts[1]) {
       crumbs.push({ label: decodeURIComponent(parts[1]), isMono: true });
     }
+  } else if (pathname === "/model-evaluation") {
+    crumbs.push({ label: "Model Evaluation" });
   } else {
     // Generic fallback for any other nested route
     const parts = pathname.split("/").filter(Boolean);

@@ -687,3 +687,43 @@ The batch dashboard surfaces full financial exposure metrics computed by unique 
 - **Financial Breakdown Chart (`FinancialBreakdownChart`):**
   - Recharts horizontal stacked bar chart visualizing Matched, Review, and Exception exposure across both Ledger and Settlement sides.
   - Interactive tooltips formatted with `formatCurrency()`.
+
+---
+
+## Phase 4 — Model Evaluation (`/model-evaluation`)
+
+The `/model-evaluation` route surfaces comprehensive offline model performance, probability calibration, and operational routing metrics derived from authentic precomputed artifacts on held-out test data.
+
+### Key Capabilities:
+- **Persistent Shell Integration:**
+  - Integrated into `AppShell` sidebar and mobile drawer with `BarChart3` icon.
+  - Active route highlighting on `/model-evaluation`.
+  - Accessible breadcrumb hierarchy: `Model Evaluation`.
+- **Core Metric Cards:**
+  - Accuracy (97.0%), Precision (100.0% / zero false positives), Recall (96.1%), F1-Score (0.9801), ROC-AUC (0.9983), and PR-AUC (0.9995).
+- **Model Architecture & Threshold Policy:**
+  - Model type (`Gradient Boosted Decision Trees (LightGBM)`), bundle file, and 22 engineered features.
+  - Visual breakdown of production routing policy:
+    - `LIKELY_NO_MATCH` ($P < 0.50$) $\to$ Exception Engine
+    - `HUMAN_REVIEW` ($0.50 \le P < 0.85$) $\to$ Human Review Queue
+    - `EXACT_MATCH` ($P \ge 0.85$) $\to$ Instant Automated Reconciliation
+  - Top 5 predictive features ranked by gain (e.g. `amount_abs_diff`, `description_similarity`).
+- **Dataset Context & Class Distribution:**
+  - Test set counts ($N=100$: 77 positive, 23 negative) alongside training ($N=598$) and validation ($N=100$) splits.
+  - Visual class balance progress bar and relationship type distribution (1:1, 1:N, N:1).
+- **Confusion Matrix ($2 \times 2$ Grid):**
+  - Displays TP (74), FN (3), FP (0), TN (23) with explicit precision/recall commentary.
+- **Relationship Class Performance Table:**
+  - Detailed precision and recall breakdown across 1:1, 1:N, and N:1 matching classes.
+  - Operational routing count distribution (Auto-Match: 67, Human Review: 8, No Match: 25).
+- **Probability Calibration Analysis:**
+  - Method: Platt scaling (sigmoid).
+  - Brier score comparison: 0.00355 (raw) vs 0.00714 (calibrated).
+  - Methodological explanation for choosing sigmoid over isotonic regression to prevent step-function collapse and preserve smooth threshold routing.
+  - Reliability binning table comparing mean predicted probability against observed match rate.
+- **Model Governance & Operational Considerations:**
+  - Bulleted governance caveats covering dataset curation, error analysis, and production risk mitigations.
+- **Robust Error & Loading States:**
+  - Loading spinner via `LoadingState`.
+  - Error alert with retry button via `ErrorState`.
+  - Graceful degradation if optional sections or features are missing.

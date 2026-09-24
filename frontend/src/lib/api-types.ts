@@ -215,3 +215,112 @@ export interface BatchCreateResponse {
   status: BatchStatus;
   summary: BatchSummary | null;
 }
+
+// ---------------- model evaluation ----------------
+
+export interface FeatureImportanceItem {
+  feature: string;
+  importance_gain: number;
+  split_count?: number;
+}
+
+export interface ModelThresholdPolicy {
+  low_threshold: number;
+  high_threshold: number;
+  fp_cost: number;
+  fn_cost: number;
+  review_cost: number;
+}
+
+export interface ModelInfo {
+  name: string;
+  model_type: string;
+  version: string;
+  features_count: number;
+  bundle_file: string;
+  threshold_policy: ModelThresholdPolicy;
+  top_features: FeatureImportanceItem[];
+}
+
+export interface DatasetRelationshipDetail {
+  total: number;
+  positive: number;
+  negative: number;
+}
+
+export interface DatasetInfo {
+  name: string;
+  split: string;
+  sample_count: number;
+  positive_count: number;
+  negative_count: number;
+  positive_rate: number;
+  by_relationship_type: Record<string, DatasetRelationshipDetail>;
+  training_samples: number;
+  validation_samples: number;
+}
+
+export interface EvaluationMetrics {
+  accuracy: number;
+  precision: number;
+  recall: number;
+  f1: number;
+  roc_auc: number;
+  pr_auc: number;
+}
+
+export interface ConfusionMatrixData {
+  true_positive: number;
+  true_negative: number;
+  false_positive: number;
+  false_negative: number;
+  total: number;
+}
+
+export interface ClassMetricDetail {
+  n: number;
+  positive: number;
+  precision: number;
+  recall: number;
+}
+
+export interface RoutingPolicyResults {
+  n_auto_match: number;
+  n_review: number;
+  n_no_match: number;
+  auto_match_precision: number;
+  auto_match_recall: number;
+  review_positive_rate: number;
+  likely_no_match_error_rate: number;
+}
+
+export interface CalibrationReliabilityBin {
+  bin: string;
+  n: number;
+  mean_predicted: number | null;
+  observed_rate: number | null;
+}
+
+export interface CalibrationInfo {
+  method: string;
+  val_fit_samples: number;
+  val_eval_samples: number;
+  brier_score_before: number;
+  brier_score_after: number;
+  brier_improved: boolean;
+  notes: string;
+  methodology_note?: string;
+  reliability_before: CalibrationReliabilityBin[];
+  reliability_after: CalibrationReliabilityBin[];
+}
+
+export interface ModelEvaluationResponse {
+  model: ModelInfo;
+  dataset: DatasetInfo;
+  metrics: EvaluationMetrics;
+  confusion_matrix: ConfusionMatrixData;
+  class_metrics: Record<string, ClassMetricDetail>;
+  routing_policy_results?: RoutingPolicyResults;
+  calibration: CalibrationInfo;
+  notes: string[];
+}

@@ -12,6 +12,7 @@ from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 
 from backend.app.csv_validator import validate_and_parse_csv
+from backend.app.model_evaluation import get_model_evaluation_data
 
 from backend.app.db import get_db, init_db
 from backend.app.pipeline import process_batch
@@ -421,3 +422,10 @@ def audit_trail(entity_type: str, entity_id: str, db: Session = Depends(get_db))
                         "previous_state": e.previous_state, "new_state": e.new_state,
                         "payload": e.payload, "timestamp": e.timestamp.isoformat()}
                        for e in events]}
+
+
+# ---------------- model evaluation ----------------
+
+@app.get("/model/evaluation")
+def get_model_evaluation():
+    return get_model_evaluation_data()

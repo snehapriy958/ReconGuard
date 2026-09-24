@@ -38,12 +38,13 @@ describe("AppShell & Navigation", () => {
     const nav = screen.getByRole("navigation", { name: "Sidebar" });
     const links = within(nav).getAllByRole("link");
 
-    expect(links).toHaveLength(5);
+    expect(links).toHaveLength(6);
     expect(within(nav).getByRole("link", { name: /Dashboard/i })).toHaveAttribute("href", "/");
     expect(within(nav).getByRole("link", { name: /Batches/i })).toHaveAttribute("href", "/batches");
     expect(within(nav).getByRole("link", { name: /Upload/i })).toHaveAttribute("href", "/upload");
     expect(within(nav).getByRole("link", { name: /Reviews/i })).toHaveAttribute("href", "/reviews");
     expect(within(nav).getByRole("link", { name: /Exceptions/i })).toHaveAttribute("href", "/exceptions");
+    expect(within(nav).getByRole("link", { name: /Model Evaluation/i })).toHaveAttribute("href", "/model-evaluation");
   });
 
   it("2b. Upload is correctly marked active on '/upload'", () => {
@@ -62,6 +63,22 @@ describe("AppShell & Navigation", () => {
     expect(dashboardLink).not.toHaveAttribute("aria-current");
   });
 
+  it("2c. Model Evaluation is correctly marked active on '/model-evaluation'", () => {
+    mockPathname = "/model-evaluation";
+    render(
+      <AppShell>
+        <div>Content</div>
+      </AppShell>
+    );
+
+    const nav = screen.getByRole("navigation", { name: "Sidebar" });
+    const modelEvalLink = within(nav).getByRole("link", { name: /Model Evaluation/i });
+    const dashboardLink = within(nav).getByRole("link", { name: /Dashboard/i });
+
+    expect(modelEvalLink).toHaveAttribute("aria-current", "page");
+    expect(dashboardLink).not.toHaveAttribute("aria-current");
+  });
+
   it("3. Dashboard is correctly marked active on '/'", () => {
     mockPathname = "/";
     render(
@@ -76,12 +93,14 @@ describe("AppShell & Navigation", () => {
     const uploadLink = within(nav).getByRole("link", { name: /Upload/i });
     const reviewsLink = within(nav).getByRole("link", { name: /Reviews/i });
     const exceptionsLink = within(nav).getByRole("link", { name: /Exceptions/i });
+    const modelEvalLink = within(nav).getByRole("link", { name: /Model Evaluation/i });
 
     expect(dashboardLink).toHaveAttribute("aria-current", "page");
     expect(batchesLink).not.toHaveAttribute("aria-current");
     expect(uploadLink).not.toHaveAttribute("aria-current");
     expect(reviewsLink).not.toHaveAttribute("aria-current");
     expect(exceptionsLink).not.toHaveAttribute("aria-current");
+    expect(modelEvalLink).not.toHaveAttribute("aria-current");
   });
 
   it("4. Batches is correctly active on batch routes (list and detail)", () => {
@@ -200,7 +219,7 @@ describe("AppShell & Navigation", () => {
     );
 
     const nav = screen.getByRole("navigation", { name: "Sidebar" });
-    const expectedRoutes = ["/", "/batches", "/upload", "/reviews", "/exceptions"];
+    const expectedRoutes = ["/", "/batches", "/upload", "/reviews", "/exceptions", "/model-evaluation"];
 
     expectedRoutes.forEach((route) => {
       const link = within(nav).getByRole("link", {
@@ -221,6 +240,11 @@ describe("AppShell & Navigation", () => {
     mockPathname = "/upload";
     rerender(<Breadcrumbs />);
     expect(screen.getByText("Upload")).toHaveAttribute("aria-current", "page");
+
+    // Model Evaluation route
+    mockPathname = "/model-evaluation";
+    rerender(<Breadcrumbs />);
+    expect(screen.getByText("Model Evaluation")).toHaveAttribute("aria-current", "page");
 
     // Nested batch route
     mockPathname = "/batches/BATCH-001";
@@ -267,5 +291,8 @@ describe("AppShell & Navigation", () => {
     expect(isNavItemActive("/exceptions", "/exceptions")).toBe(true);
     expect(isNavItemActive("/exceptions", "/exceptions/EXC-1")).toBe(true);
     expect(isNavItemActive("/exceptions", "/")).toBe(false);
+
+    expect(isNavItemActive("/model-evaluation", "/model-evaluation")).toBe(true);
+    expect(isNavItemActive("/model-evaluation", "/batches")).toBe(false);
   });
 });
