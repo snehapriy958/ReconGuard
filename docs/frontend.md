@@ -640,3 +640,29 @@ placeholder; no pagination (client-side filtering only, acceptable at
 this data scale per spec); sorting resets on filter change rather than
 persisting (a minor UX polish item, not a correctness issue).
 
+---
+
+## Phase 2 — CSV Upload & Validation (`/upload`)
+
+The `/upload` route allows users to upload Ledger and Settlement CSV files directly to ReconGuard, inspect client-side schema previews and validation status, submit the files for synchronous end-to-end reconciliation, and be automatically redirected to the resulting batch detail page (`/batches/{batchId}`).
+
+### Key Capabilities:
+- **Dual Dropzones & File Selectors:** Separate upload zones for Internal Ledger CSV and Settlement CSV with clear visual boundaries and drag-and-drop support.
+- **Client-Side Validation & Previews:**
+  - Powered by PapaParse in-browser parsing.
+  - Column schema verification:
+    - Ledger requires: `ledger_id`, `vendor_name`, `amount`, `txn_date`
+    - Settlement requires: `settlement_id`, `vendor_name`, `amount`, `txn_date`
+  - Record count detection and file size formatting.
+  - Total amount summation for financial sanity check before submission.
+  - Instant status badges (`Valid` / `Invalid Schema`) and error callouts.
+  - Individual "Clear" buttons to remove and re-select files.
+- **Form Submission & State Handling:**
+  - Submit button disabled until both files are selected and schema-valid.
+  - Submission packages files into `FormData` and posts to `/batches/upload`.
+  - Disables double submission and shows loading spinner (`Reconciling Batch...`).
+  - Clear user guidance explaining that reconciliation executes synchronously.
+  - Automatic redirect to `/batches/{batchId}` on completion.
+- **Error Display:**
+  - Structured error notification card displaying server-side 400 validation failures.
+  - Detailed error table breaking down each failure by File, Row, Field, and Reason.

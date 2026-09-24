@@ -6,10 +6,12 @@ here; this layer is orchestration, persistence, and human oversight.
 from typing import Optional
 import logging
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
+
+from backend.app.csv_validator import validate_and_parse_csv
 
 from backend.app.db import get_db, init_db
 from backend.app.pipeline import process_batch
@@ -144,6 +146,30 @@ def create_batch(payload: BatchIn, db: Session = Depends(get_db)):
     settlement_records = [r.model_dump() for r in payload.settlement_records]
     batch = process_batch(db, ledger_records, settlement_records)
     return {"batch_id": batch.id, "status": batch.status, "summary": batch.summary}
+
+
+@app.post("/batches/upload")
+async def upload_batch(
+    ledger_file: UploadFile = File(..., description="Ledger CSV file"),
+    settlement_file: UploadFile = File(..., description="Settlement CSV file"),
+    db: Session = Depends(get_db),
+):
+    ledger_bytes = await ledger_file.read()
+    settlement_bytes = await settlement_file.read()
+
+    ledger_records, ledger_errors = validate_and_parse_csv(ledger_bytes, "ledger")
+    settlement_records, settlement_errors = validate_and_parse_csv(settlement_bytes, "settlement")
+
+    all_errors = ledger_errors + settlement_errors
+    if all_errors:
+        raise HTTPException(
+            status_code=400,
+            detail={"message": "CSV validation failed", "errors": all_errors},
+        )
+
+    batch = process_batch(db, ledger_records, settlement_records)
+    return {"batch_id": batch.id, "status": batch.status, "summary": batch.summary}
+
 
 
 @app.get("/batches/{batch_id}")

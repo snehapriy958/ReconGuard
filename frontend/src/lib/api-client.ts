@@ -8,6 +8,7 @@
 import type {
   BatchListItem,
   BatchDetail,
+  BatchCreateResponse,
   Decision,
   DecisionDetail,
   ReviewListItem,
@@ -22,19 +23,29 @@ const API_BASE_URL =
 
 export class ApiError extends Error {
   status: number;
-  constructor(message: string, status: number) {
+  detail?: unknown;
+  constructor(message: string, status: number, detail?: unknown) {
     super(message);
     this.name = "ApiError";
     this.status = status;
+    this.detail = detail;
   }
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const isFormData = typeof FormData !== "undefined" && init?.body instanceof FormData;
+  const defaultHeaders: Record<string, string> = isFormData
+    ? {}
+    : { "Content-Type": "application/json" };
+
   let res: Response;
   try {
     res = await fetch(`${API_BASE_URL}${path}`, {
-      headers: { "Content-Type": "application/json" },
       ...init,
+      headers: {
+        ...defaultHeaders,
+        ...(init?.headers as Record<string, string>),
+      },
     });
   } catch {
     // Network-level failure (backend unreachable) — distinguished from an
@@ -47,14 +58,22 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
 
   if (!res.ok) {
-    let detail = res.statusText;
+    let detailText = res.statusText;
+    let detailPayload: unknown = undefined;
     try {
       const body = await res.json();
-      detail = body.detail ?? detail;
+      detailPayload = body.detail;
+      if (typeof body.detail === "string") {
+        detailText = body.detail;
+      } else if (body.detail?.message) {
+        detailText = body.detail.message;
+      } else if (body.detail) {
+        detailText = JSON.stringify(body.detail);
+      }
     } catch {
       // body wasn't JSON — fall back to statusText, already set
     }
-    throw new ApiError(detail, res.status);
+    throw new ApiError(detailText, res.status, detailPayload);
   }
 
   return res.json() as Promise<T>;
@@ -74,6 +93,20 @@ export function getBatchDecisions(
   batchId: string
 ): Promise<{ batch_id: string; decisions: Decision[] }> {
   return request(`/batches/${batchId}/decisions`);
+}
+
+export function uploadBatch(
+  ledgerFile: File,
+  settlementFile: File
+): Promise<BatchCreateResponse> {
+  const formData = new FormData();
+  formData.append("ledger_file", ledgerFile);
+  formData.append("settlement_file", settlementFile);
+
+  return request<BatchCreateResponse>("/batches/upload", {
+    method: "POST",
+    body: formData,
+  });
 }
 
 // ---------------- decisions ----------------

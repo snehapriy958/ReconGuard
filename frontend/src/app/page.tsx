@@ -12,18 +12,28 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-3xl p-8">
-      <h1 className="mb-1 text-xl font-semibold text-slate-900">ReconGuard</h1>
-      <p className="mb-6 text-sm text-slate-500">
-        Select a batch to see how it was reconciled, or open the{" "}
-        <Link href="/reviews" className="underline hover:text-slate-700">
-          review queue
-        </Link>{" "}
-        or{" "}
-        <Link href="/exceptions" className="underline hover:text-slate-700">
-          exception intelligence
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="mb-1 text-xl font-semibold text-slate-900">ReconGuard</h1>
+          <p className="text-sm text-slate-500">
+            Select a batch to see how it was reconciled, or open the{" "}
+            <Link href="/reviews" className="underline hover:text-slate-700">
+              review queue
+            </Link>{" "}
+            or{" "}
+            <Link href="/exceptions" className="underline hover:text-slate-700">
+              exception intelligence
+            </Link>
+            .
+          </p>
+        </div>
+        <Link
+          href="/upload"
+          className="inline-flex shrink-0 items-center justify-center rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-xs transition hover:bg-slate-800"
+        >
+          Upload Batch
         </Link>
-        .
-      </p>
+      </div>
 
       {state.status === "loading" && <LoadingState label="Loading batches…" />}
       {state.status === "error" && (
@@ -31,8 +41,11 @@ export default function Home() {
       )}
       {state.status === "success" && state.data.batches.length === 0 && (
         <EmptyState>
-          No batches have been processed yet. Submit one via{" "}
-          <code className="rounded bg-slate-100 px-1">POST /batches</code> to
+          No batches have been processed yet.{" "}
+          <Link href="/upload" className="underline font-medium hover:text-slate-900">
+            Upload CSV files
+          </Link>{" "}
+          or submit via <code className="rounded bg-slate-100 px-1">POST /batches</code> to
           see it here.
         </EmptyState>
       )}

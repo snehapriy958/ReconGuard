@@ -15,6 +15,7 @@ not a deployed multi-tenant service. There is no authentication layer.
 |---|---|---|
 | GET | `/batches` | List all batches, most recent first |
 | POST | `/batches` | Submit ledger + settlement records; runs the full pipeline synchronously and returns the batch summary |
+| POST | `/batches/upload` | Multipart CSV upload for ledger and settlement files; validates schema and data, then runs pipeline synchronously |
 | GET | `/batches/{batch_id}` | Batch status and summary |
 | GET | `/batches/{batch_id}/decisions` | All reconciliation decisions in a batch |
 | GET | `/decisions/{decision_id}` | Full confidence-card payload for one decision (probability, decision, risk flags, evidence, raw ledger/settlement records, recomputed feature values, risk-flag explanations) |
@@ -35,6 +36,17 @@ not a deployed multi-tenant service. There is no authentication layer.
   `reference_id`/`description` accept `null` and normalize it to an empty
   string — a real bug found and fixed after submitting an actual batch
   through the HTTP API (see `docs/frontend.md`, "Important Failures").
+- `POST /batches/upload` accepts `ledger_file` and `settlement_file` as
+  `multipart/form-data` CSV file uploads. Both files are validated via
+  `backend/app/csv_validator.py` before pipeline execution:
+  - Required ledger columns: `ledger_id`, `vendor_name`, `amount`, `txn_date`
+  - Required settlement columns: `settlement_id`, `vendor_name`, `amount`, `txn_date`
+  - Optional columns preserved: `reference_id`, `description`
+  - Checks: UTF-8 encoding, non-empty content, duplicate IDs within file,
+    non-empty trimmed vendor, numeric amounts, valid ISO-8601 date parsing.
+  - Returns `400 Bad Request` with structured JSON (`message` and `errors: [...]`,
+    each containing `file`, `row`, `field`, `message`). Errors capped at 50.
+  - On valid input, delegates directly to existing `process_batch()` pipeline.
 - `POST /reviews/{id}/approve` and `/reject` both take
   `{"reviewer_id": "...", "comment": "..." }` (comment optional). A
   review that no longer exists returns `404`; a review that has already

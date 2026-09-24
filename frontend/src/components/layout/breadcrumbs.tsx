@@ -17,6 +17,8 @@ export function Breadcrumbs() {
 
   if (pathname === "/") {
     crumbs.push({ label: "Dashboard" });
+  } else if (pathname === "/upload") {
+    crumbs.push({ label: "Upload" });
   } else if (pathname === "/batches") {
     crumbs.push({ label: "Batches" });
   } else if (pathname.startsWith("/batches/")) {

@@ -38,11 +38,28 @@ describe("AppShell & Navigation", () => {
     const nav = screen.getByRole("navigation", { name: "Sidebar" });
     const links = within(nav).getAllByRole("link");
 
-    expect(links).toHaveLength(4);
+    expect(links).toHaveLength(5);
     expect(within(nav).getByRole("link", { name: /Dashboard/i })).toHaveAttribute("href", "/");
     expect(within(nav).getByRole("link", { name: /Batches/i })).toHaveAttribute("href", "/batches");
+    expect(within(nav).getByRole("link", { name: /Upload/i })).toHaveAttribute("href", "/upload");
     expect(within(nav).getByRole("link", { name: /Reviews/i })).toHaveAttribute("href", "/reviews");
     expect(within(nav).getByRole("link", { name: /Exceptions/i })).toHaveAttribute("href", "/exceptions");
+  });
+
+  it("2b. Upload is correctly marked active on '/upload'", () => {
+    mockPathname = "/upload";
+    render(
+      <AppShell>
+        <div>Content</div>
+      </AppShell>
+    );
+
+    const nav = screen.getByRole("navigation", { name: "Sidebar" });
+    const uploadLink = within(nav).getByRole("link", { name: /Upload/i });
+    const dashboardLink = within(nav).getByRole("link", { name: /Dashboard/i });
+
+    expect(uploadLink).toHaveAttribute("aria-current", "page");
+    expect(dashboardLink).not.toHaveAttribute("aria-current");
   });
 
   it("3. Dashboard is correctly marked active on '/'", () => {
@@ -56,11 +73,13 @@ describe("AppShell & Navigation", () => {
     const nav = screen.getByRole("navigation", { name: "Sidebar" });
     const dashboardLink = within(nav).getByRole("link", { name: /Dashboard/i });
     const batchesLink = within(nav).getByRole("link", { name: /Batches/i });
+    const uploadLink = within(nav).getByRole("link", { name: /Upload/i });
     const reviewsLink = within(nav).getByRole("link", { name: /Reviews/i });
     const exceptionsLink = within(nav).getByRole("link", { name: /Exceptions/i });
 
     expect(dashboardLink).toHaveAttribute("aria-current", "page");
     expect(batchesLink).not.toHaveAttribute("aria-current");
+    expect(uploadLink).not.toHaveAttribute("aria-current");
     expect(reviewsLink).not.toHaveAttribute("aria-current");
     expect(exceptionsLink).not.toHaveAttribute("aria-current");
   });
@@ -181,7 +200,7 @@ describe("AppShell & Navigation", () => {
     );
 
     const nav = screen.getByRole("navigation", { name: "Sidebar" });
-    const expectedRoutes = ["/", "/batches", "/reviews", "/exceptions"];
+    const expectedRoutes = ["/", "/batches", "/upload", "/reviews", "/exceptions"];
 
     expectedRoutes.forEach((route) => {
       const link = within(nav).getByRole("link", {
@@ -197,6 +216,11 @@ describe("AppShell & Navigation", () => {
     const { rerender } = render(<Breadcrumbs />);
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeInTheDocument();
     expect(screen.getByText("Dashboard")).toHaveAttribute("aria-current", "page");
+
+    // Upload route
+    mockPathname = "/upload";
+    rerender(<Breadcrumbs />);
+    expect(screen.getByText("Upload")).toHaveAttribute("aria-current", "page");
 
     // Nested batch route
     mockPathname = "/batches/BATCH-001";
@@ -227,6 +251,9 @@ describe("AppShell & Navigation", () => {
     expect(isNavItemActive("/", "/")).toBe(true);
     expect(isNavItemActive("/", "/batches")).toBe(false);
     expect(isNavItemActive("/", "/reviews")).toBe(false);
+
+    expect(isNavItemActive("/upload", "/upload")).toBe(true);
+    expect(isNavItemActive("/upload", "/batches")).toBe(false);
 
     expect(isNavItemActive("/batches", "/batches")).toBe(true);
     expect(isNavItemActive("/batches", "/batches/BATCH-1")).toBe(true);

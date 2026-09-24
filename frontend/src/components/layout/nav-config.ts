@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Layers,
+  UploadCloud,
   ClipboardCheck,
   AlertTriangle,
   type LucideIcon,
@@ -27,6 +28,12 @@ export const NAV_ITEMS: NavItem[] = [
     description: "Reconciliation runs and decision records",
   },
   {
+    name: "Upload",
+    href: "/upload",
+    icon: UploadCloud,
+    description: "Submit ledger and settlement CSV files",
+  },
+  {
     name: "Reviews",
     href: "/reviews",
     icon: ClipboardCheck,
@@ -46,6 +53,7 @@ export const NAV_ITEMS: NavItem[] = [
  * Rules:
  * - "/" (Dashboard) is active only on exact root "/".
  * - "/batches" is active on "/batches", any nested "/batches/*", or "/decisions/*" (since decisions belong to batches).
+ * - "/upload" is active on "/upload" and any nested "/upload/*".
  * - "/reviews" is active on "/reviews" and any nested "/reviews/*".
  * - "/exceptions" is active on "/exceptions" and any nested "/exceptions/*".
  */
@@ -59,6 +67,9 @@ export function isNavItemActive(href: string, pathname: string): boolean {
       pathname.startsWith("/batches/") ||
       pathname.startsWith("/decisions")
     );
+  }
+  if (href === "/upload") {
+    return pathname === "/upload" || pathname.startsWith("/upload/");
   }
   if (href === "/reviews") {
     return pathname === "/reviews" || pathname.startsWith("/reviews/");

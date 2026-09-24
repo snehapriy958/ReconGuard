@@ -179,3 +179,23 @@ export interface AuditEventItem {
   payload: Record<string, unknown> | null;
   timestamp: string;
 }
+
+// ---------------- upload & validation ----------------
+
+export interface CsvValidationErrorDetail {
+  file: "ledger" | "settlement" | string;
+  row?: number;
+  field?: string;
+  message: string;
+}
+
+export interface CsvValidationResponseError {
+  message: string;
+  errors: CsvValidationErrorDetail[];
+}
+
+export interface BatchCreateResponse {
+  batch_id: string;
+  status: BatchStatus;
+  summary: BatchSummary | null;
+}
